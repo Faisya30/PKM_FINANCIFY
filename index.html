@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literasi Keuangan Digital</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            /* START PERBAIKAN STICKY FOOTER */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* END PERBAIKAN STICKY FOOTER */
+        }
+        main {
+            /* Pastikan konten utama mengambil sisa ruang yang tersedia */
+            flex: 1;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #3b82f6; /* blue-500 */
+            transition: width 0.3s ease;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: #3b82f6; /* blue-500 */
+        }
+        .nav-link.active::after, .nav-link:hover::after {
+            width: 100%;
+        }
+        .sidebar-link.active {
+            background-color: #e0f2fe; /* sky-100 */
+            color: #0284c7; /* sky-600 */
+            font-weight: 600;
+        }
+        .page-content, .investment-content, .auth-container {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .calculator-input {
+            @apply mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm;
+        }
+        /* Style untuk input yang readonly di profile page */
+        .calculator-input[readonly] {
+            @apply bg-slate-100 cursor-not-allowed border-slate-200;
+        }
+        #chat-window {
+            scroll-behavior: smooth;
+        }
+        .hero-bg {
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8)), url('https://images.pexels.com/photos/7690117/pexels-photo-7690117.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover;
+            background-position: center;
+        }
+        .risk-bar {
+            @apply h-2.5 rounded-full;
+        }
+        /* Custom styles untuk link yang dinonaktifkan (tapi masih perlu event listener) */
+        .auth-link:not(.active-link) {
+            cursor: default;
+            pointer-events: none;
+            text-decoration: none !important;
+            color: #1e293b !important; /* slate-900 */
+        }
+        /* Gaya baru untuk tab interaktif */
+        .tab-link {
+            @apply flex items-center gap-3 w-full text-left px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-800 transition-all duration-200;
+        }
+        .tab-link.active {
+            @apply bg-blue-100 text-blue-700 font-semibold shadow-sm;
+        }
+        .tab-content {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-800">
+
+    <!-- Halaman Otentikasi -->
+    <section id="auth-section" class="flex items-center justify-center min-h-screen bg-slate-100">
+        <div class="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-lg auth-container">
+            <!-- Form Login -->
+            <div id="login-form">
+                <div class="text-center">
+                    <div class="flex items-center justify-center space-x-2 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        <h1 class="text-2xl font-bold text-slate-800">Login ke Financify</h1>
+                    </div>
+                    <p class="text-slate-500">Selamat datang kembali! Silakan masuk.</p>
+                </div>
+                <!-- Tempat Pesan Login (Error atau Sukses dari Register) -->
+                <div id="login-message" class="mt-4"></div> 
+                <form class="mt-8 space-y-6" onsubmit="event.preventDefault(); handleLogin();">
+                    <div class="rounded-md shadow-sm -space-y-px">
+                        <div>
+                            <label for="login-email" class="sr-only">Alamat Email</label>
+                            <input id="login-email" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-3 border border-slate-300 placeholder-slate-500 text-slate-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Alamat Email">
+                        </div>
+                        <div>
+                            <label for="login-password" class="sr-only">Password</label>
+                            <input id="login-password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-3 border border-slate-300 placeholder-slate-500 text-slate-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Password">
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                            Login
+                        </button>
+                    </div>
+                </form>
+                <p class="mt-4 text-center text-sm text-slate-600">
+                    Belum punya akun?
+                    <!-- Hapus href dan tambahkan kelas auth-link -->
+                    <span id="show-register" class="font-medium text-blue-600 hover:text-blue-500 active-link cursor-pointer">
+                        Register di sini
+                    </span>
+                </p>
+            </div>
+
+            <!-- Form Register -->
+            <div id="register-form" class="hidden">
+                <div class="text-center">
+                    <div class="flex items-center justify-center space-x-2 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        <h1 class="text-2xl font-bold text-slate-800">Buat Akun Baru</h1>
+                    </div>
+                    <p class="text-slate-500">Bergabunglah dengan Financify sekarang juga.</p>
+                </div>
+                <!-- Pesan Sukses/Gagal Register -->
+                <div id="register-message" class="mt-4"></div> 
+                <form class="mt-8 space-y-6" onsubmit="event.preventDefault(); handleRegister();">
+                    <div class="rounded-md shadow-sm -space-y-px">
+                        <div>
+                            <label for="register-name" class="sr-only">Nama Lengkap</label>
+                            <input id="register-name" name="name" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-3 border border-slate-300 placeholder-slate-500 text-slate-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Nama Lengkap">
+                        </div>
+                        <div>
+                            <label for="register-email" class="sr-only">Alamat Email</label>
+                            <input id="register-email" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-3 border border-slate-300 placeholder-slate-500 text-slate-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Alamat Email">
+                        </div>
+                        <div>
+                            <label for="register-password" class="sr-only">Password</label>
+                            <input id="register-password" name="password" type="password" autocomplete="new-password" required class="appearance-none rounded-none relative block w-full px-3 py-3 border border-slate-300 placeholder-slate-500 text-slate-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Password">
+                        </div>
+                    </div>
+                    <div>
+                        <button id="register-submit-btn" type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                            Register
+                        </button>
+                    </div>
+                </form>
+                <p class="mt-4 text-center text-sm text-slate-600">
+                    Sudah punya akun?
+                    <!-- Hapus href dan tambahkan kelas auth-link -->
+                    <span id="show-login" class="font-medium text-blue-600 hover:text-blue-500 active-link cursor-pointer">
+                        Login di sini
+                    </span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Header / Navbar -->
+    <header id="main-header" class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50 hidden">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" id="logo" class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span class="text-xl font-bold text-slate-800">Financify</span>
+            </a>
+            
+            <!-- Menu Utama -->
+            <ul class="hidden md:flex items-center space-x-8">
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="investasi">Investasi</a></li>
+                <li><a href="#" class="nav-link" data-page="pinjaman">Pinjaman</a></li>
+                <li><a href="#" class="nav-link" data-page="simpanan">Simpanan</a></li>
+                <li><a href="#" class="nav-link" data-page="chatbot">Chatbot</a></li>
+                <li><a href="#" class="nav-link" data-page="about">Tentang Kami</a></li>
+            </ul>
+
+            <!-- Profile Icon & Logout -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#" id="profile-link" class="text-slate-600 hover:text-blue-500 transition-colors" title="Profil">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </a>
+                <button id="logout-btn" class="text-sm font-medium text-slate-600 hover:text-rose-500 transition-colors">Logout</button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <ul class="flex flex-col space-y-4">
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="investasi">Investasi</a></li>
+                <li><a href="#" class="nav-link" data-page="pinjaman">Pinjaman</a></li>
+                <li><a href="#" class="nav-link" data-page="simpanan">Simpanan</a></li>
+                <li><a href="#" class="nav-link" data-page="chatbot">Chatbot</a></li>
+                <li><a href="#" class="nav-link" data-page="about">Tentang Kami</a></li>
+                <li class="border-t pt-4 mt-2"><a href="#" class="nav-link" data-page="profile">Profil Saya</a></li>
+                <li><button id="mobile-logout-btn" class="w-full text-left text-rose-600 font-semibold">Logout</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Konten Utama Aplikasi -->
+    <main id="app-content" class="hidden">
+        
+        <!-- Halaman Home (Desain Baru & Berwarna) -->
+        <section id="home-page" class="page-content">
+            <!-- Hero Section -->
+            <div class="hero-bg rounded-b-3xl -mt-20 pt-20">
+                <div class="container mx-auto px-6 py-24 text-center">
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-4 leading-tight">Masa Depan Finansial Anda, <br class="hidden md:block"> Dimulai Hari Ini.</h1>
+                    <p class="text-lg text-slate-700 max-w-2xl mx-auto mb-8">Financify membantu Anda memahami, merencanakan, dan mencapai setiap tujuan keuangan dengan lebih percaya diri.</p>
+                    <a href="#pillars" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl">Mulai Jelajahi</a>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="container mx-auto px-6 -mt-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-emerald-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-emerald-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                        <p class="text-3xl font-bold text-slate-800">12,000+</p>
+                        <p class="text-slate-500">Pengguna Terdaftar</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-amber-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-amber-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        <p class="text-3xl font-bold text-slate-800">98.7%</p>
+                        <p class="text-slate-500">Tingkat Kepercayaan</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-sky-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-sky-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        <p class="text-3xl font-bold text-slate-800">Rp50 M+</p>
+                        <p class="text-slate-500">Total Simulasi</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Pillars Section -->
+            <div id="pillars" class="container mx-auto px-6 py-24">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Tiga Pilar Menuju Kebebasan Finansial</h2>
+                    <p class="text-md text-slate-600 max-w-2xl mx-auto mt-4">Pahami fondasi untuk membangun kekayaan dan stabilitas finansial jangka panjang.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Pilar 1: Simpanan -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://images.pexels.com/photos/4386370/pexels-photo-4386370.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Menyimpan Uang" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-emerald-700 mb-2">1. Menyimpan (Save)</h3>
+                            <p class="text-slate-600 mb-4 text-sm">Bangun fondasi kokoh dengan dana darurat dan tujuan jangka pendek yang aman.</p>
+                            <a href="#" data-page="simpanan" class="action-link font-semibold text-emerald-600 hover:text-emerald-700">Pelajari Simpanan →</a>
+                        </div>
+                    </div>
+                    <!-- Pilar 2: Investasi -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mengembangkan Aset" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-blue-700 mb-2">2. Mengembangkan (Grow)</h3>
+                            <p class="text-slate-600 mb-4 text-sm">Akselerasi pencapaian tujuan finansial Anda dengan berinvestasi pada instrumen yang tepat.</p>
+                            <a href="#" data-page="investasi" class="action-link font-semibold text-blue-600 hover:text-blue-700">Jelajahi Investasi →</a>
+                        </div>
+                    </div>
+                    <!-- Pilar 3: Pinjaman -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Membeli Rumah" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-rose-700 mb-2">3. Meminjam (Leverage)</h3>
+                            <p class="text-slate-600 mb-4 text-sm">Gunakan pinjaman secara bijak sebagai alat untuk mencapai tujuan besar seperti properti.</p>
+                            <a href="#" data-page="pinjaman" class="action-link font-semibold text-rose-600 hover:text-rose-700">Pahami Pinjaman →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Investment Options Section -->
+            <div class="bg-slate-900 py-24">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-bold text-white">Mulai Perjalanan Investasi Anda</h2>
+                        <p class="text-md text-slate-400 max-w-2xl mx-auto mt-4">Kenali berbagai instrumen yang dapat membantu Anda mengembangkan aset.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Card Reksadana -->
+                        <a href="#" data-page="investasi" class="action-link relative h-64 rounded-xl overflow-hidden group shadow-lg">
+                            <img src="https://images.pexels.com/photos/187041/pexels-photo-187041.jpeg?auto=compress&cs=tinysrgb&w=600" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Reksadana">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div class="relative h-full p-6 flex flex-col justify-end text-white">
+                                <h3 class="text-xl font-bold">Reksadana</h3>
+                                <p class="text-sm opacity-80">Pilihan populer untuk pemula.</p>
+                            </div>
+                        </a>
+                        <!-- Card Obligasi -->
+                        <a href="#" data-page="investasi" class="action-link relative h-64 rounded-xl overflow-hidden group shadow-lg">
+                            <img src="https://images.pexels.com/photos/210574/pexels-photo-210574.jpeg?auto=compress&cs=tinysrgb&w=600" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Obligasi">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div class="relative h-full p-6 flex flex-col justify-end text-white">
+                                <h3 class="text-xl font-bold">Obligasi / Sukuk</h3>
+                                <p class="text-sm opacity-80">Pendapatan tetap & stabil.</p>
+                            </div>
+                        </a>
+                        <!-- Card Saham -->
+                        <a href="#" data-page="investasi" class="action-link relative h-64 rounded-xl overflow-hidden group shadow-lg">
+                            <img src="https://images.pexels.com/photos/5929471/pexels-photo-5929471.jpeg?auto=compress&cs=tinysrgb&w=600" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Saham">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div class="relative h-full p-6 flex flex-col justify-end text-white">
+                                <h3 class="text-xl font-bold">Saham</h3>
+                                <p class="text-sm opacity-80">Potensi imbal hasil tinggi.</p>
+                            </div>
+                        </a>
+                        <!-- Card Deposito -->
+                        <a href="#" data-page="investasi" class="action-link relative h-64 rounded-xl overflow-hidden group shadow-lg">
+                            <img src="https://images.pexels.com/photos/259200/pexels-photo-259200.jpeg?auto=compress&cs=tinysrgb&w=600" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Deposito">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div class="relative h-full p-6 flex flex-col justify-end text-white">
+                                <h3 class="text-xl font-bold">Deposito</h3>
+                                <p class="text-sm opacity-80">Aman & dijamin LPS.</p>
+                            </div>
+                        </a>
+                        <!-- Card Cryptocurrency -->
+                        <a href="#" data-page="investasi" class="action-link relative h-64 rounded-xl overflow-hidden group shadow-lg">
+                            <img src="https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&w=600" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Cryptocurrency">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div class="relative h-full p-6 flex flex-col justify-end text-white">
+                                <h3 class="text-xl font-bold">Cryptocurrency</h3>
+                                <p class="text-sm opacity-80">Aset digital volatilitas tinggi.</p>
+                            </div>
+                        </a>
+                        <!-- Card Logam Mulia -->
+                        <a href="#" data-page="investasi" class="action-link relative h-64 rounded-xl overflow-hidden group shadow-lg">
+                            <img src="https://images.pexels.com/photos/1405773/pexels-photo-1405773.jpeg?auto=compress&cs=tinysrgb&w=600" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Logam Mulia">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div class="relative h-full p-6 flex flex-col justify-end text-white">
+                                <h3 class="text-xl font-bold">Logam Mulia</h3>
+                                <p class="text-sm opacity-80">Aset 'safe haven' klasik.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Halaman Investasi (DESAIN BARU) -->
+        <section id="investasi-page" class="page-content hidden">
+            <div class="container mx-auto px-6 py-12">
+                <div class="flex flex-col md:flex-row gap-8 lg:gap-12">
+                    <!-- Sidebar Investasi -->
+                    <aside class="w-full md:w-1/4">
+                        <div class="sticky top-24">
+                            <h2 class="text-2xl font-bold mb-4 text-slate-800">Jenis Investasi</h2>
+                            <p class="text-sm text-slate-500 mb-4">Pilih instrumen untuk melihat detail dan memulai simulasi.</p>
+                            <ul id="investment-sidebar" class="space-y-2">
+                                <li><a href="#" class="sidebar-link block px-4 py-2.5 rounded-lg active" data-content="reksadana">Reksadana</a></li>
+                                <li><a href="#" class="sidebar-link block px-4 py-2.5 rounded-lg" data-content="obligasi">Obligasi / Sukuk</a></li>
+                                <li><a href="#" class="sidebar-link block px-4 py-2.5 rounded-lg" data-content="saham">Saham</a></li>
+                                <li><a href="#" class="sidebar-link block px-4 py-2.5 rounded-lg" data-content="deposito">Deposito</a></li>
+                                <li><a href="#" class="sidebar-link block px-4 py-2.5 rounded-lg" data-content="crypto">Cryptocurrency</a></li>
+                                <li><a href="#" class="sidebar-link block px-4 py-2.5 rounded-lg" data-content="logam-mulia">Logam Mulia</a></li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <!-- Konten Detail Investasi -->
+                    <div class="w-full md:w-3/4">
+                        <!-- Konten Reksadana -->
+                        <article id="reksadana-content" class="investment-content space-y-6">
+                            <div class="bg-gradient-to-br from-blue-50 to-sky-100 p-6 md:p-8 rounded-2xl shadow-lg border border-blue-200">
+                                <div class="flex flex-col sm:flex-row items-start gap-6 mb-6">
+                                    <div class="bg-blue-600 text-white rounded-xl p-4 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-3xl font-bold text-blue-800 mb-1">Reksadana</h2>
+                                        <p class="text-slate-600">Pilihan populer bagi pemula karena dikelola secara profesional oleh Manajer Investasi (MI). Anda tidak perlu pusing menganalisis aset satu per satu.</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-blue-700">Rendah - Tinggi</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-blue-700">Moderat</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-blue-700">Pemula</p> </div>
+                                </div>
+                                <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
+                                    <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Reksadana</h5>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div><label for="rd-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="number" id="rd-modal" class="calculator-input" placeholder="1000000"></div>
+                                        <div><label for="rd-bulanan" class="block text-sm font-medium text-slate-700">Investasi Bulanan (Rp)</label><input type="number" id="rd-bulanan" class="calculator-input" placeholder="500000" value="0"></div>
+                                        <div><label for="rd-waktu" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="rd-waktu" class="calculator-input" placeholder="5"></div>
+                                        <div><label for="rd-return" class="block text-sm font-medium text-slate-700">Estimasi Return (% per Tahun)</label><input type="number" id="rd-return" class="calculator-input" placeholder="10"></div>
+                                    </div>
+                                    <button id="rd-hitung-btn" class="mt-4 w-full bg-blue-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-blue-700 transition-colors shadow hover:shadow-lg">Hitung</button>
+                                    <div id="rd-hasil" class="mt-4 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Konten Obligasi -->
+                        <article id="obligasi-content" class="investment-content hidden space-y-6">
+                            <div class="bg-gradient-to-br from-emerald-50 to-teal-100 p-6 md:p-8 rounded-2xl shadow-lg border border-emerald-200">
+                                <div class="flex flex-col sm:flex-row items-start gap-6 mb-6">
+                                    <div class="bg-emerald-600 text-white rounded-xl p-4 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-3xl font-bold text-emerald-800 mb-1">Obligasi & Sukuk</h2>
+                                        <p class="text-slate-600">Surat utang dari pemerintah/korporasi yang memberikan imbal hasil (kupon) tetap secara berkala. Cocok untuk pendapatan pasif yang stabil.</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-emerald-700">Sangat Rendah</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-emerald-700">Rendah - Moderat</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-emerald-700">Jangka Menengah</p> </div>
+                                </div>
+                                <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
+                                    <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Obligasi</h5>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div><label for="ob-modal" class="block text-sm font-medium text-slate-700">Nilai Investasi (Rp)</label><input type="number" id="ob-modal" class="calculator-input" placeholder="100000000"></div>
+                                        <div><label for="ob-kupon" class="block text-sm font-medium text-slate-700">Kupon (% per Tahun)</label><input type="number" id="ob-kupon" class="calculator-input" placeholder="6.5"></div>
+                                        <div><label for="ob-waktu" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="ob-waktu" class="calculator-input" placeholder="3"></div>
+                                    </div>
+                                    <button id="ob-hitung-btn" class="mt-4 w-full bg-emerald-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-emerald-700 transition-colors shadow hover:shadow-lg">Hitung</button>
+                                    <div id="ob-hasil" class="mt-4 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                                </div>
+                            </div>
+                        </article>
+                        
+                        <!-- Konten Saham -->
+                        <article id="saham-content" class="investment-content hidden space-y-6">
+                            <div class="bg-gradient-to-br from-rose-50 to-red-100 p-6 md:p-8 rounded-2xl shadow-lg border border-rose-200">
+                                <div class="flex flex-col sm:flex-row items-start gap-6 mb-6">
+                                    <div class="bg-rose-600 text-white rounded-xl p-4 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-3xl font-bold text-rose-800 mb-1">Saham</h2>
+                                        <p class="text-slate-600">Membeli sebagian kecil dari sebuah perusahaan. Investasi saham memiliki potensi keuntungan tertinggi, namun diiringi dengan risiko yang sepadan.</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-rose-700">Sangat Tinggi</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-rose-700">Sangat Tinggi</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-rose-700">Jangka Panjang</p> </div>
+                                </div>
+                                <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
+                                    <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Saham</h5>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div><label for="sh-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="number" id="sh-modal" class="calculator-input" placeholder="5000000"></div>
+                                        <div><label for="sh-return" class="block text-sm font-medium text-slate-700">Estimasi Kenaikan (% per Tahun)</label><input type="number" id="sh-return" class="calculator-input" placeholder="15"></div>
+                                        <div><label for="sh-waktu" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="sh-waktu" class="calculator-input" placeholder="5"></div>
+                                    </div>
+                                    <button id="sh-hitung-btn" class="mt-4 w-full bg-rose-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-rose-700 transition-colors shadow hover:shadow-lg">Hitung</button>
+                                    <div id="sh-hasil" class="mt-4 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Konten Deposito -->
+                        <article id="deposito-content" class="investment-content hidden space-y-6">
+                            <div class="bg-gradient-to-br from-sky-50 to-cyan-100 p-6 md:p-8 rounded-2xl shadow-lg border border-sky-200">
+                                <div class="flex flex-col sm:flex-row items-start gap-6 mb-6">
+                                    <div class="bg-sky-600 text-white rounded-xl p-4 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-3xl font-bold text-sky-800 mb-1">Deposito</h2>
+                                        <p class="text-slate-600">Simpanan berjangka di bank dengan bunga lebih tinggi dari tabungan dan dijamin LPS. Dana tidak bisa ditarik sebelum jatuh tempo.</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-sky-700">Sangat Rendah</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-sky-700">Rendah</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-sky-700">Jangka Pendek</p> </div>
+                                </div>
+                                <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
+                                    <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Deposito</h5>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div><label for="dp-modal-inv" class="block text-sm font-medium text-slate-700">Jumlah Pokok (Rp)</label><input type="number" id="dp-modal-inv" class="calculator-input" placeholder="50000000"></div>
+                                        <div><label for="dp-bunga-inv" class="block text-sm font-medium text-slate-700">Bunga (% per Tahun)</label><input type="number" id="dp-bunga-inv" class="calculator-input" placeholder="4.5"></div>
+                                        <div><label for="dp-waktu-inv" class="block text-sm font-medium text-slate-700">Jangka Waktu (Bulan)</label><input type="number" id="dp-waktu-inv" class="calculator-input" placeholder="12"></div>
+                                    </div>
+                                    <button id="dp-hitung-btn-inv" class="mt-4 w-full bg-sky-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-sky-700 transition-colors shadow hover:shadow-lg">Hitung</button>
+                                    <div id="dp-hasil-inv" class="mt-4 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Konten Crypto -->
+                        <article id="crypto-content" class="investment-content hidden space-y-6">
+                            <div class="bg-gradient-to-br from-amber-50 to-yellow-100 p-6 md:p-8 rounded-2xl shadow-lg border border-amber-200">
+                                <div class="flex flex-col sm:flex-row items-start gap-6 mb-6">
+                                    <div class="bg-amber-500 text-white rounded-xl p-4 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.4 3.9a2 2 0 0 0-1.9 2.5l1.6 6.1a2 2 0 0 1-1.9 2.5H4.5a2 2 0 0 1-2-2.3L4 7.6a2 2 0 0 1 2-1.7h4.9a2 2 0 0 0 1.5-3zM13.6 20.1a2 2 0 0 0 1.9-2.5l-1.6-6.1a2 2 0 0 1 1.9-2.5h4.6a2 2 0 0 1 2 2.3L20 16.4a2 2 0 0 1-2 1.7h-4.9a2 2 0 0 0-1.5 3z"/></svg>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-3xl font-bold text-amber-800 mb-1">Cryptocurrency</h2>
+                                        <p class="text-slate-600">Aset digital terdesentralisasi yang dikenal karena volatilitasnya yang ekstrim. Potensi keuntungan sangat besar, begitu pula dengan risikonya.</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-amber-700">Ekstrem</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-amber-700">Ekstrem</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-amber-700">Spekulasi</p> </div>
+                                </div>
+                                <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
+                                    <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Cryptocurrency</h5>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div><label for="cr-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="number" id="cr-modal" class="calculator-input" placeholder="10000000"></div>
+                                        <div><label for="cr-return" class="block text-sm font-medium text-slate-700">Estimasi Kenaikan (% per Tahun)</label><input type="number" id="cr-return" class="calculator-input" placeholder="50"></div>
+                                        <div><label for="cr-waktu" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="cr-waktu" class="calculator-input" placeholder="3"></div>
+                                    </div>
+                                    <button id="cr-hitung-btn" class="mt-4 w-full bg-amber-500 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-amber-600 transition-colors shadow hover:shadow-lg">Hitung</button>
+                                    <div id="cr-hasil" class="mt-4 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Konten Logam Mulia -->
+                        <article id="logam-mulia-content" class="investment-content hidden space-y-6">
+                            <div class="bg-gradient-to-br from-yellow-50 to-amber-100 p-6 md:p-8 rounded-2xl shadow-lg border border-yellow-200">
+                                <div class="flex flex-col sm:flex-row items-start gap-6 mb-6">
+                                    <div class="bg-yellow-500 text-white rounded-xl p-4 flex-shrink-0">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 11h4a2 2 0 0 0 0-4H9a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 1 0 4H7a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2Z"/><path d="M17 7h-2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h2a2 2 0 0 1 0 4h-2a2 2 0 0 1-2-2"/></svg>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-3xl font-bold text-yellow-800 mb-1">Logam Mulia</h2>
+                                        <p class="text-slate-600">Aset 'safe haven' klasik seperti emas yang nilainya cenderung stabil dan meningkat saat kondisi ekonomi tidak menentu, melindungi nilai kekayaan Anda.</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-yellow-700">Sangat Rendah</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-yellow-700">Rendah - Moderat</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-yellow-700">Menjaga Nilai Aset</p> </div>
+                                </div>
+                                <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
+                                    <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Logam Mulia</h5>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div><label for="lm-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="number" id="lm-modal" class="calculator-input" placeholder="10000000"></div>
+                                        <div><label for="lm-return" class="block text-sm font-medium text-slate-700">Estimasi Kenaikan (% per Tahun)</label><input type="number" id="lm-return" class="calculator-input" placeholder="8"></div>
+                                        <div><label for="lm-waktu" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="lm-waktu" class="calculator-input" placeholder="5"></div>
+                                    </div>
+                                    <button id="lm-hitung-btn" class="mt-4 w-full bg-yellow-500 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-yellow-600 transition-colors shadow hover:shadow-lg">Hitung</button>
+                                    <div id="lm-hasil" class="mt-4 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Halaman Pinjaman (UI BARU & INTERAKTIF) -->
+        <section id="pinjaman-page" class="page-content hidden">
+            <div class="container mx-auto px-6 py-12">
+                <!-- Header -->
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Pahami Opsi Pinjaman Anda</h1>
+                    <p class="text-lg text-slate-600 max-w-3xl mx-auto">Pinjaman bisa menjadi alat yang ampuh. Jelajahi setiap jenisnya untuk membuat keputusan yang tepat.</p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+                    <!-- Navigasi Tabs di Sidebar -->
+                    <aside class="w-full lg:w-1/4">
+                        <div class="sticky top-24">
+                            <ul id="loan-tabs" class="space-y-2">
+                                <li><a href="#" class="tab-link active" data-tab="kpr">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                    <span>KPR</span>
+                                </a></li>
+                                <li><a href="#" class="tab-link" data-tab="kta">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h5m-5-6V5a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v2m-3 10v-2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2zm-9-8V7a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v2"></path></svg>
+                                    <span>KTA</span>
+                                </a></li>
+                                <li><a href="#" class="tab-link" data-tab="kur">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                    <span>KUR</span>
+                                </a></li>
+                                <li><a href="#" class="tab-link" data-tab="kmk">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                                    <span>Kredit Modal Kerja</span>
+                                </a></li>
+                            </ul>
+                        </div>
+                    </aside>
+                    <!-- Konten Tabs -->
+                    <div class="w-full lg:w-3/4">
+                        <!-- Konten KPR -->
+                        <div id="kpr-tab-content" class="tab-content">
+                            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                                <h2 class="text-2xl font-bold text-cyan-700 mb-2">KPR (Kredit Pemilikan Rumah)</h2>
+                                <p class="text-slate-600 mb-6 text-sm">Pinjaman jangka panjang untuk membeli properti. Properti yang dibeli akan menjadi jaminan. Tenor sangat panjang, umumnya 5 hingga 30 tahun.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div><label for="kpr-harga" class="block text-sm font-medium text-slate-700">Harga Properti (Rp)</label><input type="number" id="kpr-harga" class="calculator-input" placeholder="500000000"></div>
+                                    <div><label for="kpr-dp" class="block text-sm font-medium text-slate-700">Uang Muka / DP (Rp)</label><input type="number" id="kpr-dp" class="calculator-input" placeholder="100000000"></div>
+                                    <div><label for="kpr-bunga" class="block text-sm font-medium text-slate-700">Bunga (% per Tahun)</label><input type="number" id="kpr-bunga" class="calculator-input" placeholder="8.5"></div>
+                                    <div><label for="kpr-tenor" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="kpr-tenor" class="calculator-input" placeholder="20"></div>
+                                </div>
+                                <button id="kpr-hitung-btn" class="mt-6 w-full bg-cyan-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-cyan-700 transition-colors shadow hover:shadow-lg">Hitung Estimasi Cicilan KPR</button>
+                                <div id="kpr-hasil" class="mt-6 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                            </div>
+                        </div>
+                        <!-- Konten KTA -->
+                        <div id="kta-tab-content" class="tab-content hidden">
+                            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                                <h2 class="text-2xl font-bold text-violet-700 mb-2">KTA (Kredit Tanpa Agunan)</h2>
+                                <p class="text-slate-600 mb-6 text-sm">Pinjaman tanpa jaminan, cocok untuk kebutuhan mendesak. Bunga cenderung lebih tinggi dengan tenor lebih pendek, biasanya 1 hingga 5 tahun.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div><label for="kta-pokok" class="block text-sm font-medium text-slate-700">Jumlah Pinjaman (Rp)</label><input type="number" id="kta-pokok" class="calculator-input" placeholder="50000000"></div>
+                                    <div><label for="kta-bunga" class="block text-sm font-medium text-slate-700">Bunga (% per Tahun)</label><input type="number" id="kta-bunga" class="calculator-input" placeholder="12"></div>
+                                    <div><label for="kta-tenor" class="block text-sm font-medium text-slate-700">Jangka Waktu (Bulan)</label><input type="number" id="kta-tenor" class="calculator-input" placeholder="36"></div>
+                                </div>
+                                <button id="kta-hitung-btn" class="mt-6 w-full bg-violet-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-violet-700 transition-colors shadow hover:shadow-lg">Hitung Estimasi Cicilan KTA</button>
+                                <div id="kta-hasil" class="mt-6 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                            </div>
+                        </div>
+                        <!-- Konten KUR -->
+                        <div id="kur-tab-content" class="tab-content hidden">
+                            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                                <h2 class="text-2xl font-bold text-lime-700 mb-2">KUR (Kredit Usaha Rakyat)</h2>
+                                <p class="text-slate-600 mb-6 text-sm">Program pemerintah untuk membantu UMKM dengan suku bunga rendah (disubsidi). Umumnya untuk modal kerja atau investasi usaha.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div><label for="kur-pokok" class="block text-sm font-medium text-slate-700">Jumlah Pinjaman (Rp)</label><input type="number" id="kur-pokok" class="calculator-input" placeholder="100000000"></div>
+                                    <div><label for="kur-bunga" class="block text-sm font-medium text-slate-700">Bunga (% per Tahun)</label><input type="number" id="kur-bunga" class="calculator-input" placeholder="6"></div>
+                                    <div><label for="kur-tenor" class="block text-sm font-medium text-slate-700">Jangka Waktu (Bulan)</label><input type="number" id="kur-tenor" class="calculator-input" placeholder="48"></div>
+                                </div>
+                                <button id="kur-hitung-btn" class="mt-6 w-full bg-lime-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-lime-700 transition-colors shadow hover:shadow-lg">Hitung Estimasi Cicilan KUR</button>
+                                <div id="kur-hasil" class="mt-6 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                            </div>
+                        </div>
+                        <!-- Konten KMK -->
+                        <div id="kmk-tab-content" class="tab-content hidden">
+                             <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                                <h2 class="text-2xl font-bold text-amber-700 mb-2">KMK (Kredit Modal Kerja)</h2>
+                                <p class="text-slate-600 mb-6 text-sm">Pinjaman jangka pendek (biasanya ~1 tahun) untuk membiayai operasional harian perusahaan, seperti pembelian bahan baku atau membayar gaji.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div><label for="kmk-pokok" class="block text-sm font-medium text-slate-700">Jumlah Pinjaman (Rp)</label><input type="number" id="kmk-pokok" class="calculator-input" placeholder="250000000"></div>
+                                    <div><label for="kmk-bunga" class="block text-sm font-medium text-slate-700">Bunga (% per Tahun)</label><input type="number" id="kmk-bunga" class="calculator-input" placeholder="10"></div>
+                                    <div><label for="kmk-tenor" class="block text-sm font-medium text-slate-700">Jangka Waktu (Bulan)</label><input type="number" id="kmk-tenor" class="calculator-input" placeholder="12"></div>
+                                </div>
+                                <button id="kmk-hitung-btn" class="mt-6 w-full bg-amber-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-amber-700 transition-colors shadow hover:shadow-lg">Hitung Estimasi Cicilan KMK</button>
+                                <div id="kmk-hasil" class="mt-6 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Halaman Simpanan (UI BARU & INTERAKTIF) -->
+        <section id="simpanan-page" class="page-content hidden">
+            <div class="container mx-auto px-6 py-12">
+                <!-- Header -->
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Membangun Fondasi Keuangan Anda</h1>
+                    <p class="text-lg text-slate-600 max-w-3xl mx-auto">Menyimpan adalah langkah pertama menuju stabilitas. Kenali produk simpanan yang aman dan tepat untuk Anda.</p>
+                </div>
+
+                <!-- Tabel Perbandingan (dibuat lebih menarik) -->
+                 <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg mb-16">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center">Sekilas Perbandingan Simpanan</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-slate-500">
+                            <thead class="text-xs text-slate-700 uppercase bg-slate-100 rounded-lg">
+                                <tr>
+                                    <th scope="col" class="px-6 py-4 rounded-l-lg">Fitur</th>
+                                    <th scope="col" class="px-6 py-4">Tabungan</th>
+                                    <th scope="col" class="px-6 py-4">Deposito</th>
+                                    <th scope="col" class="px-6 py-4 rounded-r-lg">Giro</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Tujuan Ideal</th>
+                                    <td class="px-6 py-4">Transaksi harian</td>
+                                    <td class="px-6 py-4">Investasi jangka pendek</td>
+                                    <td class="px-6 py-4">Transaksi bisnis</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Suku Bunga</th>
+                                    <td class="px-6 py-4">Sangat Rendah</td>
+                                    <td class="px-6 py-4 font-semibold text-emerald-600">Lebih Tinggi</td>
+                                    <td class="px-6 py-4">Rendah / Tidak Ada</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Fleksibilitas</th>
+                                    <td class="px-6 py-4 text-emerald-600 font-semibold">Sangat Fleksibel</td>
+                                    <td class="px-6 py-4 text-rose-600 font-semibold">Tidak Fleksibel</td>
+                                    <td class="px-6 py-4 text-emerald-600 font-semibold">Sangat Fleksibel</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Alat Transaksi</th>
+                                    <td class="px-6 py-4">ATM, M-Banking</td>
+                                    <td class="px-6 py-4">-</td>
+                                    <td class="px-6 py-4">Cek & Bilyet Giro</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+                     <!-- Navigasi Tabs di Sidebar -->
+                    <aside class="w-full lg:w-1/4">
+                        <div class="sticky top-24">
+                             <ul id="savings-tabs" class="space-y-2">
+                                <li><a href="#" class="tab-link active" data-tab="tabungan">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                    <span>Target Menabung</span>
+                                </a></li>
+                                <li><a href="#" class="tab-link" data-tab="deposito">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                                    <span>Deposito</span>
+                                </a></li>
+                                <li><a href="#" class="tab-link" data-tab="giro">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                                    <span>Giro</span>
+                                </a></li>
+                            </ul>
+                        </div>
+                    </aside>
+                     <!-- Konten Tabs -->
+                    <div class="w-full lg:w-3/4">
+                        <!-- Konten Target Menabung -->
+                        <div id="tabungan-tab-content" class="tab-content">
+                             <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                                <h2 class="text-2xl font-bold text-emerald-700 mb-2">Kalkulator Target Tabungan</h2>
+                                <p class="text-slate-600 mb-6 text-sm">Hitung berapa lama waktu yang Anda butuhkan untuk mencapai tujuan finansial Anda dengan menabung secara rutin.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div><label for="target-jumlah" class="block text-sm font-medium text-slate-700">Jumlah Target (Rp)</label><input type="number" id="target-jumlah" class="calculator-input" placeholder="100000000"></div>
+                                    <div><label for="target-bulanan" class="block text-sm font-medium text-slate-700">Simpanan per Bulan (Rp)</label><input type="number" id="target-bulanan" class="calculator-input" placeholder="2000000"></div>
+                                </div>
+                                <button id="target-hitung-btn" class="mt-6 w-full bg-emerald-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-emerald-700 transition-colors shadow hover:shadow-lg">Hitung Waktu</button>
+                                <div id="target-hasil" class="mt-6 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                            </div>
+                        </div>
+                         <!-- Konten Deposito -->
+                        <div id="deposito-tab-content" class="tab-content hidden">
+                            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                                <h2 class="text-2xl font-bold text-sky-700 mb-2">Kalkulator Simulasi Deposito</h2>
+                                <p class="text-slate-600 mb-6 text-sm">Simulasikan potensi keuntungan dari simpanan berjangka Anda setelah dipotong pajak.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div><label for="dp-modal" class="block text-sm font-medium text-slate-700">Jumlah Pokok (Rp)</label><input type="number" id="dp-modal" class="calculator-input" placeholder="100000000"></div>
+                                    <div><label for="dp-bunga" class="block text-sm font-medium text-slate-700">Bunga (% per Tahun)</label><input type="number" id="dp-bunga" class="calculator-input" placeholder="5"></div>
+                                    <div><label for="dp-waktu" class="block text-sm font-medium text-slate-700">Jangka Waktu (Bulan)</label><input type="number" id="dp-waktu" class="calculator-input" placeholder="12"></div>
+                                </div>
+                                <button id="dp-hitung-btn" class="mt-6 w-full bg-sky-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-sky-700 transition-colors shadow hover:shadow-lg">Hitung Bunga Deposito</button>
+                                <div id="dp-hasil" class="mt-6 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                            </div>
+                        </div>
+                        <!-- Konten Giro -->
+                        <div id="giro-tab-content" class="tab-content hidden">
+                            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+                                <h2 class="text-2xl font-bold text-indigo-700 mb-2">Kalkulator Jasa Giro</h2>
+                                <p class="text-slate-600 mb-6 text-sm">Hitung estimasi jasa giro bulanan yang bisa Anda dapatkan berdasarkan saldo rata-rata.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div><label for="giro-modal" class="block text-sm font-medium text-slate-700">Saldo Rata-Rata Bulanan (Rp)</label><input type="number" id="giro-modal" class="calculator-input" placeholder="500000000"></div>
+                                    <div><label for="giro-bunga" class="block text-sm font-medium text-slate-700">Jasa Giro (% per Tahun)</label><input type="number" id="giro-bunga" class="calculator-input" placeholder="1.5"></div>
+                                </div>
+                                <button id="giro-hitung-btn" class="mt-6 w-full bg-indigo-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-indigo-700 transition-colors shadow hover:shadow-lg">Hitung Jasa Giro per Bulan</button>
+                                <div id="giro-hasil" class="mt-6 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Halaman Chatbot -->
+        <section id="chatbot-page" class="page-content hidden">
+            <div class="container mx-auto px-6 py-12">
+                <div class="text-center mb-8">
+                    <h1 class="text-4xl font-bold text-slate-900">Financify AI Assistant</h1>
+                    <p class="mt-4 text-slate-600">Tanyakan apapun seputar investasi, pinjaman, dan simpanan.</p>
+                </div>
+
+                <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg flex flex-col" style="height: 60vh;">
+                    <!-- Chat Window -->
+                    <div id="chat-window" class="p-6 flex-grow overflow-y-auto space-y-4">
+                        <!-- Bot Welcome Message -->
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg">F</span>
+                            <div class="bg-slate-100 p-3 rounded-lg rounded-tl-none max-w-xs">
+                                <p class="text-sm text-slate-700">Halo! Saya Financify Assistant, seorang ahli keuangan yang ramah dan membantu. Ada yang bisa saya bantu seputar keuangan? Silakan ketik pertanyaan Anda atau pilih salah satu di bawah.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Predefined Questions -->
+                    <div id="predefined-questions" class="p-4 border-t border-b border-slate-200 flex flex-wrap gap-2 justify-center">
+                        <button class="question-btn text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-1 px-3 rounded-full transition-colors">Apa itu Reksadana?</button>
+                        <button class="question-btn text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-1 px-3 rounded-full transition-colors">Investasi untuk pemula?</button>
+                        <button class="question-btn text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-1 px-3 rounded-full transition-colors">Apa itu pinjaman KPR?</button>
+                    </div>
+                    <!-- Input Area -->
+                    <div class="p-4 flex gap-3 bg-white rounded-b-xl">
+                        <input type="text" id="chat-input" placeholder="Ketik pertanyaan Anda..." class="flex-grow w-full px-4 py-2 bg-slate-100 rounded-full border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <button id="send-btn" class="bg-blue-600 text-white font-semibold py-2 px-5 rounded-full hover:bg-blue-700 transition-colors flex items-center justify-center">
+                            Kirim
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Halaman About Us (Konten Baru) -->
+        <section id="about-page" class="page-content hidden bg-slate-50">
+            <div class="container mx-auto px-6 py-16">
+                <!-- Header -->
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Misi Kami: Memberdayakan Masa Depan Finansial Indonesia</h1>
+                    <p class="text-lg text-slate-600 max-w-3xl mx-auto">Di tengah kompleksnya dunia keuangan, Financify hadir sebagai sahabat Anda. Kami percaya bahwa pemahaman finansial adalah hak setiap orang, bukan privilese segelintir orang.</p>
+                </div>
+
+                <!-- Misi & Visi -->
+                <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-3xl font-bold text-slate-800 mb-4">Misi Kami</h2>
+                        <p class="text-slate-600">Menyediakan platform edukasi keuangan yang mudah diakses, akurat, dan relevan bagi masyarakat Indonesia, serta memberikan alat simulasi yang intuitif untuk membantu pengambilan keputusan finansial yang lebih baik.</p>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h2 class="text-3xl font-bold text-slate-800 mb-4">Visi Kami</h2>
+                        <p class="text-slate-600">Menjadi platform literasi keuangan digital terdepan di Indonesia, menciptakan generasi yang cerdas finansial, percaya diri dalam mengelola aset, dan mampu mencapai kebebasan finansial.</p>
+                    </div>
+                </div>
+
+                <!-- Nilai-Nilai Kami -->
+                <div class="mb-20">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-12 text-center">Apa yang Kami Pegang Teguh</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="text-center p-6">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Edukasi</h3>
+                            <p class="text-slate-600 text-sm">Kami menyajikan informasi yang kompleks menjadi sederhana dan mudah dipahami.</p>
+                        </div>
+                        <div class="text-center p-6">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto mb-4">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Aksesibilitas</h3>
+                            <p class="text-slate-600 text-sm">Platform kami dirancang untuk dapat digunakan oleh siapa saja, kapan saja, dan di mana saja.</p>
+                        </div>
+                        <div class="text-center p-6">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-amber-100 text-amber-600 mx-auto mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Kepercayaan</h3>
+                            <p class="text-slate-600 text-sm">Kami berkomitmen pada akurasi dan objektivitas data, menjadi sumber informasi yang dapat Anda andalkan.</p>
+                        </div>
+                        <div class="text-center p-6">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-rose-100 text-rose-600 mx-auto mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11.5l5 5l5-5"></path><path d="M12 4v12.5"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Pemberdayaan</h3>
+                            <p class="text-slate-600 text-sm">Tujuan akhir kami adalah memberdayakan Anda untuk mengambil kendali atas masa depan finansial Anda.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tim Kami -->
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-800 mb-12 text-center">Tim di Balik Financify</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                        <!-- Anggota Tim 1 -->
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:-translate-y-2 transition-all duration-300">
+                            <img class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Foto Anggota Tim 1">
+                            <h4 class="text-lg font-bold">Budi Santoso</h4>
+                            <p class="text-blue-600 font-semibold text-sm mb-2">Founder & CEO</p>
+                            <p class="text-slate-600 text-xs">Dengan pengalaman di industri fintech, Budi memiliki visi untuk mendemokratisasi pengetahuan finansial di Indonesia.</p>
+                        </div>
+                        <!-- Anggota Tim 2 -->
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:-translate-y-2 transition-all duration-300">
+                            <img class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Foto Anggota Tim 2">
+                            <h4 class="text-lg font-bold">Citra Lestari</h4>
+                            <p class="text-blue-600 font-semibold text-sm mb-2">Head of Content</p>
+                            <p class="text-slate-600 text-xs">Seorang perencana keuangan bersertifikat yang memastikan semua materi edukasi akurat, relevan, dan mudah dicerna.</p>
+                        </div>
+                        <!-- Anggota Tim 3 -->
+                        <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:-translate-y-2 transition-all duration-300">
+                            <img class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Foto Anggota Tim 3">
+                            <h4 class="text-lg font-bold">Agung Wijaya</h4>
+                            <p class="text-blue-600 font-semibold text-sm mb-2">Lead Developer</p>
+                            <p class="text-slate-600 text-xs">Arsitek di balik platform Financify, berdedikasi menciptakan pengalaman pengguna yang mulus dan aman.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- Halaman Profile (DESAIN BARU & MENARIK) -->
+        <section id="profile-page" class="page-content hidden bg-slate-50">
+            <!-- Profile Header -->
+            <div class="bg-gradient-to-r from-slate-800 to-slate-900 pb-16">
+                <div class="container mx-auto px-4 sm:px-6 pt-12">
+                    <h1 class="text-3xl font-bold text-white">Profil & Pengaturan</h1>
+                    <p class="text-slate-300 mt-1">Kelola informasi profil dan preferensi Anda.</p>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 sm:px-6 -mt-10">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Kolom Kiri: Kartu Profil -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white p-6 rounded-2xl shadow-xl text-center sticky top-24">
+                            <!-- Avatar -->
+                            <div class="relative w-32 h-32 mx-auto mb-4">
+                                <!-- Hidden file input -->
+                                <input type="file" id="profile-pic-input" accept="image/*" class="hidden">
+                                <img id="profile-avatar-img" class="w-full h-full rounded-full object-cover ring-4 ring-offset-2 ring-offset-white ring-blue-200" src="https://placehold.co/128x128/e2e8f0/64748b?text=A" alt="Avatar">
+                                <button id="change-profile-pic-btn" title="Ubah Foto Profil" class="absolute bottom-1 right-1 bg-blue-600 text-white rounded-full p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-transform hover:scale-110 shadow-md">
+                                   <svg xmlns="http://www.w.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                </button>
+                            </div>
+                            <!-- Info Pengguna -->
+                            <h2 id="profile-card-name" class="text-2xl font-bold text-slate-900 truncate">Nama Pengguna</h2>
+                            <p id="profile-card-email" class="text-slate-500 mt-1 truncate">email@pengguna.com</p>
+                            
+                            <div class="mt-6 border-t pt-4">
+                                <p id="profile-join-date" class="text-sm text-slate-500 flex items-center justify-center gap-2">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                    Pengguna Sejak: 01 Jan 2025
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom Kanan: Pengaturan -->
+                    <div class="lg:col-span-2 space-y-8">
+                        <!-- Card Edit Profil -->
+                        <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl">
+                            <h3 class="text-xl font-semibold text-slate-800 border-b pb-4 mb-6 flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                Informasi Pribadi
+                            </h3>
+                            <div id="profile-save-message" class="mb-4"></div>
+                            <form id="profile-edit-form" class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="edit-name" class="block text-sm font-medium text-slate-700 mb-1">Nama Lengkap</label>
+                                        <input type="text" id="edit-name" class="calculator-input" value="Nama Pengguna">
+                                    </div>
+                                    <div>
+                                        <label for="edit-email" class="block text-sm font-medium text-slate-700 mb-1">Alamat Email</label>
+                                        <input type="email" id="edit-email" class="calculator-input bg-slate-100 cursor-not-allowed" value="email@pengguna.com" readonly>
+                                    </div>
+                                </div>
+                                <div>
+                                     <label for="edit-phone" class="block text-sm font-medium text-slate-700 mb-1">Nomor Telepon</label>
+                                     <input type="tel" id="edit-phone" class="calculator-input" placeholder="e.g. 081234567890">
+                                </div>
+                                 <div>
+                                     <label for="edit-address" class="block text-sm font-medium text-slate-700 mb-1">Alamat</label>
+                                     <textarea id="edit-address" rows="3" class="calculator-input" placeholder="e.g. Jl. Finansial No. 123, Jakarta"></textarea>
+                                </div>
+                                <div class="pt-4 text-right">
+                                    <button type="submit" class="bg-blue-600 text-white font-semibold py-2.5 px-6 rounded-lg hover:bg-blue-700 transition-colors shadow hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Simpan Perubahan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer id="main-footer" class="bg-slate-800 text-slate-300 hidden">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 Financify. Semua Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Elemen Otentikasi ---
+            const authSection = document.getElementById('auth-section');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const showRegisterBtn = document.getElementById('show-register');
+            const showLoginBtn = document.getElementById('show-login');
+            const registerSubmitBtn = document.getElementById('register-submit-btn'); 
+
+            // --- Elemen Aplikasi Utama ---
+            const mainHeader = document.getElementById('main-header');
+            const appContent = document.getElementById('app-content');
+            const mainFooter = document.getElementById('main-footer');
+            const profileLink = document.getElementById('profile-link');
+            const logoutBtn = document.getElementById('logout-btn');
+            const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+            const loginMessageDiv = document.getElementById('login-message'); 
+            
+            // --- Elemen Profil ---
+            const profilePicInput = document.getElementById('profile-pic-input');
+            const changeProfilePicBtn = document.getElementById('change-profile-pic-btn');
+            const profileEditForm = document.getElementById('profile-edit-form');
+
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page-content');
+            const logoLink = document.getElementById('logo');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // --- Data Management (Simulasi Backend menggunakan localStorage) ---
+            const USER_STORAGE_KEY = 'financify_users';
+            let currentUser = null; 
+
+            const getUsers = () => {
+                try {
+                    const storedUsers = localStorage.getItem(USER_STORAGE_KEY);
+                    return storedUsers ? JSON.parse(storedUsers) : {};
+                } catch (e) {
+                    console.error("Error loading users from localStorage:", e);
+                    return {};
+                }
+            };
+
+            const saveUsers = (users) => {
+                try {
+                    // Masalah terjadi di sini karena Base64 string gambar yang besar
+                    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(users));
+                } catch (e) {
+                    // Log ini yang terpicu jika quota exceeded
+                    console.error("Error saving users to localStorage:", e); 
+                    // Kita biarkan log error ini, tapi fungsionalitas di atas sudah meminimalisir risiko.
+                }
+            };
+            
+            // Fungsi untuk mengaktifkan/menonaktifkan interaksi pada form register/login
+            const setAuthFormInteractions = (state) => {
+                const isEnabled = state === 'enabled';
+                // Toggle kelas untuk memastikan link Register/Login terlihat non-interaktif saat disabled
+                const registerLink = document.getElementById('show-register');
+                const loginLink = document.getElementById('show-login');
+                
+                if (registerLink) {
+                    registerLink.classList.toggle('active-link', isEnabled);
+                    registerLink.classList.toggle('text-blue-600', isEnabled);
+                    registerLink.classList.toggle('hover:text-blue-500', isEnabled);
+                    registerLink.classList.toggle('cursor-pointer', isEnabled);
+                }
+                
+                if (loginLink) {
+                    loginLink.classList.toggle('active-link', isEnabled);
+                    loginLink.classList.toggle('text-blue-600', isEnabled);
+                    loginLink.classList.toggle('hover:text-blue-500', isEnabled);
+                    loginLink.classList.toggle('cursor-pointer', isEnabled);
+                }
+
+                if (registerSubmitBtn) registerSubmitBtn.disabled = !isEnabled;
+            };
+
+            // --- Logika Profile Picture ---
+            
+            const updateProfileCard = (user) => {
+                if (!user) return;
+
+                const nameCard = document.getElementById('profile-card-name');
+                const emailCard = document.getElementById('profile-card-email');
+                const avatarImg = document.getElementById('profile-avatar-img');
+
+                if (nameCard) nameCard.textContent = user.name;
+                if (emailCard) emailCard.textContent = user.email;
+
+                if (avatarImg) {
+                    if (user.profilePic) {
+                        avatarImg.src = user.profilePic;
+                    } else {
+                        const initial = user.name ? user.name.charAt(0).toUpperCase() : 'A';
+                        avatarImg.src = `https://placehold.co/128x128/e2e8f0/64748b?text=${initial}`;
+                    }
+                }
+            };
+            
+            // LOGIKA RESIZE & KOMPRESI (FIX untuk QuotaExceededError)
+            const handleProfilePicChange = (event) => {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                if (!file.type.startsWith('image/')) {
+                    console.error("File selected is not an image.");
+                    return;
+                }
+
+                const reader = new FileReader();
+                
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.src = e.target.result;
+
+                    img.onload = () => {
+                        const MAX_SIZE = 200; // Maksimum sisi dalam piksel
+                        let width = img.width;
+                        let height = img.height;
+
+                        // Hitung dimensi untuk mempertahankan rasio aspek
+                        if (width > height) {
+                            if (width > MAX_SIZE) {
+                                height *= MAX_SIZE / width;
+                                width = MAX_SIZE;
+                            }
+                        } else {
+                            if (height > MAX_SIZE) {
+                                width *= MAX_SIZE / height;
+                                height = MAX_SIZE;
+                            }
+                        }
+
+                        // Buat Canvas dan kompresi
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // Export ke Base64 dengan kompresi (JPEG kualitas 0.7)
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+
+                        // Update UI
+                        const avatarImg = document.getElementById('profile-avatar-img');
+                        if(avatarImg) avatarImg.src = compressedBase64;
+                        
+                        // Save ke simulated backend (localStorage)
+                        const users = getUsers();
+                        const email = currentUser?.email;
+                        if (email && users[email]) {
+                            users[email].profilePic = compressedBase64;
+                            saveUsers(users); 
+                            currentUser.profilePic = compressedBase64;
+                            // Reset input file agar event 'change' bisa terpicu lagi jika file yang sama dipilih
+                            profilePicInput.value = '';
+                        }
+                    };
+
+                    img.onerror = (error) => {
+                        console.error("Error loading image for resizing:", error);
+                    };
+                };
+
+                reader.onerror = (error) => {
+                    console.error("Error reading file:", error);
+                };
+
+                reader.readAsDataURL(file);
+            };
+
+            if (profilePicInput && changeProfilePicBtn) {
+                changeProfilePicBtn.addEventListener('click', () => {
+                    profilePicInput.click();
+                });
+                profilePicInput.addEventListener('change', handleProfilePicChange);
+            }
+            // --- End Logika Profile Picture ---
+
+
+            // --- Logika Otentikasi & Navigasi ---
+
+            const showApp = (user, email) => {
+                currentUser = { ...user, email };
+                
+                // Update UI di berbagai tempat
+                updateProfileCard(currentUser);
+
+                // Populate form
+                const editNameInput = document.getElementById('edit-name');
+                const editEmailInput = document.getElementById('edit-email');
+                const editPhoneInput = document.getElementById('edit-phone');
+                const editAddressInput = document.getElementById('edit-address');
+                const joinDateEl = document.getElementById('profile-join-date');
+
+                if(editNameInput) editNameInput.value = currentUser.name;
+                if(editEmailInput) editEmailInput.value = currentUser.email;
+                if(editPhoneInput) editPhoneInput.value = currentUser.phone || '';
+                if(editAddressInput) editAddressInput.value = currentUser.address || '';
+                
+                if(joinDateEl) {
+                    const registeredDate = currentUser.registeredAt ? new Date(currentUser.registeredAt) : new Date();
+                    const formattedDate = registeredDate.toLocaleDateString('id-ID', {day: '2-digit', month: 'short', year: 'numeric'});
+                    joinDateEl.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        Pengguna Sejak: ${formattedDate}
+                    `;
+                }
+
+                authSection.classList.add('hidden');
+                mainHeader.classList.remove('hidden');
+                appContent.classList.remove('hidden');
+                mainFooter.classList.remove('hidden');
+                switchPage('home'); // Tampilkan halaman home setelah login
+            };
+            
+            const handleLogout = () => {
+                currentUser = null;
+                authSection.classList.remove('hidden');
+                mainHeader.classList.add('hidden');
+                appContent.classList.add('hidden');
+                mainFooter.classList.add('hidden');
+                // Kembali ke form login
+                registerForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+                loginMessageDiv.innerHTML = ''; // Hapus pesan login/sukses
+                setAuthFormInteractions('enabled'); // Pastikan interaksi diaktifkan kembali
+            };
+
+            window.handleLogin = () => {
+                const loginEmail = document.getElementById('login-email').value.trim();
+                const loginPassword = document.getElementById('login-password').value;
+                
+                loginMessageDiv.innerHTML = ''; 
+                
+                const users = getUsers();
+                const user = users[loginEmail];
+
+                if (!user) {
+                    loginMessageDiv.innerHTML = `<p class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md text-sm font-medium">Login gagal: Email tidak terdaftar.</p>`;
+                    return;
+                }
+
+                // Cek Password
+                if (user.password === loginPassword) {
+                    // Login Berhasil
+                    document.getElementById('login-email').value = '';
+                    document.getElementById('login-password').value = '';
+                    showApp(user, loginEmail); 
+                } else {
+                    // Password Salah
+                    loginMessageDiv.innerHTML = `<p class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md text-sm font-medium">Login gagal: Password salah.</p>`;
+                }
+            };
+            
+            // Logika Register: Hanya Notifikasi Teks
+            window.handleRegister = () => {
+                const registerName = document.getElementById('register-name').value.trim();
+                const registerEmail = document.getElementById('register-email').value.trim();
+                const registerPassword = document.getElementById('register-password');
+                const registerMessageDiv = document.getElementById('register-message');
+                const loginMessageDiv = document.getElementById('login-message');
+                
+                loginMessageDiv.innerHTML = ''; 
+
+                if (registerName === "" || registerEmail === "" || registerPassword.value === "") {
+                    registerMessageDiv.innerHTML = `<p class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md text-sm font-medium">Registrasi gagal: Semua field harus diisi.</p>`;
+                    return;
+                }
+                
+                let users = getUsers();
+                
+                // Cek apakah email sudah terdaftar
+                if (users[registerEmail]) {
+                    registerMessageDiv.innerHTML = `<p class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md text-sm font-medium">Registrasi gagal: Email sudah terdaftar!</p>`;
+                    return;
+                }
+
+                // Simulasi sukses register dan menyimpan data
+                users[registerEmail] = { 
+                    name: registerName, 
+                    password: registerPassword.value, 
+                    registeredAt: new Date().toISOString(),
+                    profilePic: null, // Default no profile picture
+                    phone: '',
+                    address: ''
+                };
+                saveUsers(users);
+
+                // 1. Tampilkan pesan sukses (HANYA TEKS TANPA LINK)
+                registerMessageDiv.innerHTML = `<p class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md text-sm font-medium">Registrasi untuk <strong>${registerName}</strong> berhasil! Silakan Login.</p>`;
+                
+                // 2. Kosongkan input register
+                document.getElementById('register-name').value = '';
+                document.getElementById('register-email').value = '';
+                registerPassword.value = '';
+                
+                // 3. Pastikan interaksi diaktifkan (sehingga link "Login di sini" di bawah form bisa diklik)
+                setAuthFormInteractions('enabled');
+            };
+
+            showRegisterBtn.addEventListener('click', (e) => {
+                if (e.target.classList.contains('active-link')) {
+                    loginForm.classList.add('hidden');
+                    registerForm.classList.remove('hidden');
+                    loginMessageDiv.innerHTML = ''; // Clear login error/success message
+                    setAuthFormInteractions('enabled');
+                }
+            });
+
+            showLoginBtn.addEventListener('click', (e) => {
+                if (e.target.classList.contains('active-link')) {
+                    registerForm.classList.add('hidden');
+                    loginForm.classList.remove('hidden');
+                    document.getElementById('register-message').innerHTML = ''; // Clear register message
+                    setAuthFormInteractions('enabled');
+                }
+            });
+            
+            logoutBtn.addEventListener('click', handleLogout);
+            mobileLogoutBtn.addEventListener('click', handleLogout);
+
+            // Inisialisasi: Pastikan interaksi aktif saat dimuat
+            setAuthFormInteractions('enabled');
+
+            // --- Simpan Perubahan Profil ---
+            if (profileEditForm) {
+                profileEditForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const newName = document.getElementById('edit-name').value.trim();
+                    const newPhone = document.getElementById('edit-phone').value.trim();
+                    const newAddress = document.getElementById('edit-address').value.trim();
+                    const messageDiv = document.getElementById('profile-save-message');
+
+                    if (!newName) {
+                        messageDiv.innerHTML = `<p class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md text-sm font-medium">Nama tidak boleh kosong.</p>`;
+                        return;
+                    }
+                    
+                    const users = getUsers();
+                    const email = currentUser?.email;
+
+                    if (email && users[email]) {
+                        // Update data di localStorage
+                        users[email].name = newName;
+                        users[email].phone = newPhone;
+                        users[email].address = newAddress;
+                        saveUsers(users);
+
+                        // Update data di state aplikasi (currentUser)
+                        currentUser.name = newName;
+                        currentUser.phone = newPhone;
+                        currentUser.address = newAddress;
+
+                        // Update UI Kartu Profil
+                        updateProfileCard(currentUser);
+
+                        // Tampilkan pesan sukses
+                        messageDiv.innerHTML = `<p class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md text-sm font-medium">Profil berhasil diperbarui!</p>`;
+                        
+                        // Hapus pesan setelah beberapa detik
+                        setTimeout(() => {
+                           if(messageDiv) messageDiv.innerHTML = '';
+                        }, 3000);
+                    } else {
+                        messageDiv.innerHTML = `<p class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md text-sm font-medium">Gagal menyimpan: Pengguna tidak ditemukan.</p>`;
+                    }
+                });
+            }
+
+
+            // --- Navigasi Halaman Utama ---
+            const switchPage = (pageId) => {
+                pages.forEach(page => page.classList.add('hidden'));
+                const activePage = document.getElementById(`${pageId}-page`);
+                if (activePage) activePage.classList.remove('hidden');
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.page === pageId) link.classList.add('active');
+                });
+
+                if (mobileMenu) mobileMenu.classList.add('hidden');
+                window.scrollTo(0, 0); // Scroll to top on page change
+            };
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPage = e.target.closest('a').dataset.page;
+                    if (targetPage) switchPage(targetPage);
+                });
+            });
+            
+            profileLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchPage('profile');
+            });
+
+            // Handle action links from the new dashboard
+            const actionLinks = document.querySelectorAll('.action-link');
+            actionLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Traverse up to find the closest <a> tag if the click was on an inner element
+                    const anchorElement = e.target.closest('a');
+                    if(anchorElement && anchorElement.dataset.page) {
+                       switchPage(anchorElement.dataset.page);
+                    }
+                });
+            });
+
+            if (logoLink) {
+                logoLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchPage('home');
+                });
+            }
+            
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    if (mobileMenu) mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // --- Logika Sidebar Halaman Investasi ---
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            const investmentContents = document.querySelectorAll('.investment-content');
+
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const contentId = e.target.closest('a').dataset.content;
+                    investmentContents.forEach(content => content.classList.add('hidden'));
+                    const activeContent = document.getElementById(`${contentId}-content`);
+                    if (activeContent) activeContent.classList.remove('hidden');
+                    sidebarLinks.forEach(sLink => sLink.classList.remove('active'));
+                    e.target.closest('a').classList.add('active');
+                });
+            });
+
+            // --- Logika Tab Interaktif untuk Pinjaman & Simpanan ---
+            const setupTabs = (tabContainerId, contentClass) => {
+                const tabContainer = document.getElementById(tabContainerId);
+                if (!tabContainer) return;
+
+                const tabs = tabContainer.querySelectorAll('.tab-link');
+                const contents = document.querySelectorAll(`.${contentClass}`);
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', e => {
+                        e.preventDefault();
+                        
+                        // Update status tab
+                        tabs.forEach(t => t.classList.remove('active'));
+                        e.currentTarget.classList.add('active');
+                        
+                        const targetId = `${e.currentTarget.dataset.tab}-tab-content`;
+
+                        // Tampilkan konten yang sesuai
+                        contents.forEach(content => {
+                            if (content.id === targetId) {
+                                content.classList.remove('hidden');
+                            } else {
+                                content.classList.add('hidden');
+                            }
+                        });
+                    });
+                });
+            };
+
+            setupTabs('loan-tabs', 'tab-content');
+            setupTabs('savings-tabs', 'tab-content');
+
+
+            // --- Helper Kalkulator ---
+            const formatCurrency = (value) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(value);
+            
+            // --- Logika Kalkulator Investasi ---
+            // Reksadana
+            const rdHitungBtn = document.getElementById('rd-hitung-btn');
+            if (rdHitungBtn) {
+                rdHitungBtn.addEventListener('click', () => {
+                    const modal = parseFloat(document.getElementById('rd-modal').value) || 0;
+                    const bulanan = parseFloat(document.getElementById('rd-bulanan').value) || 0;
+                    const waktu = parseInt(document.getElementById('rd-waktu').value) || 0;
+                    const returnRate = parseFloat(document.getElementById('rd-return').value) || 0;
+                    const hasilDiv = document.getElementById('rd-hasil');
+                    if (waktu <= 0 || returnRate < 0 || modal < 0 || (modal === 0 && bulanan === 0)) {
+                        hasilDiv.innerHTML = `<p class="text-red-600">Mohon isi Modal Awal dan/atau Investasi Bulanan dengan benar.</p>`;
+                        hasilDiv.classList.remove('hidden'); return;
+                    }
+                    const totalBulan = waktu * 12;
+                    const rateBulanan = returnRate / 100 / 12;
+                    // Future Value of Lump Sum (Modal Awal)
+                    let fvLumpSum = modal * Math.pow(1 + rateBulanan, totalBulan);
+                    // Future Value of Annuity (Investasi Bulanan)
+                    let fvSeries = bulanan * ( (Math.pow(1 + rateBulanan, totalBulan) - 1) / rateBulanan );
+                    const nilaiAkhir = fvLumpSum + fvSeries;
+                    const totalInvestasi = modal + (bulanan * totalBulan);
+                    const totalKeuntungan = nilaiAkhir - totalInvestasi;
+                    hasilDiv.innerHTML = `<h6 class="font-semibold text-lg mb-2">Hasil Simulasi</h6><div class="space-y-1 text-sm"><p>Total Dana Diinvestasikan: <strong class="float-right">${formatCurrency(totalInvestasi)}</strong></p><p>Total Keuntungan: <strong class="float-right text-green-600">${formatCurrency(totalKeuntungan)}</strong></p><hr class="my-1"><p class="font-bold">Nilai Akhir Investasi: <strong class="float-right">${formatCurrency(nilaiAkhir)}</strong></p></div>`;
+                    hasilDiv.classList.remove('hidden');
+                });
+            }
+            // Obligasi
+            const obHitungBtn = document.getElementById('ob-hitung-btn');
+            if (obHitungBtn) {
+                obHitungBtn.addEventListener('click', () => {
+                    const modal = parseFloat(document.getElementById('ob-modal').value) || 0;
+                    const kupon = parseFloat(document.getElementById('ob-kupon').value) || 0;
+                    const waktu = parseInt(document.getElementById('ob-waktu').value) || 0;
+                    const hasilDiv = document.getElementById('ob-hasil');
+                    if (modal <= 0 || kupon < 0 || waktu <= 0) {
+                        hasilDiv.innerHTML = `<p class="text-red-600">Mohon isi semua field dengan benar.</p>`;
+                        hasilDiv.classList.remove('hidden'); return;
+                    }
+                    // Obligasi: Kupon tahunan * waktu (simple interest for kupon)
+                    const totalKupon = modal * (kupon / 100) * waktu;
+                    const nilaiAkhir = modal + totalKupon;
+                    hasilDiv.innerHTML = `<h6 class="font-semibold text-lg mb-2">Hasil Simulasi</h6><div class="space-y-1 text-sm"><p>Total Kupon Diterima: <strong class="float-right text-green-600">${formatCurrency(totalKupon)}</strong></p><hr class="my-1"><p class="font-bold">Nilai Akhir (Pokok + Kupon): <strong class="float-right">${formatCurrency(nilaiAkhir)}</strong></p></div>`;
+                    hasilDiv.classList.remove('hidden');
+                });
+            }
+            // Saham, Crypto, Logam Mulia (Compound Interest Sederhana)
+            const setupCompoundCalculator = (prefix) => {
+                const hitungBtn = document.getElementById(`${prefix}-hitung-btn`);
+                if (hitungBtn) {
+                    hitungBtn.addEventListener('click', () => {
+                        const modal = parseFloat(document.getElementById(`${prefix}-modal`).value) || 0;
+                        const returnRate = parseFloat(document.getElementById(`${prefix}-return`).value) || 0;
+                        const waktu = parseInt(document.getElementById(`${prefix}-waktu`).value) || 0;
+                        const hasilDiv = document.getElementById(`${prefix}-hasil`);
+                        if (modal <= 0 || returnRate < 0 || waktu <= 0) { // Return rate can be 0 or slightly less than 0 for safe assets
+                            hasilDiv.innerHTML = `<p class="text-red-600">Mohon isi semua field dengan benar.</p>`;
+                            hasilDiv.classList.remove('hidden'); return;
+                        }
+                        const nilaiAkhir = modal * Math.pow(1 + (returnRate / 100), waktu);
+                        const keuntungan = nilaiAkhir - modal;
+                        hasilDiv.innerHTML = `<h6 class="font-semibold text-lg mb-2">Hasil Simulasi</h6><div class="space-y-1 text-sm"><p>Modal Awal: <strong class="float-right">${formatCurrency(modal)}</strong></p><p>Potensi Keuntungan: <strong class="float-right text-green-600">${formatCurrency(keuntungan)}</strong></p><hr class="my-1"><p class="font-bold">Potensi Nilai Akhir: <strong class="float-right">${formatCurrency(nilaiAkhir)}</strong></p></div>`;
+                        hasilDiv.classList.remove('hidden');
+                    });
+                }
+            };
+            setupCompoundCalculator('sh');
+            setupCompoundCalculator('cr');
+            setupCompoundCalculator('lm');
+            // Deposito di halaman Investasi (same as Simpanan page logic)
+            const dpHitungBtnInv = document.getElementById('dp-hitung-btn-inv');
+            if (dpHitungBtnInv) {
+                dpHitungBtnInv.addEventListener('click', () => {
+                    const modal = parseFloat(document.getElementById('dp-modal-inv').value) || 0;
+                    const bunga = parseFloat(document.getElementById('dp-bunga-inv').value) || 0;
+                    const waktu = parseInt(document.getElementById('dp-waktu-inv').value) || 0;
+                    const hasilDiv = document.getElementById('dp-hasil-inv');
+                    if (modal <= 0 || bunga < 0 || waktu <= 0) {
+                        hasilDiv.innerHTML = `<p class="text-red-600">Mohon isi semua field dengan benar.</p>`;
+                        hasilDiv.classList.remove('hidden'); return;
+                    }
+                    const pajak = 0.20;
+                    const totalBunga = modal * (bunga / 100) * (waktu / 12);
+                    const totalPajak = totalBunga * pajak;
+                    const bungaBersih = totalBunga - totalPajak;
+                    const nilaiAkhir = modal + bungaBersih;
+                    hasilDiv.innerHTML = `<h6 class="font-semibold text-lg mb-2">Hasil Simulasi</h6><div class="space-y-1 text-sm"><p>Total Bunga (sebelum pajak): <strong class="float-right">${formatCurrency(totalBunga)}</strong></p><p>Pajak Bunga (20%): <strong class="float-right text-red-600">-${formatCurrency(totalPajak)}</strong></p><p>Bunga Bersih Diterima: <strong class="float-right text-green-600">${formatCurrency(bungaBersih)}</strong></p><hr class="my-1"><p class="font-bold">Nilai Akhir Diterima: <strong class="float-right">${formatCurrency(nilaiAkhir)}</strong></p></div>`;
+                    hasilDiv.classList.remove('hidden');
+                });
+            }
+
+            // --- Logika Kalkulator Pinjaman ---
+            // Fungsi Amortisasi (Anuitas/Angsuran Tetap)
+            const hitungCicilan = (pokok, bungaTahunan, tenorBulan) => {
+                const bungaBulanan = bungaTahunan / 100 / 12;
+                if (bungaBulanan === 0) return pokok / tenorBulan;
+                const pangkat = Math.pow(1 + bungaBulanan, tenorBulan);
+                // Rumus Cicilan Tetap (PMT)
+                return pokok * ((bungaBulanan * pangkat) / (pangkat - 1));
+            };
+            const tampilkanHasilCicilan = (hasilDiv, cicilan, pokok, tenorBulan) => {
+                const totalBayar = cicilan * tenorBulan;
+                const totalBunga = totalBayar - pokok;
+                hasilDiv.innerHTML = `<h6 class="font-semibold text-lg mb-2 text-center">Hasil Simulasi</h6><p class="text-center text-slate-600 mb-3">Estimasi Cicilan Bulanan Anda adalah:</p><p class="text-center text-3xl font-bold text-blue-600 mb-4">${formatCurrency(cicilan)}</p><div class="text-sm border-t pt-2 space-y-1"><p>Total Pokok Pinjaman: <strong class="float-right">${formatCurrency(pokok)}</strong></p><p>Total Bunga Pinjaman: <strong class="float-right">${formatCurrency(totalBunga)}</strong></p><p>Total Pembayaran: <strong class="float-right font-semibold">${formatCurrency(totalBayar)}</strong></p></div>`;
+                hasilDiv.classList.remove('hidden');
+            };
+            // KPR
+            const kprHitungBtn = document.getElementById('kpr-hitung-btn');
+            if(kprHitungBtn) {
+                kprHitungBtn.addEventListener('click', () => {
+                    const harga = parseFloat(document.getElementById('kpr-harga').value) || 0;
+                    const dp = parseFloat(document.getElementById('kpr-dp').value) || 0;
+                    const bungaTahunan = parseFloat(document.getElementById('kpr-bunga').value) || 0;
+                    const tenorTahun = parseInt(document.getElementById('kpr-tenor').value) || 0;
+                    const hasilDiv = document.getElementById('kpr-hasil');
+                    const pokok = harga - dp;
+                    if (pokok <= 0 || bungaTahunan < 0 || tenorTahun <= 0) {
+                        hasilDiv.innerHTML = `<p class="text-red-600 text-center font-medium">Mohon isi semua field dengan valid. Pastikan Harga Properti lebih besar dari DP.</p>`;
+                        hasilDiv.classList.remove('hidden'); return;
+                    }
+                    const tenorBulan = tenorTahun * 12;
+                    const cicilan = hitungCicilan(pokok, bungaTahunan, tenorBulan);
+                    tampilkanHasilCicilan(hasilDiv, cicilan, pokok, tenorBulan);
+                });
+            }
+            // KTA, KUR, KMK (Menggunakan fungsi yang sama)
+            const setupLoanCalculator = (prefix) => {
+                const hitungBtn = document.getElementById(`${prefix}-hitung-btn`);
+                if(hitungBtn) {
+                    hitungBtn.addEventListener('click', () => {
+                        const pokok = parseFloat(document.getElementById(`${prefix}-pokok`).value) || 0;
+                        const bungaTahunan = parseFloat(document.getElementById(`${prefix}-bunga`).value) || 0;
+                        const tenorBulan = parseInt(document.getElementById(`${prefix}-tenor`).value) || 0;
+                        const hasilDiv = document.getElementById(`${prefix}-hasil`);
+                        if (pokok <= 0 || bungaTahunan < 0 || tenorBulan <= 0) {
+                            hasilDiv.innerHTML = `<p class="text-red-600 text-center font-medium">Mohon isi semua field dengan nilai yang valid.</p>`;
+                            hasilDiv.classList.remove('hidden'); return;
+                        }
+                        const cicilan = hitungCicilan(pokok, bungaTahunan, tenorBulan);
+                        tampilkanHasilCicilan(hasilDiv, cicilan, pokok, tenorBulan);
+                    });
+                }
+            };
+            setupLoanCalculator('kta');
+            setupLoanCalculator('kur');
+            setupLoanCalculator('kmk');
+
+            // --- Logika Kalkulator Simpanan ---
+            // Target Menabung
+            const targetHitungBtn = document.getElementById('target-hitung-btn');
+            if (targetHitungBtn) {
+                targetHitungBtn.addEventListener('click', () => {
+                    const target = parseFloat(document.getElementById('target-jumlah').value) || 0;
+                    const bulanan = parseFloat(document.getElementById('target-bulanan').value) || 0;
+                    const hasilDiv = document.getElementById('target-hasil');
+                    if (target <= 0 || bulanan <= 0) {
+                        hasilDiv.innerHTML = `<p class="text-red-600 text-center font-medium">Mohon isi Jumlah Target dan Simpanan per Bulan.</p>`;
+                        hasilDiv.classList.remove('hidden'); return;
+                    }
+                    const totalBulan = Math.ceil(target / bulanan);
+                    const tahun = Math.floor(totalBulan / 12);
+                    const sisaBulan = totalBulan % 12;
+                    let hasilText = '';
+                    if (tahun > 0) hasilText += `${tahun} tahun `;
+                    if (sisaBulan > 0) hasilText += `${sisaBulan} bulan`;
+                    if (hasilText === '') hasilText = 'Kurang dari 1 bulan';
+                    hasilDiv.innerHTML = `<h6 class="font-semibold text-lg mb-2 text-center">Waktu yang Dibutuhkan</h6><p class="text-center text-slate-600 mb-3">Untuk mencapai target <strong class="text-slate-800">${formatCurrency(target)}</strong> dengan menabung <strong class="text-slate-800">${formatCurrency(bulanan)}/bulan</strong>, Anda membutuhkan waktu sekitar:</p><p class="text-center text-3xl font-bold text-emerald-600">${hasilText.trim()}</p>`.replace('tahun Kurang', 'tahun');
+                    hasilDiv.classList.remove('hidden');
+                });
+            }
+            // Deposito (Simple Interest with Tax)
+            const dpHitungBtn = document.getElementById('dp-hitung-btn');
+            if (dpHitungBtn) {
+                dpHitungBtn.addEventListener('click', () => {
+                    const modal = parseFloat(document.getElementById('dp-modal').value) || 0;
+                    const bunga = parseFloat(document.getElementById('dp-bunga').value) || 0;
+                    const waktu = parseInt(document.getElementById('dp-waktu').value) || 0;
+                    const hasilDiv = document.getElementById('dp-hasil');
+                    if (modal <= 0 || bunga < 0 || waktu <= 0) {
+                        hasilDiv.innerHTML = `<p class="text-red-600">Mohon isi semua field dengan benar.</p>`;
+                        hasilDiv.classList.remove('hidden'); return;
+                    }
+                    const pajak = 0.20; // PPh 20%
+                    const totalBunga = modal * (bunga / 100) * (waktu / 12);
+                    const totalPajak = totalBunga * pajak;
+                    const bungaBersih = totalBunga - totalPajak;
+                    const nilaiAkhir = modal + bungaBersih;
+                    hasilDiv.innerHTML = `<h6 class="font-semibold text-lg mb-2">Hasil Simulasi</h6><div class="space-y-1 text-sm"><p>Total Bunga (sebelum pajak): <strong class="float-right">${formatCurrency(totalBunga)}</strong></p><p>Pajak Bunga (20%): <strong class="float-right text-red-600">-${formatCurrency(totalPajak)}</strong></p><p>Bunga Bersih Diterima: <strong class="float-right text-green-600">${formatCurrency(bungaBersih)}</strong></p><hr class="my-1"><p class="font-bold">Nilai Akhir Diterima: <strong class="float-right">${formatCurrency(nilaiAkhir)}</strong></p></div>`;
+                    hasilDiv.classList.remove('hidden');
+                });
+            }
+            // Giro (Simple Interest with Tax for Monthly Average Balance)
+            const giroHitungBtn = document.getElementById('giro-hitung-btn');
+            if (giroHitungBtn) {
+                giroHitungBtn.addEventListener('click', () => {
+                    const modal = parseFloat(document.getElementById('giro-modal').value) || 0;
+                    const bunga = parseFloat(document.getElementById('giro-bunga').value) || 0;
+                    const hasilDiv = document.getElementById('giro-hasil');
+                    if (modal <= 0 || bunga < 0) {
+                        hasilDiv.innerHTML = `<p class="text-red-600">Mohon isi semua field dengan benar.</p>`;
+                        hasilDiv.classList.remove('hidden'); return;
+                    }
+                    const pajak = 0.20; // Pajak 20%
+                    const totalBunga = modal * (bunga / 100) * (1/12); // Perhitungan per bulan
+                    const totalPajak = totalBunga * pajak;
+                    const bungaBersih = totalBunga - totalPajak;
+                    hasilDiv.innerHTML = `<h6 class="font-semibold text-lg mb-2">Hasil Simulasi Jasa Giro Bulanan</h6><div class="space-y-1 text-sm"><p>Jasa Giro (sebelum pajak): <strong class="float-right">${formatCurrency(totalBunga)}</strong></p><p>Pajak (20%): <strong class="float-right text-red-600">-${formatCurrency(totalPajak)}</strong></p><hr class="my-1"><p class="font-bold">Jasa Giro Bersih Diterima: <strong class="float-right">${formatCurrency(bungaBersih)}</strong></p></div>`;
+                    hasilDiv.classList.remove('hidden');
+                });
+            }
+
+
+            // --- CHATBOT LOGIC (GEMINI API) ---
+            const chatWindow = document.getElementById('chat-window');
+            const chatInput = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('send-btn');
+            const questionBtns = document.querySelectorAll('.question-btn');
+
+            const addMessage = (message, sender) => {
+                const messageWrapper = document.createElement('div');
+                if (sender === 'user') {
+                    messageWrapper.className = 'flex justify-end';
+                    messageWrapper.innerHTML = `
+                        <div class="bg-blue-600 text-white p-3 rounded-lg rounded-br-none max-w-xs break-words">
+                            <p class="text-sm">${message}</p>
+                        </div>
+                    `;
+                } else { // bot
+                    messageWrapper.className = 'flex items-start gap-3';
+                    messageWrapper.innerHTML = `
+                        <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg">F</span>
+                        <div class="bg-slate-100 p-3 rounded-lg rounded-tl-none max-w-xs break-words">
+                            <p class="text-sm text-slate-700">${message}</p>
+                        </div>
+                    `;
+                }
+                if (chatWindow) {
+                    chatWindow.appendChild(messageWrapper);
+                    chatWindow.scrollTop = chatWindow.scrollHeight;
+                }
+            };
+
+            const addTypingIndicator = () => {
+                const typingWrapper = document.createElement('div');
+                typingWrapper.id = 'typing-indicator';
+                typingWrapper.className = 'flex items-start gap-3';
+                typingWrapper.innerHTML = `
+                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg">F</span>
+                    <div class="bg-slate-100 p-3 rounded-lg rounded-tl-none max-w-xs">
+                        <p class="text-sm text-slate-700">
+                            <span class="animate-pulse">Mengetik...</span>
+                        </p>
+                    </div>
+                `;
+                if (chatWindow) {
+                    chatWindow.appendChild(typingWrapper);
+                    chatWindow.scrollTop = chatWindow.scrollHeight;
+                }
+            };
+
+            const removeTypingIndicator = () => {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) {
+                    indicator.remove();
+                }
+            };
+            
+            // Function to handle retries with exponential backoff
+            const fetchWithRetry = async (url, options, maxRetries = 5) => {
+                let lastError = null;
+                for (let i = 0; i < maxRetries; i++) {
+                    try {
+                        const response = await fetch(url, options);
+                        if (response.status === 429) { // Too Many Requests
+                            throw new Error('Rate limit exceeded');
+                        }
+                        if (!response.ok) {
+                             const errorData = await response.json();
+                             throw new Error(errorData.error.message || `HTTP error! status: ${response.status}`);
+                        }
+                        return response;
+                    } catch (error) {
+                        lastError = error;
+                        // Log only if it's the last retry or if it's not a rate limit error
+                        if (i === maxRetries - 1 || error.message !== 'Rate limit exceeded') {
+                            console.error(`Attempt ${i + 1} failed:`, error);
+                        }
+                        if (i < maxRetries - 1) {
+                            const delay = Math.pow(2, i) * 1000; // Exponential backoff
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                        }
+                    }
+                }
+                throw lastError;
+            };
+
+            const handleSendMessage = async () => {
+                if (!chatInput) return;
+                const userMessage = chatInput.value.trim();
+                if (userMessage === '') return;
+
+                addMessage(userMessage, 'user');
+                chatInput.value = '';
+                addTypingIndicator();
+
+                const apiKey = ""; // API key will be injected by the environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                
+                const systemPrompt = "Anda adalah Financify AI Assistant, seorang ahli keuangan yang ramah dan membantu. Berikan jawaban yang jelas, singkat, dan mudah dimengerti seputar topik investasi, pinjaman, dan simpanan di Indonesia. Gunakan bahasa Indonesia yang baik dan benar.";
+
+                const payload = {
+                    contents: [{ parts: [{ text: userMessage }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                };
+
+                try {
+                    const response = await fetchWithRetry(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    removeTypingIndicator();
+
+                    const result = await response.json();
+                    
+                    const candidate = result.candidates?.[0];
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        // Replace markdown list markers with bullet points for cleaner display
+                        const botResponse = candidate.content.parts[0].text.replace(/\*/g, '•').replace(/^- /gm, '• ');
+                        addMessage(botResponse, 'bot');
+                    } else {
+                         // Check for block reason
+                        const safetyRatings = candidate?.safetyRatings;
+                        let blockReason = "Maaf, respons tidak valid.";
+                        if (safetyRatings && safetyRatings.length > 0) {
+                            const blocked = safetyRatings.find(r => r.probability !== 'NEGLIGIBLE');
+                            if (blocked) {
+                                blockReason = `Maaf, pertanyaan ini diblokir karena melanggar kebijakan keamanan (Kategori: ${blocked.category.replace('HARM_CATEGORY_', '')}).`;
+                            }
+                        }
+                         addMessage(blockReason, 'bot');
+                         console.log("Unexpected response structure:", result);
+                    }
+
+                } catch (error) {
+                    console.error("Error fetching Gemini response after retries:", error);
+                    removeTypingIndicator();
+                    addMessage(`Maaf, terjadi masalah koneksi atau error sistem. Silakan coba lagi. Error: ${error.message}`, 'bot');
+                }
+            };
+
+            if (sendBtn) {
+                sendBtn.addEventListener('click', handleSendMessage);
+            }
+            if (chatInput) {
+                chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        handleSendMessage();
+                    }
+                });
+            }
+            
+            questionBtns.forEach(button => {
+                button.addEventListener('click', () => {
+                    const question = button.textContent;
+                    if(chatInput) {
+                        chatInput.value = question;
+                        handleSendMessage();
+                    }
+                });
+            });
+            
+            // Set halaman awal (di sini kita tidak set, karena menunggu login)
+            // switchPage('home');
+        });
+    </script>
+</body>
+</html>
+
+
