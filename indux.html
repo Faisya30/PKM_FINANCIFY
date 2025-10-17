@@ -91,7 +91,7 @@
             @apply bg-white/5 backdrop-blur-md p-8 rounded-2xl border border-white/10 transform hover:-translate-y-2 transition-all duration-300;
         }
         .pillar-card {
-            @apply bg-slate-800/50 p-8 rounded-2xl border border-white/10 text-center transform hover:bg-slate-800 hover:scale-105 transition-all duration-300;
+            @apply bg-slate-800/50 p-0 rounded-2xl border border-white/10 transform hover:bg-slate-800 hover:scale-105 transition-all duration-300 overflow-hidden;
         }
     </style>
 </head>
@@ -111,7 +111,7 @@
                 <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
                 <li><a href="#" class="nav-link" data-page="investasi">Investasi</a></li>
                 <li><a href="#" class="nav-link" data-page="pinjaman">Pinjaman</a></li>
-                <li><a href="#" class="nav-link" data-page="pembiayaan">Pembiayaan</a></li>
+                <li><a href="#" class="nav-link" data-page="perencanaan">Perencanaan</a></li>
                 <li><a href="#" class="nav-link" data-page="chatbot">Chatbot</a></li>
                 <li><a href="#" class="nav-link" data-page="about">Tentang Kami</a></li>
             </ul>
@@ -127,7 +127,7 @@
                 <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
                 <li><a href="#" class="nav-link" data-page="investasi">Investasi</a></li>
                 <li><a href="#" class="nav-link" data-page="pinjaman">Pinjaman</a></li>
-                <li><a href="#" class="nav-link" data-page="pembiayaan">Pembiayaan</a></li>
+                <li><a href="#" class="nav-link" data-page="perencanaan">Perencanaan</a></li>
                 <li><a href="#" class="nav-link" data-page="chatbot">Chatbot</a></li>
                 <li><a href="#" class="nav-link" data-page="about">Tentang Kami</a></li>
             </ul>
@@ -164,76 +164,59 @@
                 </div>
             </div>
     
-            <!-- Pillar Section -->
-            <div class="py-24 px-6 container mx-auto">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold">Jelajahi Pilar Finansial Kami</h2>
-                    <p class="mt-4 text-slate-400">Financify dibangun di atas tiga pilar utama untuk membantu Anda mencapai kebebasan finansial secara holistik.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Pillar 1: Menyimpan -->
-                    <div class="pillar-card">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-emerald-500/20 text-emerald-300 mx-auto mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a2.25 2.25 0 01-2.25 2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 013 12m18 0v-2.25A2.25 2.25 0 0018.75 7.5H5.25A2.25 2.25 0 003 9.75v2.25m18 0v2.25A2.25 2.25 0 0118.75 16.5H5.25A2.25 2.25 0 013 14.25v-2.25" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Menyimpan (Save)</h3>
-                        <p class="text-slate-400 text-sm">Bangun fondasi yang kuat dengan produk simpanan yang aman dan terjamin. Mulai dari dana darurat hingga tujuan jangka pendek.</p>
-                    </div>
-                    <!-- Pillar 2: Mengembangkan -->
-                    <div class="pillar-card">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-500/20 text-blue-300 mx-auto mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="4"></line><polyline points="18 10 12 4 6 10"></polyline></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Mengembangkan (Grow)</h3>
-                        <p class="text-slate-400 text-sm">Akselerasi pertumbuhan aset Anda melalui berbagai instrumen investasi. Temukan yang paling sesuai dengan profil risiko Anda.</p>
-                    </div>
-                    <!-- Pillar 3: Meminjam -->
-                    <div class="pillar-card">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-rose-500/20 text-rose-300 mx-auto mb-6">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m-3-1l-1.5.545m0 0l-1.5-1.5m1.5 1.5l1.5 1.5m-1.5-1.5l-1.5-1.5m0 0l-6.75-3.055m6.75 3.055l-6.75 3.055m0 0v3.75m6.75-3.055l-6.75 3.055" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Meminjam (Leverage)</h3>
-                        <p class="text-slate-400 text-sm">Gunakan pinjaman secara bijak sebagai daya ungkit untuk mencapai tujuan besar, seperti memiliki rumah atau modal usaha.</p>
-                    </div>
-                </div>
-            </div>
-    
-            <!-- Why Choose Us Section -->
-            <div class="py-24 px-6 bg-black/20">
+            <!-- Section "Cara Menggunakan Financify" -->
+            <div class="py-24 px-6 bg-slate-900/70">
                 <div class="container mx-auto">
                     <div class="text-center max-w-3xl mx-auto mb-16">
-                        <h2 class="text-3xl md:text-4xl font-bold">Mengapa Memilih Financify?</h2>
-                        <p class="mt-4 text-slate-400">Kami menyediakan alat dan pengetahuan yang Anda butuhkan untuk mengambil keputusan finansial dengan percaya diri.</p>
+                        <h2 class="text-3xl md:text-4xl font-bold">Panduan Cepat Financify</h2>
+                        <p class="mt-4 text-slate-400">Hanya dalam 4 langkah mudah, Anda bisa mulai merencanakan masa depan finansial Anda.</p>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Feature 1: Edukasi -->
-                        <div class="feature-card">
-                            <h3 class="text-xl font-bold mb-3">Edukasi Terstruktur</h3>
-                            <p class="text-slate-300">Dari konsep dasar hingga strategi lanjutan, materi kami dirancang agar mudah dipahami oleh semua kalangan.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Step 1 Card -->
+                        <div class="feature-card text-center">
+                            <div class="flex items-center justify-center h-20 w-20 rounded-full bg-blue-500/20 text-blue-300 mx-auto mb-6 border-2 border-blue-400">
+                                <span class="text-3xl font-bold">1</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Pilih Kebutuhan Anda</h3>
+                            <p class="text-slate-300 text-sm">Jelajahi menu utama kami: <strong class="text-white">Investasi</strong>, <strong class="text-white">Pinjaman</strong>, atau <strong class="text-white">Perencanaan</strong> untuk menemukan alat yang Anda butuhkan.</p>
                         </div>
-                         <!-- Feature 2: Simulasi -->
-                        <div class="feature-card">
-                            <h3 class="text-xl font-bold mb-3">Kalkulator Intuitif</h3>
-                            <p class="text-slate-300">Lakukan simulasi investasi, pinjaman, dan tabungan dengan mudah untuk memproyeksikan masa depan finansial Anda.</p>
+                        <!-- Step 2 Card -->
+                        <div class="feature-card text-center">
+                             <div class="flex items-center justify-center h-20 w-20 rounded-full bg-blue-500/20 text-blue-300 mx-auto mb-6 border-2 border-blue-400">
+                                <span class="text-3xl font-bold">2</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Isi Kalkulator</h3>
+                            <p class="text-slate-300 text-sm">Masukkan data seperti modal, jangka waktu, atau jumlah pinjaman pada kalkulator interaktif yang telah kami sediakan.</p>
                         </div>
-                         <!-- Feature 3: Kepercayaan -->
-                        <div class="feature-card">
-                            <h3 class="text-xl font-bold mb-3">Informasi Terpercaya</h3>
-                            <p class="text-slate-300">Kami menyajikan data dan informasi yang akurat dan tidak bias untuk membantu Anda membuat pilihan yang tepat.</p>
+                        <!-- Step 3 Card -->
+                        <div class="feature-card text-center">
+                            <div class="flex items-center justify-center h-20 w-20 rounded-full bg-blue-500/20 text-blue-300 mx-auto mb-6 border-2 border-blue-400">
+                                <span class="text-3xl font-bold">3</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Dapatkan Analisis</h3>
+                            <p class="text-slate-300 text-sm">Lihat hasil simulasi, estimasi cicilan, atau rekomendasi produk yang disesuaikan dengan profil risiko dan tujuan Anda.</p>
+                        </div>
+                        <!-- Step 4 Card -->
+                        <div class="feature-card text-center">
+                            <div class="flex items-center justify-center h-20 w-20 rounded-full bg-blue-500/20 text-blue-300 mx-auto mb-6 border-2 border-blue-400">
+                                <span class="text-3xl font-bold">4</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Tanya AI Assistant</h3>
+                            <p class="text-slate-300 text-sm">Masih bingung? Buka halaman <strong class="text-white">Chatbot</strong> dan tanyakan apa pun seputar keuangan kepada asisten AI kami.</p>
                         </div>
                     </div>
                 </div>
             </div>
-    
+
             <!-- Final CTA -->
             <div class="py-24 px-6 text-center">
-                 <h2 class="text-3xl md:text-4xl font-bold max-w-2xl mx-auto">Siap Mengambil Kendali Atas Keuangan Anda?</h2>
-                 <p class="mt-4 text-slate-400">Jelajahi semua fitur dan mulailah merencanakan masa depan Anda hari ini.</p>
-                 <div class="mt-8">
-                     <button data-page="home" class="page-switcher bg-blue-600 text-white font-bold py-4 px-10 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-500/50 transform hover:scale-105">
-                         Masuk ke Dashboard
-                     </button>
-                 </div>
+                   <h2 class="text-3xl md:text-4xl font-bold max-w-2xl mx-auto">Siap Mengambil Kendali Atas Keuangan Anda?</h2>
+                   <p class="mt-4 text-slate-400">Jelajahi semua fitur dan mulailah merencanakan masa depan Anda hari ini.</p>
+                   <div class="mt-8">
+                       <button data-page="home" class="page-switcher bg-blue-600 text-white font-bold py-4 px-10 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-500/50 transform hover:scale-105">
+                           Masuk ke Dashboard
+                       </button>
+                   </div>
             </div>
         </section>
         
@@ -248,7 +231,7 @@
                 </div>
             </div>
 
-                 <!-- Key Metrics -->
+                         <!-- Key Metrics -->
             <div class="container mx-auto px-6 -mt-12">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                     <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-emerald-400">
@@ -282,7 +265,7 @@
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-emerald-700 mb-2">1. Menyimpan (Save)</h3>
                             <p class="text-slate-600 mb-4 text-sm">Bangun fondasi kokoh dengan dana darurat dan tujuan jangka pendek yang aman.</p>
-                            <a href="#" data-page="pembiayaan" class="action-link font-semibold text-emerald-600 hover:text-emerald-700">Pelajari Pembiayaan →</a>
+                            <a href="#" data-page="perencanaan" class="action-link font-semibold text-emerald-600 hover:text-emerald-700">Pelajari Perencanaan →</a>
                         </div>
                     </div>
                     <!-- Pillar 2: Investasi -->
@@ -341,7 +324,7 @@
                                 <p class="text-sm opacity-80">Bukti kepemilikan perusahaan. Menawarkan potensi keuntungan tinggi dengan risiko yang sepadan.</p>
                             </div>
                         </a>
-                         <!-- Card Deposito -->
+                        <!-- Card Deposito -->
                         <a href="#" data-page="deposito-detail" class="page-switcher relative h-64 rounded-xl overflow-hidden group shadow-lg">
                             <img src="https://images.pexels.com/photos/259200/pexels-photo-259200.jpeg?auto=compress&cs=tinysrgb&w=600" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Deposito">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
@@ -409,15 +392,55 @@
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-blue-700">Rendah - Tinggi</p> </div>
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-blue-700">Moderat</p> </div>
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-blue-700">Pemula</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4>
+                                        <p class="font-bold text-blue-700">Rendah - Tinggi</p>
+                                    </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4>
+                                        <p class="font-bold text-blue-700">Moderat</p>
+                                    </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4>
+                                        <p class="font-bold text-blue-700">Pemula</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white/60 p-4 rounded-lg mb-6 border-l-4 border-indigo-400">
+                                    <div class="text-center">
+                                        <h4 class="text-sm font-semibold text-slate-700">Analisis Profil Anda</h4>
+                                        <p class="text-xs text-slate-500 mt-1">Berdasarkan jangka waktu investasi yang Anda masukkan.</p>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 text-center mt-3 pt-3 border-t">
+                                        <div>
+                                            <p class="text-xs text-slate-500 font-medium">Profil Risiko Anda</p>
+                                            <p id="rd-user-risk" class="font-bold text-indigo-700">-</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-slate-500 font-medium">Kecocokan Produk</p>
+                                            <p id="rd-suitability" class="font-bold text-indigo-700">-</p>
+                                        </div>
+                                    </div>
+                                    <div id="rd-explanation-detail" class="mt-4 pt-4 border-t text-xs text-slate-600 space-y-2">
+                                        <div>
+                                            <strong class="font-semibold text-slate-700">Logika Profil Risiko:</strong>
+                                            <p>Profil risiko ditentukan oleh jangka waktu. Semakin panjang waktunya, semakin tinggi toleransi risiko Anda (Agresif), karena ada lebih banyak waktu untuk pulih dari potensi kerugian pasar.</p>
+                                            <ul class="list-disc list-inside pl-2 mt-1 text-slate-500">
+                                                <li><strong>&lt; 3 thn:</strong> Konservatif</li>
+                                                <li><strong>3-5 thn:</strong> Moderat</li>
+                                                <li><strong>&gt; 5 thn:</strong> Agresif</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <strong class="font-semibold text-slate-700">Logika Kecocokan Produk:</strong>
+                                            <p>Kami membandingkan profil risiko Anda dengan risiko produk. Produk dianggap 'Sesuai' jika risikonya cocok/lebih rendah dari profil Anda. Contoh: jika profil Anda Konservatif, produk berisiko Tinggi seperti Saham akan 'Kurang Sesuai'.</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
                                     <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Reksadana</h5>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div><label for="rd-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="number" id="rd-modal" class="calculator-input" placeholder="1000000"></div>
-                                        <div><label for="rd-bulanan" class="block text-sm font-medium text-slate-700">Investasi Bulanan (Rp)</label><input type="number" id="rd-bulanan" class="calculator-input" placeholder="500000" value="0"></div>
+                                        <div><label for="rd-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="text" id="rd-modal" class="calculator-input number-input-formatter" placeholder="1.000.000" inputmode="numeric"></div>
+                                        <div><label for="rd-bulanan" class="block text-sm font-medium text-slate-700">Investasi Bulanan (Rp)</label><input type="text" id="rd-bulanan" class="calculator-input number-input-formatter" placeholder="500.000" value="0" inputmode="numeric"></div>
                                         <div><label for="rd-waktu" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="rd-waktu" class="calculator-input" placeholder="5"></div>
                                         <div><label for="rd-return" class="block text-sm font-medium text-slate-700">Estimasi Return (% per Tahun)</label><input type="number" id="rd-return" class="calculator-input" placeholder="10"></div>
                                     </div>
@@ -440,14 +463,54 @@
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-emerald-700">Sangat Rendah</p> </div>
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-emerald-700">Rendah - Moderat</p> </div>
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-emerald-700">Jangka Menengah</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4>
+                                        <p class="font-bold text-emerald-700">Sangat Rendah</p>
+                                    </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4>
+                                        <p class="font-bold text-emerald-700">Rendah - Moderat</p>
+                                    </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4>
+                                        <p class="font-bold text-emerald-700">Jangka Menengah</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white/60 p-4 rounded-lg mb-6 border-l-4 border-emerald-400">
+                                    <div class="text-center">
+                                        <h4 class="text-sm font-semibold text-slate-700">Analisis Profil Anda</h4>
+                                        <p class="text-xs text-slate-500 mt-1">Berdasarkan jangka waktu investasi yang Anda masukkan.</p>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 text-center mt-3 pt-3 border-t">
+                                        <div>
+                                            <p class="text-xs text-slate-500 font-medium">Profil Risiko Anda</p>
+                                            <p id="ob-user-risk" class="font-bold text-emerald-700">-</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-slate-500 font-medium">Kecocokan Produk</p>
+                                            <p id="ob-suitability" class="font-bold text-emerald-700">-</p>
+                                        </div>
+                                    </div>
+                                    <div id="ob-explanation-detail" class="mt-4 pt-4 border-t text-xs text-slate-600 space-y-2">
+                                        <div>
+                                            <strong class="font-semibold text-slate-700">Logika Profil Risiko:</strong>
+                                            <p>Profil risiko ditentukan oleh jangka waktu. Semakin panjang waktunya, semakin tinggi toleransi risiko Anda (Agresif), karena ada lebih banyak waktu untuk pulih dari potensi kerugian pasar.</p>
+                                            <ul class="list-disc list-inside pl-2 mt-1 text-slate-500">
+                                                <li><strong>&lt; 3 thn:</strong> Konservatif</li>
+                                                <li><strong>3-5 thn:</strong> Moderat</li>
+                                                <li><strong>&gt; 5 thn:</strong> Agresif</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <strong class="font-semibold text-slate-700">Logika Kecocokan Produk:</strong>
+                                            <p>Kami membandingkan profil risiko Anda dengan risiko produk. Produk dianggap 'Sesuai' jika risikonya cocok/lebih rendah dari profil Anda. Contoh: jika profil Anda Konservatif, produk berisiko Tinggi seperti Saham akan 'Kurang Sesuai'.</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
                                     <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Obligasi</h5>
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        <div><label for="ob-modal" class="block text-sm font-medium text-slate-700">Nilai Investasi (Rp)</label><input type="number" id="ob-modal" class="calculator-input" placeholder="100000000"></div>
+                                        <div><label for="ob-modal" class="block text-sm font-medium text-slate-700">Nilai Investasi (Rp)</label><input type="text" id="ob-modal" class="calculator-input number-input-formatter" placeholder="100.000.000" inputmode="numeric"></div>
                                         <div><label for="ob-kupon" class="block text-sm font-medium text-slate-700">Kupon (% per Tahun)</label><input type="number" id="ob-kupon" class="calculator-input" placeholder="6.5"></div>
                                         <div><label for="ob-waktu" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="ob-waktu" class="calculator-input" placeholder="3"></div>
                                     </div>
@@ -470,14 +533,54 @@
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-rose-700">Sangat Tinggi</p> </div>
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-rose-700">Sangat Tinggi</p> </div>
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-rose-700">Jangka Panjang</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4>
+                                        <p class="font-bold text-rose-700">Sangat Tinggi</p>
+                                    </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4>
+                                        <p class="font-bold text-rose-700">Sangat Tinggi</p>
+                                    </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4>
+                                        <p class="font-bold text-rose-700">Jangka Panjang</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white/60 p-4 rounded-lg mb-6 border-l-4 border-rose-400">
+                                    <div class="text-center">
+                                        <h4 class="text-sm font-semibold text-slate-700">Analisis Profil Anda</h4>
+                                        <p class="text-xs text-slate-500 mt-1">Berdasarkan jangka waktu investasi yang Anda masukkan.</p>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 text-center mt-3 pt-3 border-t">
+                                        <div>
+                                            <p class="text-xs text-slate-500 font-medium">Profil Risiko Anda</p>
+                                            <p id="sh-user-risk" class="font-bold text-rose-700">-</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-slate-500 font-medium">Kecocokan Produk</p>
+                                            <p id="sh-suitability" class="font-bold text-rose-700">-</p>
+                                        </div>
+                                    </div>
+                                    <div id="sh-explanation-detail" class="mt-4 pt-4 border-t text-xs text-slate-600 space-y-2">
+                                        <div>
+                                            <strong class="font-semibold text-slate-700">Logika Profil Risiko:</strong>
+                                            <p>Profil risiko ditentukan oleh jangka waktu. Semakin panjang waktunya, semakin tinggi toleransi risiko Anda (Agresif), karena ada lebih banyak waktu untuk pulih dari potensi kerugian pasar.</p>
+                                            <ul class="list-disc list-inside pl-2 mt-1 text-slate-500">
+                                                <li><strong>&lt; 3 thn:</strong> Konservatif</li>
+                                                <li><strong>3-5 thn:</strong> Moderat</li>
+                                                <li><strong>&gt; 5 thn:</strong> Agresif</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <strong class="font-semibold text-slate-700">Logika Kecocokan Produk:</strong>
+                                            <p>Kami membandingkan profil risiko Anda dengan risiko produk. Produk dianggap 'Sesuai' jika risikonya cocok/lebih rendah dari profil Anda. Contoh: jika profil Anda Konservatif, produk berisiko Tinggi seperti Saham akan 'Kurang Sesuai'.</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
                                     <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Saham</h5>
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        <div><label for="sh-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="number" id="sh-modal" class="calculator-input" placeholder="5000000"></div>
+                                        <div><label for="sh-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="text" id="sh-modal" class="calculator-input number-input-formatter" placeholder="5.000.000" inputmode="numeric"></div>
                                         <div><label for="sh-return" class="block text-sm font-medium text-slate-700">Estimasi Kenaikan (% per Tahun)</label><input type="number" id="sh-return" class="calculator-input" placeholder="15"></div>
                                         <div><label for="sh-waktu" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="sh-waktu" class="calculator-input" placeholder="5"></div>
                                     </div>
@@ -500,21 +603,61 @@
                                        </div>
                                    </div>
                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
-                                       <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-sky-700">Sangat Rendah</p> </div>
-                                       <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-sky-700">Rendah</p> </div>
-                                       <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-sky-700">Jangka Pendek</p> </div>
+                                       <div class="bg-white/60 p-4 rounded-lg">
+                                            <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4>
+                                            <p class="font-bold text-sky-700">Sangat Rendah</p>
+                                       </div>
+                                       <div class="bg-white/60 p-4 rounded-lg">
+                                            <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4>
+                                            <p class="font-bold text-sky-700">Rendah</p>
+                                       </div>
+                                       <div class="bg-white/60 p-4 rounded-lg">
+                                            <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4>
+                                            <p class="font-bold text-sky-700">Jangka Pendek</p>
+                                       </div>
+                                   </div>
+                                   <div class="bg-white/60 p-4 rounded-lg mb-6 border-l-4 border-sky-400">
+                                        <div class="text-center">
+                                            <h4 class="text-sm font-semibold text-slate-700">Analisis Profil Anda</h4>
+                                            <p class="text-xs text-slate-500 mt-1">Berdasarkan jangka waktu investasi yang Anda masukkan.</p>
+                                        </div>
+                                        <div class="grid grid-cols-2 gap-4 text-center mt-3 pt-3 border-t">
+                                            <div>
+                                                <p class="text-xs text-slate-500 font-medium">Profil Risiko Anda</p>
+                                                <p id="dp-user-risk" class="font-bold text-sky-700">-</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-500 font-medium">Kecocokan Produk</p>
+                                                <p id="dp-suitability" class="font-bold text-sky-700">-</p>
+                                            </div>
+                                        </div>
+                                        <div id="dp-explanation-detail" class="mt-4 pt-4 border-t text-xs text-slate-600 space-y-2">
+                                            <div>
+                                                <strong class="font-semibold text-slate-700">Logika Profil Risiko:</strong>
+                                                <p>Profil risiko ditentukan oleh jangka waktu. Semakin panjang waktunya, semakin tinggi toleransi risiko Anda (Agresif), karena ada lebih banyak waktu untuk pulih dari potensi kerugian pasar.</p>
+                                                <ul class="list-disc list-inside pl-2 mt-1 text-slate-500">
+                                                    <li><strong>&lt; 3 thn:</strong> Konservatif</li>
+                                                    <li><strong>3-5 thn:</strong> Moderat</li>
+                                                    <li><strong>&gt; 5 thn:</strong> Agresif</li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <strong class="font-semibold text-slate-700">Logika Kecocokan Produk:</strong>
+                                                <p>Kami membandingkan profil risiko Anda dengan risiko produk. Produk dianggap 'Sesuai' jika risikonya cocok/lebih rendah dari profil Anda. Contoh: jika profil Anda Konservatif, produk berisiko Tinggi seperti Saham akan 'Kurang Sesuai'.</p>
+                                            </div>
+                                        </div>
                                    </div>
                                    <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
                                        <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Deposito</h5>
                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                           <div><label for="dp-modal-inv" class="block text-sm font-medium text-slate-700">Jumlah Pokok (Rp)</label><input type="number" id="dp-modal-inv" class="calculator-input" placeholder="50000000"></div>
+                                           <div><label for="dp-modal-inv" class="block text-sm font-medium text-slate-700">Jumlah Pokok (Rp)</label><input type="text" id="dp-modal-inv" class="calculator-input number-input-formatter" placeholder="50.000.000" inputmode="numeric"></div>
                                            <div><label for="dp-bunga-inv" class="block text-sm font-medium text-slate-700">Bunga (% per Tahun)</label><input type="number" id="dp-bunga-inv" class="calculator-input" placeholder="4.5"></div>
                                            <div><label for="dp-waktu-inv" class="block text-sm font-medium text-slate-700">Jangka Waktu (Bulan)</label><input type="number" id="dp-waktu-inv" class="calculator-input" placeholder="12"></div>
                                        </div>
                                        <button id="dp-hitung-btn-inv" class="mt-4 w-full bg-sky-600 text-white font-semibold py-2.5 px-4 rounded-md hover:bg-sky-700 transition-colors shadow hover:shadow-lg">Hitung</button>
                                        <div id="dp-hasil-inv" class="mt-4 p-4 bg-slate-50 rounded-md border border-slate-200 hidden"></div>
                                    </div>
-                                 </div>
+                                  </div>
                         </article>
 
                         <!-- Konten Crypto -->
@@ -530,14 +673,54 @@
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-amber-700">Ekstrem</p> </div>
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-amber-700">Ekstrem</p> </div>
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-amber-700">Spekulasi</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4>
+                                        <p class="font-bold text-amber-700">Ekstrem</p>
+                                    </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4>
+                                        <p class="font-bold text-amber-700">Ekstrem</p>
+                                    </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4>
+                                        <p class="font-bold text-amber-700">Spekulasi</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white/60 p-4 rounded-lg mb-6 border-l-4 border-amber-400">
+                                    <div class="text-center">
+                                        <h4 class="text-sm font-semibold text-slate-700">Analisis Profil Anda</h4>
+                                        <p class="text-xs text-slate-500 mt-1">Berdasarkan jangka waktu investasi yang Anda masukkan.</p>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 text-center mt-3 pt-3 border-t">
+                                        <div>
+                                            <p class="text-xs text-slate-500 font-medium">Profil Risiko Anda</p>
+                                            <p id="cr-user-risk" class="font-bold text-amber-700">-</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-slate-500 font-medium">Kecocokan Produk</p>
+                                            <p id="cr-suitability" class="font-bold text-amber-700">-</p>
+                                        </div>
+                                    </div>
+                                    <div id="cr-explanation-detail" class="mt-4 pt-4 border-t text-xs text-slate-600 space-y-2">
+                                        <div>
+                                            <strong class="font-semibold text-slate-700">Logika Profil Risiko:</strong>
+                                            <p>Profil risiko ditentukan oleh jangka waktu. Semakin panjang waktunya, semakin tinggi toleransi risiko Anda (Agresif), karena ada lebih banyak waktu untuk pulih dari potensi kerugian pasar.</p>
+                                            <ul class="list-disc list-inside pl-2 mt-1 text-slate-500">
+                                                <li><strong>&lt; 3 thn:</strong> Konservatif</li>
+                                                <li><strong>3-5 thn:</strong> Moderat</li>
+                                                <li><strong>&gt; 5 thn:</strong> Agresif</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <strong class="font-semibold text-slate-700">Logika Kecocokan Produk:</strong>
+                                            <p>Kami membandingkan profil risiko Anda dengan risiko produk. Produk dianggap 'Sesuai' jika risikonya cocok/lebih rendah dari profil Anda. Contoh: jika profil Anda Konservatif, produk berisiko Tinggi seperti Saham akan 'Kurang Sesuai'.</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
                                     <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Cryptocurrency</h5>
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        <div><label for="cr-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="number" id="cr-modal" class="calculator-input" placeholder="10000000"></div>
+                                        <div><label for="cr-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="text" id="cr-modal" class="calculator-input number-input-formatter" placeholder="10.000.000" inputmode="numeric"></div>
                                         <div><label for="cr-return" class="block text-sm font-medium text-slate-700">Estimasi Kenaikan (% per Tahun)</label><input type="number" id="cr-return" class="calculator-input" placeholder="50"></div>
                                         <div><label for="cr-waktu" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="cr-waktu" class="calculator-input" placeholder="3"></div>
                                     </div>
@@ -560,14 +743,54 @@
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4> <p class="font-bold text-yellow-700">Sangat Rendah</p> </div>
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4> <p class="font-bold text-yellow-700">Rendah - Moderat</p> </div>
-                                    <div class="bg-white/60 p-4 rounded-lg"> <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4> <p class="font-bold text-yellow-700">Menjaga Nilai Aset</p> </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Tingkat Risiko</h4>
+                                        <p class="font-bold text-yellow-700">Sangat Rendah</p>
+                                    </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Potensi Return</h4>
+                                        <p class="font-bold text-yellow-700">Rendah - Moderat</p>
+                                    </div>
+                                    <div class="bg-white/60 p-4 rounded-lg">
+                                        <h4 class="text-sm font-semibold text-slate-500 mb-1">Cocok Untuk</h4>
+                                        <p class="font-bold text-yellow-700">Menjaga Nilai Aset</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white/60 p-4 rounded-lg mb-6 border-l-4 border-yellow-400">
+                                    <div class="text-center">
+                                        <h4 class="text-sm font-semibold text-slate-700">Analisis Profil Anda</h4>
+                                        <p class="text-xs text-slate-500 mt-1">Berdasarkan jangka waktu investasi yang Anda masukkan.</p>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 text-center mt-3 pt-3 border-t">
+                                        <div>
+                                            <p class="text-xs text-slate-500 font-medium">Profil Risiko Anda</p>
+                                            <p id="lm-user-risk" class="font-bold text-yellow-700">-</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-slate-500 font-medium">Kecocokan Produk</p>
+                                            <p id="lm-suitability" class="font-bold text-yellow-700">-</p>
+                                        </div>
+                                    </div>
+                                     <div id="lm-explanation-detail" class="mt-4 pt-4 border-t text-xs text-slate-600 space-y-2">
+                                        <div>
+                                            <strong class="font-semibold text-slate-700">Logika Profil Risiko:</strong>
+                                            <p>Profil risiko ditentukan oleh jangka waktu. Semakin panjang waktunya, semakin tinggi toleransi risiko Anda (Agresif), karena ada lebih banyak waktu untuk pulih dari potensi kerugian pasar.</p>
+                                            <ul class="list-disc list-inside pl-2 mt-1 text-slate-500">
+                                                <li><strong>&lt; 3 thn:</strong> Konservatif</li>
+                                                <li><strong>3-5 thn:</strong> Moderat</li>
+                                                <li><strong>&gt; 5 thn:</strong> Agresif</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <strong class="font-semibold text-slate-700">Logika Kecocokan Produk:</strong>
+                                            <p>Kami membandingkan profil risiko Anda dengan risiko produk. Produk dianggap 'Sesuai' jika risikonya cocok/lebih rendah dari profil Anda. Contoh: jika profil Anda Konservatif, produk berisiko Tinggi seperti Saham akan 'Kurang Sesuai'.</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl border border-slate-200/80">
                                     <h5 class="text-lg font-semibold mb-4 text-slate-800 text-center">Kalkulator Simulasi Logam Mulia</h5>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div><label for="lm-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="number" id="lm-modal" class="calculator-input" placeholder="10000000"></div>
+                                        <div><label for="lm-modal" class="block text-sm font-medium text-slate-700">Modal Awal (Rp)</label><input type="text" id="lm-modal" class="calculator-input number-input-formatter" placeholder="10.000.000" inputmode="numeric"></div>
                                         <div><label for="lm-return" class="block text-sm font-medium text-slate-700">Estimasi Kenaikan (% per Tahun)</label><input type="number" id="lm-return" class="calculator-input" placeholder="8"></div>
                                         <div><label for="lm-waktu" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="lm-waktu" class="calculator-input" placeholder="5"></div>
                                     </div>
@@ -648,8 +871,8 @@
                     <div class="bg-white p-8 rounded-2xl shadow-lg border">
                         <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center">Kalkulator Simulasi KPR</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div><label for="kpr-harga" class="block text-sm font-medium text-slate-700">Harga Properti (Rp)</label><input type="number" id="kpr-harga" class="calculator-input" placeholder="500000000"></div>
-                            <div><label for="kpr-dp" class="block text-sm font-medium text-slate-700">Uang Muka / DP (Rp)</label><input type="number" id="kpr-dp" class="calculator-input" placeholder="100000000"></div>
+                            <div><label for="kpr-harga" class="block text-sm font-medium text-slate-700">Harga Properti (Rp)</label><input type="text" id="kpr-harga" class="calculator-input number-input-formatter" placeholder="500.000.000" inputmode="numeric"></div>
+                            <div><label for="kpr-dp" class="block text-sm font-medium text-slate-700">Uang Muka / DP (Rp)</label><input type="text" id="kpr-dp" class="calculator-input number-input-formatter" placeholder="100.000.000" inputmode="numeric"></div>
                             <div><label for="kpr-bunga" class="block text-sm font-medium text-slate-700">Bunga (% per Tahun)</label><input type="number" id="kpr-bunga" class="calculator-input" placeholder="8.5"></div>
                             <div><label for="kpr-tenor" class="block text-sm font-medium text-slate-700">Jangka Waktu (Tahun)</label><input type="number" id="kpr-tenor" class="calculator-input" placeholder="20"></div>
                         </div>
@@ -661,7 +884,7 @@
                     <div class="bg-white p-8 rounded-2xl shadow-lg border">
                         <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center">Kalkulator Simulasi KTA</h2>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div><label for="kta-pokok" class="block text-sm font-medium text-slate-700">Jumlah Pinjaman (Rp)</label><input type="number" id="kta-pokok" class="calculator-input" placeholder="50000000"></div>
+                            <div><label for="kta-pokok" class="block text-sm font-medium text-slate-700">Jumlah Pinjaman (Rp)</label><input type="text" id="kta-pokok" class="calculator-input number-input-formatter" placeholder="50.000.000" inputmode="numeric"></div>
                             <div><label for="kta-bunga" class="block text-sm font-medium text-slate-700">Bunga (% per Tahun)</label><input type="number" id="kta-bunga" class="calculator-input" placeholder="12"></div>
                             <div><label for="kta-tenor" class="block text-sm font-medium text-slate-700">Jangka Waktu (Bulan)</label><input type="number" id="kta-tenor" class="calculator-input" placeholder="36"></div>
                         </div>
@@ -673,7 +896,7 @@
                     <div class="bg-white p-8 rounded-2xl shadow-lg border">
                         <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center">Kalkulator Simulasi KUR</h2>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div><label for="kur-pokok" class="block text-sm font-medium text-slate-700">Jumlah Pinjaman (Rp)</label><input type="number" id="kur-pokok" class="calculator-input" placeholder="100000000"></div>
+                            <div><label for="kur-pokok" class="block text-sm font-medium text-slate-700">Jumlah Pinjaman (Rp)</label><input type="text" id="kur-pokok" class="calculator-input number-input-formatter" placeholder="100.000.000" inputmode="numeric"></div>
                             <div><label for="kur-bunga" class="block text-sm font-medium text-slate-700">Bunga (% per Tahun)</label><input type="number" id="kur-bunga" class="calculator-input" placeholder="6"></div>
                             <div><label for="kur-tenor" class="block text-sm font-medium text-slate-700">Jangka Waktu (Bulan)</label><input type="number" id="kur-tenor" class="calculator-input" placeholder="48"></div>
                         </div>
@@ -685,7 +908,7 @@
                     <div class="bg-white p-8 rounded-2xl shadow-lg border">
                         <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center">Kalkulator Simulasi KMK</h2>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div><label for="kmk-pokok" class="block text-sm font-medium text-slate-700">Jumlah Pinjaman (Rp)</label><input type="number" id="kmk-pokok" class="calculator-input" placeholder="250000000"></div>
+                            <div><label for="kmk-pokok" class="block text-sm font-medium text-slate-700">Jumlah Pinjaman (Rp)</label><input type="text" id="kmk-pokok" class="calculator-input number-input-formatter" placeholder="250.000.000" inputmode="numeric"></div>
                             <div><label for="kmk-bunga" class="block text-sm font-medium text-slate-700">Bunga (% per Tahun)</label><input type="number" id="kmk-bunga" class="calculator-input" placeholder="10"></div>
                             <div><label for="kmk-tenor" class="block text-sm font-medium text-slate-700">Jangka Waktu (Bulan)</label><input type="number" id="kmk-tenor" class="calculator-input" placeholder="12"></div>
                         </div>
@@ -697,105 +920,99 @@
         </section>
 
 
-        <!-- Halaman Pembiayaan -->
-        <section id="pembiayaan-page" class="page-content hidden">
-             <div class="container mx-auto p-4 md:p-8 max-w-4xl">
-        
-                <!-- Header -->
-                <header class="text-center mb-8">
-                    <h1 class="text-3xl md:text-4xl font-bold text-indigo-600">Perencana Keuangan Impian Anda</h1>
-                    <p class="mt-2 text-gray-600">Wujudkan tujuan finansial Anda dengan strategi investasi yang tepat.</p>
+        <!-- Halaman Perencanaan -->
+        <section id="perencanaan-page" class="page-content hidden bg-slate-100">
+            <div class="container mx-auto px-6 py-16">
+                 <!-- Header -->
+                <header class="text-center mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold text-slate-800">Rencanakan Tujuan Finansial Anda</h1>
+                    <p class="mt-3 text-slate-600 max-w-2xl mx-auto">Dari dana pendidikan hingga membeli rumah impian, mulailah merencanakan langkah Anda di sini.</p>
                 </header>
-
-                <!-- Penjelasan Konsep -->
-                <div class="mb-8 bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-200 animate-fade-in">
-                    <h2 class="text-xl font-semibold mb-3 text-gray-700">Memahami Perencanaan Pembiayaan</h2>
-                    <div class="space-y-4 text-gray-600 text-sm md:text-base leading-relaxed">
-                        <p>
-                            Perencanaan pembiayaan adalah proses menetapkan tujuan keuangan Anda dan membuat strategi untuk mencapainya. Ini bukan hanya tentang menabung, tetapi tentang membuat uang Anda bekerja untuk Anda secara efektif.
-                        </p>
-                        <p>
-                            Dengan merencanakan, Anda dapat:
-                        </p>
-                        <ul class="list-disc list-inside pl-4 space-y-1">
-                            <li><strong>Mewujudkan Impian:</strong> Baik itu untuk ibadah Umroh, membeli rumah pertama, atau dana pendidikan anak, perencanaan yang matang adalah langkah pertamanya.</li>
-                            <li><strong>Mengelola Risiko:</strong> Dengan memilih instrumen investasi yang sesuai dengan profil risiko dan jangka waktu, Anda dapat meminimalkan potensi kerugian.</li>
-                            <li><strong>Disiplin & Terarah:</strong> Mengetahui berapa yang harus diinvestasikan setiap bulan (seperti dengan metode Dollar Cost Averaging) akan membantu Anda tetap disiplin mencapai target.</li>
-                        </ul>
-                        <p class="pt-2 font-medium text-gray-700">
-                            Gunakan kalkulator di bawah ini untuk memulai perjalanan Anda. Masukkan impian Anda, dan kami akan bantu merekomendasikan jalannya!
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Input Card -->
-                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-200">
-                    <h2 class="text-xl font-semibold mb-4 text-gray-700">Mulai Perencanaan Anda</h2>
-                    <form id="planning-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Tujuan Pembiayaan -->
-                        <div>
-                            <label for="tujuan" class="block text-sm font-medium text-gray-700 mb-1">Tujuan Pembiayaan</label>
-                            <input type="text" id="tujuan" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="Contoh: Dana Umroh, Beli Rumah">
-                        </div>
-
-                        <!-- Modal Awal -->
-                        <div>
-                            <label for="modal" class="block text-sm font-medium text-gray-700 mb-1">Modal Awal (Rp)</label>
-                            <input type="number" id="modal" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="Contoh: 10000000">
-                        </div>
-
-                        <!-- Target Dana -->
-                        <div>
-                            <label for="target" class="block text-sm font-medium text-gray-700 mb-1">Target Dana (Rp)</label>
-                            <input type="number" id="target" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="Contoh: 35000000">
-                        </div>
-
-                        <!-- Jangka Waktu -->
-                        <div>
-                            <label for="waktu" class="block text-sm font-medium text-gray-700 mb-1">Jangka Waktu (Tahun)</label>
-                            <input type="number" id="waktu" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="Contoh: 3">
-                        </div>
-                        
-                        <!-- Tombol Hitung -->
-                        <div class="md:col-span-2 text-center">
-                            <button type="submit" class="w-full md:w-auto bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-transform transform hover:scale-105">
-                                Buat Rekomendasi
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Hasil Rekomendasi -->
-                <div id="result-section" class="mt-10 hidden">
-                    <!-- Ringkasan & Profil Risiko -->
-                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-200 mb-8 animate-fade-in">
-                        <h2 class="text-xl font-semibold mb-4 text-gray-700">Ringkasan & Profil Risiko Anda</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
-                            <div class="bg-indigo-50 p-4 rounded-lg">
-                                <p class="text-sm text-gray-500">Profil Risiko Anda</p>
-                                <p id="risk-profile" class="text-2xl font-bold text-indigo-600"></p>
+                
+                <!-- Main Layout -->
+                <div class="grid lg:grid-cols-5 gap-10 xl:gap-16 items-start">
+                    <!-- Left: Input Form -->
+                    <div class="lg:col-span-2 bg-white p-8 rounded-2xl shadow-lg border border-slate-200 sticky top-28">
+                         <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h3m-3-10h.01M9 17h.01M9 14h.01M12 7v3m0 4v3m0-10h3m-6 10h.01M12 10h.01M15 17h.01M15 14h.01M15 10h.01M5 21V3a2 2 0 012-2h10a2 2 0 012 2v18l-1.732-1.732a2 2 0 00-2.828 0L12 19l-2.44-2.44a2 2 0 00-2.828 0L5 21z" /></svg>
                             </div>
-                            <div class="bg-green-50 p-4 rounded-lg">
-                                <p class="text-sm text-gray-500">Investasi Bulanan (DCA)</p>
-                                <p id="monthly-investment" class="text-2xl font-bold text-green-600"></p>
-                                <p class="text-xs text-gray-500">untuk mencapai target</p>
+                             <h2 class="text-2xl font-bold text-slate-800">Mulai Perencanaan</h2>
+                         </div>
+                        <form id="planning-form" class="space-y-5">
+                            <div>
+                                <label for="tujuan" class="block text-sm font-medium text-gray-700 mb-1">Apa Tujuan Finansial Anda?</label>
+                                <input type="text" id="tujuan" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="Contoh: Dana Pendidikan Anak">
+                            </div>
+                            <div>
+                                <label for="target" class="block text-sm font-medium text-gray-700 mb-1">Berapa Dana yang Dibutuhkan? (Rp)</label>
+                                <input type="text" id="target" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition number-input-formatter" placeholder="150.000.000" inputmode="numeric">
+                            </div>
+                             <div>
+                                <label for="modal" class="block text-sm font-medium text-gray-700 mb-1">Dana yang Sudah Anda Miliki? (Rp)</label>
+                                <input type="text" id="modal" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition number-input-formatter" placeholder="20.000.000" inputmode="numeric">
+                            </div>
+                            <div>
+                                <label for="waktu" class="block text-sm font-medium text-gray-700 mb-1">Kapan Anda Ingin Tercapai? (Tahun)</label>
+                                <input type="number" id="waktu" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="Contoh: 10">
+                            </div>
+                            <div class="pt-2">
+                                <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-transform transform hover:scale-105 shadow-lg shadow-indigo-500/30">
+                                    Buat Rencana Investasi
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Right: Result Display -->
+                    <div class="lg:col-span-3">
+                         <!-- Initial State -->
+                        <div id="initial-planning-state" class="text-center p-8 bg-white rounded-2xl shadow-lg border border-slate-200">
+                             <svg class="mx-auto h-20 w-20 text-indigo-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 006.75 5.625v1.5c0 .621.504 1.125 1.125 1.125h2.25c.621 0 1.125-.504 1.125-1.125v-1.5A3.375 3.375 0 0010.125 2.25zM18.75 14.25v2.25a2.25 2.25 0 01-2.25 2.25h-2.25a2.25 2.25 0 01-2.25-2.25v-2.25a2.25 2.25 0 012.25-2.25h2.25a2.25 2.25 0 012.25 2.25z" />
+                             </svg>
+                             <h3 class="mt-4 text-xl font-bold text-slate-700">Rencana Anda Akan Muncul di Sini</h3>
+                             <p class="mt-2 text-sm text-slate-500">Isi formulir di samping untuk mendapatkan rekomendasi investasi yang dipersonalisasi sesuai tujuan dan profil risiko Anda.</p>
+                        </div>
+                        <!-- Result State -->
+                        <div id="result-section" class="hidden animate-fade-in space-y-8">
+                             <!-- Ringkasan -->
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+                                <h2 class="text-2xl font-bold text-slate-800 mb-6">Ringkasan Rencana Anda</h2>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center">
+                                    <div class="bg-indigo-50 p-5 rounded-xl">
+                                        <p class="text-sm text-indigo-800/70 font-semibold">Profil Risiko Anda</p>
+                                        <p id="risk-profile" class="text-2xl font-bold text-indigo-600 mt-1"></p>
+                                    </div>
+                                    <div class="bg-green-50 p-5 rounded-xl">
+                                        <p class="text-sm text-green-800/70 font-semibold">Investasi Bulanan (DCA)</p>
+                                        <p id="monthly-investment" class="text-2xl font-bold text-green-600 mt-1"></p>
+                                    </div>
+                                </div>
+                                <div class="mt-6 pt-6 border-t text-sm text-slate-600 space-y-4">
+                                    <div>
+                                        <h4 class="font-semibold text-slate-800">Apa itu "Profil Risiko Anda"?</h4>
+                                        <p class="text-xs mt-1">Ini adalah gambaran toleransi risiko Anda yang kami tentukan dari <strong class="font-semibold">jangka waktu</strong>. Tujuan jangka panjang (misal: 10 tahun) berarti Anda bisa lebih <strong class="font-semibold">Agresif</strong>, karena punya waktu untuk pemulihan pasar. Sebaliknya, tujuan jangka pendek (misal: 1 tahun) lebih cocok dengan profil <strong class="font-semibold">Konservatif</strong>.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-slate-800">Apa itu "Investasi Bulanan"?</h4>
+                                        <p class="text-xs mt-1">Ini adalah estimasi dana yang perlu Anda tabung rutin setiap bulan untuk mencapai target, berdasarkan kekurangan dana Anda saat ini. Ini adalah cara disiplin untuk berinvestasi (Dollar Cost Averaging).</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Rekomendasi -->
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+                                <h2 class="text-2xl font-bold text-slate-800 mb-6">Rekomendasi Alokasi Investasi</h2>
+                                <div id="recommendations" class="space-y-4">
+                                    <!-- Rekomendasi akan diisi oleh JS -->
+                                </div>
+                                <div class="mt-6 text-center text-xs text-gray-500 bg-slate-100 p-3 rounded-lg">
+                                     <p><strong>Disclaimer:</strong> Rekomendasi ini adalah simulasi dan bukan nasihat keuangan. Selalu lakukan riset mandiri (DYOR) sebelum berinvestasi.</p>
+                                 </div>
                             </div>
                         </div>
-                         <p class="text-xs text-center mt-4 text-gray-500">Profil risiko ditentukan berdasarkan jangka waktu investasi Anda. Semakin panjang jangka waktu, semakin tinggi toleransi risiko yang bisa diambil.</p>
-                    </div>
-
-                    <!-- Rekomendasi Investasi -->
-                    <h2 class="text-2xl font-bold text-center mb-6 text-gray-800 animate-fade-in">Rekomendasi Alokasi Investasi</h2>
-                    <div id="recommendations" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-                        <!-- Kartu rekomendasi akan dimasukkan di sini oleh JavaScript -->
-                    </div>
-                    
-                     <!-- Disclaimer -->
-                    <div class="mt-8 text-center text-xs text-gray-500 animate-fade-in">
-                        <p><strong>Disclaimer:</strong> Rekomendasi ini adalah simulasi berdasarkan data umum dan bukan merupakan nasihat keuangan. Kinerja masa lalu tidak mencerminkan hasil di masa depan. Selalu lakukan riset mandiri (DYOR) sebelum berinvestasi.</p>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -813,7 +1030,7 @@
                             <p class="text-slate-500 mt-2">Saya Financify AI, siap menjawab pertanyaan Anda tentang keuangan.</p>
                         </div>
                     </div>
-    
+            
                     <div class="p-4 bg-white/50 backdrop-blur-sm border-t border-slate-200 rounded-b-2xl">
                         <!-- Predefined Questions Cards -->
                         <div id="predefined-questions" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
@@ -848,110 +1065,98 @@
         </section>
 
         <!-- Halaman About Us (Konten Baru) -->
-        <section id="about-page" class="page-content hidden bg-slate-50">
+        <section id="about-page" class="page-content hidden bg-white">
              <!-- Hero Section -->
-            <div class="relative bg-blue-50">
+            <div class="relative bg-blue-600">
                  <div class="absolute inset-0">
-                     <img class="w-full h-full object-cover" src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tim Financify">
-                     <div class="absolute inset-0 bg-gradient-to-r from-blue-50/90 via-blue-50/70 to-transparent"></div>
+                     <img class="w-full h-full object-cover opacity-20" src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tim Financify">
                  </div>
-                 <div class="relative container mx-auto px-6 py-24 lg:py-32">
-                     <div class="max-w-2xl">
-                         <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">Memberdayakan Masa Depan Finansial Indonesia</h1>
-                         <p class="text-lg text-slate-700">Di tengah kompleksnya dunia keuangan, Financify hadir sebagai sahabat Anda. Kami percaya bahwa pemahaman finansial adalah hak setiap orang, bukan privilese segelintir orang.</p>
+                 <div class="relative container mx-auto px-6 py-24 lg:py-32 text-center text-white">
+                     <div class="max-w-3xl mx-auto">
+                        <span class="text-sm font-bold uppercase tracking-widest text-blue-200">Tentang Financify</span>
+                         <h1 class="text-4xl md:text-6xl font-bold mt-4 mb-6 leading-tight">Mendemokratisasi Literasi Keuangan</h1>
+                         <p class="text-lg text-blue-100 max-w-2xl mx-auto">Kami percaya bahwa pemahaman finansial adalah hak setiap orang. Misi kami adalah menyediakan alat dan pengetahuan agar Anda dapat mengambil keputusan keuangan dengan percaya diri.</p>
                      </div>
                  </div>
             </div>
 
-            <div class="container mx-auto px-6 py-16">
-                 <!-- Misi & Visi -->
-                 <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 -mt-24 mb-24 relative z-10">
-                      <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 flex items-start space-x-6">
-                       <div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-4">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9m-9 9a9 9 0 00-9-9" /></svg>
-                       </div>
-                       <div>
-                           <h2 class="text-2xl font-bold text-slate-800 mb-2">Misi Kami</h2>
-                           <p class="text-slate-600">Menyediakan platform edukasi keuangan yang mudah diakses, akurat, dan relevan, serta memberikan alat simulasi intuitif untuk pengambilan keputusan finansial yang lebih baik.</p>
-                       </div>
-                      </div>
-                      <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 flex items-start space-x-6">
-                       <div class="flex-shrink-0 bg-emerald-100 text-emerald-600 rounded-full p-4">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                       </div>
-                       <div>
-                           <h2 class="text-2xl font-bold text-slate-800 mb-2">Visi Kami</h2>
-                           <p class="text-slate-600">Menjadi platform literasi keuangan digital terdepan, menciptakan generasi Indonesia yang cerdas finansial, percaya diri, dan mampu mencapai kebebasan finansial.</p>
-                       </div>
-                      </div>
-                 </div>
-
-                 <!-- Nilai-Nilai Kami -->
-                 <div class="mb-24">
-                     <h2 class="text-3xl font-bold text-slate-800 mb-12 text-center">Apa yang Kami Pegang Teguh</h2>
-                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                          <!-- Edukasi -->
-                          <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">
-                              <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                              </div>
-                              <h3 class="text-xl font-bold mb-2 text-center text-slate-800">Edukasi</h3>
-                              <p class="text-slate-600 text-sm text-center">Kami menyajikan informasi yang kompleks menjadi sederhana dan mudah dipahami.</p>
+            <div class="bg-slate-50">
+                <div class="container mx-auto px-6 py-20">
+                     <!-- Misi & Visi Layout Baru -->
+                     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 mb-24 items-center">
+                          <div class="order-2 md:order-1">
+                             <h2 class="text-3xl font-bold text-slate-800 mb-4">Misi & Visi Kami</h2>
+                             <p class="text-slate-600 mb-6">Tujuan utama kami adalah menjadi platform literasi keuangan digital terdepan, menciptakan generasi Indonesia yang cerdas finansial, percaya diri, dan mampu mencapai kebebasan finansial.</p>
+                             <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-3 mt-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-slate-800">Memberdayakan</h3>
+                                        <p class="text-sm text-slate-500">Memberikan alat & pengetahuan untuk keputusan finansial yang lebih baik.</p>
+                                    </div>
+                                </div>
+                                 <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 bg-emerald-100 text-emerald-600 rounded-full p-3 mt-1">
+                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-slate-800">Menyederhanakan</h3>
+                                        <p class="text-sm text-slate-500">Mengubah informasi keuangan yang kompleks menjadi mudah diakses dan dipahami.</p>
+                                    </div>
+                                </div>
+                             </div>
                           </div>
-                          <!-- Aksesibilitas -->
-                          <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">
-                              <div class="flex items-center justify-center h-16 w-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto mb-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
-                              </div>
-                              <h3 class="text-xl font-bold mb-2 text-center text-slate-800">Aksesibilitas</h3>
-                              <p class="text-slate-600 text-sm text-center">Platform kami dirancang untuk dapat digunakan oleh siapa saja, kapan saja, dan di mana saja.</p>
-                          </div>
-                          <!-- Kepercayaan -->
-                          <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">
-                              <div class="flex items-center justify-center h-16 w-16 rounded-full bg-amber-100 text-amber-600 mx-auto mb-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                              </div>
-                              <h3 class="text-xl font-bold mb-2 text-center text-slate-800">Kepercayaan</h3>
-                              <p class="text-slate-600 text-sm text-center">Kami berkomitmen pada akurasi dan objektivitas data, menjadi sumber informasi yang dapat Anda andalkan.</p>
-                          </div>
-                          <!-- Pemberdayaan -->
-                          <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">
-                               <div class="flex items-center justify-center h-16 w-16 rounded-full bg-rose-100 text-rose-600 mx-auto mb-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11.5l5 5l5-5"></path><path d="M12 4v12.5"></path></svg>
-                              </div>
-                              <h3 class="text-xl font-bold mb-2 text-center text-slate-800">Pemberdayaan</h3>
-                              <p class="text-slate-600 text-sm text-center">Tujuan akhir kami adalah memberdayakan Anda untuk mengambil kendali atas masa depan finansial Anda.</p>
+                          <div class="order-1 md:order-2">
+                             <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Diskusi tim Financify" class="rounded-2xl shadow-2xl w-full h-full object-cover">
                           </div>
                      </div>
-                 </div>
-
-                 <!-- Tim Kami -->
-                 <div>
-                     <h2 class="text-3xl font-bold text-slate-800 mb-12 text-center">Tim di Balik Financify</h2>
-                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                          <!-- Anggota Tim 1 -->
-                          <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:-translate-y-2 transition-all duration-300 group">
-                              <img class="w-32 h-32 mx-auto rounded-full mb-4 object-cover ring-4 ring-white group-hover:ring-blue-200 transition-all" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Foto Anggota Tim 1">
-                              <h4 class="text-lg font-bold text-slate-800">Budi Santoso</h4>
-                              <p class="text-blue-600 font-semibold text-sm mb-3">Founder & CEO</p>
-                              <p class="text-slate-600 text-xs">Dengan pengalaman di industri fintech, Budi memiliki visi untuk mendemokratisasi pengetahuan finansial di Indonesia.</p>
-                          </div>
-                          <!-- Anggota Tim 2 -->
-                          <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:-translate-y-2 transition-all duration-300 group">
-                              <img class="w-32 h-32 mx-auto rounded-full mb-4 object-cover ring-4 ring-white group-hover:ring-blue-200 transition-all" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Foto Anggota Tim 2">
-                              <h4 class="text-lg font-bold text-slate-800">Citra Lestari</h4>
-                              <p class="text-blue-600 font-semibold text-sm mb-3">Head of Content</p>
-                              <p class="text-slate-600 text-xs">Seorang perencana keuangan bersertifikat yang memastikan semua materi edukasi akurat, relevan, dan mudah dicerna.</p>
-                          </div>
-                           <!-- Anggota Tim 3 -->
-                          <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:-translate-y-2 transition-all duration-300 group">
-                              <img class="w-32 h-32 mx-auto rounded-full mb-4 object-cover ring-4 ring-white group-hover:ring-blue-200 transition-all" src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Foto Anggota Tim 3">
-                              <h4 class="text-lg font-bold text-slate-800">Agung Wijaya</h4>
-                              <p class="text-blue-600 font-semibold text-sm mb-3">Lead Developer</p>
-                              <p class="text-slate-600 text-xs">Arsitek di balik platform Financify, berdedikasi menciptakan pengalaman pengguna yang mulus dan aman.</p>
-                          </div>
-                     </div>
-                 </div>
+    
+                    <!-- Hubungi Kami / Social Media -->
+                    <div class="mb-24 bg-white p-8 md:p-12 rounded-2xl shadow-xl border">
+                        <h2 class="text-3xl font-bold text-slate-800 mb-2 text-center">Tetap Terhubung Dengan Kami</h2>
+                        <p class="text-center text-slate-500 mb-10">Ikuti kami di media sosial untuk tips keuangan harian dan update terbaru.</p>
+                        <div class="flex justify-center items-center flex-wrap gap-8 md:gap-16">
+                            <!-- Instagram -->
+                            <a href="#" target="_blank" class="text-center text-slate-600 hover:text-blue-600 transition-colors group">
+                                <div class="w-16 h-16 mx-auto bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                </div>
+                                <p class="mt-3 font-semibold text-sm">@financify.id</p>
+                            </a>
+                            <!-- TikTok -->
+                            <a href="#" target="_blank" class="text-center text-slate-600 hover:text-blue-600 transition-colors group">
+                                <div class="w-16 h-16 mx-auto bg-slate-800 rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-lg">
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM6 12a6 6 0 0 1 6-6v12a6 6 0 0 1-6-6z"></path></svg>
+                                </div>
+                                <p class="mt-3 font-semibold text-sm">@financify.official</p>
+                            </a>
+                            <!-- WhatsApp -->
+                            <a href="#" target="_blank" class="text-center text-slate-600 hover:text-blue-600 transition-colors group">
+                                <div class="w-16 h-16 mx-auto bg-green-500 rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                </div>
+                                <p class="mt-3 font-semibold text-sm">0812-3456-7890</p>
+                            </a>
+                        </div>
+                    </div>
+    
+    
+                     <!-- Lokasi Kami -->
+                     <div class="mb-16">
+                        <h2 class="text-3xl font-bold text-slate-800 mb-4 text-center">Kunjungi Kantor Kami</h2>
+                         <p class="text-center text-slate-600 max-w-2xl mx-auto mb-10">Kami berlokasi di jantung kota Bandung. Jangan ragu untuk mampir dan berdiskusi dengan tim kami.</p>
+                        <div class="bg-white rounded-2xl shadow-xl p-4 border border-slate-200 overflow-hidden">
+                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.901842880194!2d107.6166708147728!3d-6.902206995012588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e64c5e8866e5%3A0x401e8f1fc28c720!2sGedung%20Sate!5e0!3m2!1sen!2sid!4v1678886460803!5m2!1sen!2sid" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-xl"></iframe>
+                             <div class="p-4 text-center">
+                                 <p class="font-bold">Financify HQ</p>
+                                 <p class="text-sm text-slate-600">Jl. Diponegoro No. 22, Citarum, Kec. Bandung Wetan, Kota Bandung, Jawa Barat 40115</p>
+                             </div>
+                        </div>
+                    </div>
+    
+                </div>
             </div>
         </section>
         
@@ -1239,6 +1444,19 @@
             const formatCurrency = (value) => {
                 return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(value);
             };
+            
+            const formatNumberWithDots = (value) => {
+                if (!value) return '';
+                const numberString = value.toString().replace(/[^0-9]/g, '');
+                if (numberString === '') return '';
+                return new Intl.NumberFormat('de-DE').format(numberString);
+            };
+
+            const parseNumberWithDots = (value) => {
+                if (!value) return 0;
+                const parsedValue = parseFloat(value.toString().replace(/\./g, '').replace(/,/g, '.'));
+                return isNaN(parsedValue) ? 0 : parsedValue;
+            };
 
             // --- Navigasi Halaman Utama ---
             const switchPage = (pageId) => {
@@ -1297,7 +1515,7 @@
                           }, 0);
                       }
                   }
-              });
+             });
 
             
             if (mobileMenuButton) {
@@ -1305,6 +1523,15 @@
                     if (mobileMenu) mobileMenu.classList.toggle('hidden');
                 });
             }
+
+            // --- Number Formatting for Calculator Inputs ---
+            document.querySelectorAll('.number-input-formatter').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const value = e.target.value;
+                    const formattedValue = formatNumberWithDots(value);
+                    e.target.value = formattedValue;
+                });
+            });
 
             // --- Logika Sidebar Halaman Investasi ---
             const sidebarLinks = document.querySelectorAll('.sidebar-link');
@@ -1321,6 +1548,213 @@
                     e.target.classList.add('active');
                 });
             });
+
+            // --- DYNAMIC RISK PROFILE LOGIC ---
+            const instrumentRiskLevels = {
+                rd: 3, // Reksadana (average)
+                ob: 2, // Obligasi
+                sh: 4, // Saham
+                dp: 1, // Deposito
+                cr: 5, // Crypto
+                lm: 1  // Logam Mulia
+            };
+
+            const updateRiskProfile = (prefix) => {
+                let waktuInput = document.getElementById(`${prefix}-waktu`) || document.getElementById(`${prefix}-waktu-inv`);
+                if (!waktuInput) return;
+                
+                let waktu = parseFloat(waktuInput.value) || 0;
+                if (prefix === 'dp') {
+                    waktu = waktu / 12; // Deposito uses months, convert to years
+                }
+                
+                const userRiskEl = document.getElementById(`${prefix}-user-risk`);
+                const suitabilityEl = document.getElementById(`${prefix}-suitability`);
+
+                if (!userRiskEl || !suitabilityEl) return;
+
+                if (waktu <= 0) {
+                    userRiskEl.textContent = '-';
+                    suitabilityEl.textContent = '-';
+                    suitabilityEl.className = `font-bold text-${getThemeColor(prefix)}-700`;
+                    return;
+                }
+
+                let userProfileText = '';
+                let userRiskLevel = 0;
+
+                if (waktu <= 1) {
+                    userProfileText = 'Sangat Konservatif';
+                    userRiskLevel = 1;
+                } else if (waktu <= 3) {
+                    userProfileText = 'Konservatif';
+                    userRiskLevel = 2;
+                } else if (waktu <= 5) {
+                    userProfileText = 'Moderat';
+                    userRiskLevel = 3;
+                } else if (waktu <= 10) {
+                    userProfileText = 'Agresif';
+                    userRiskLevel = 4;
+                } else {
+                    userProfileText = 'Sangat Agresif';
+                    userRiskLevel = 5;
+                }
+                userRiskEl.textContent = userProfileText;
+
+                const instrumentRisk = instrumentRiskLevels[prefix];
+                let suitabilityText = '';
+                let suitabilityColorClass = '';
+
+                if (userRiskLevel >= instrumentRisk) {
+                    suitabilityText = 'Sesuai';
+                    suitabilityColorClass = 'text-green-700';
+                } else if (userRiskLevel === instrumentRisk - 1) {
+                    suitabilityText = 'Cukup Sesuai';
+                    suitabilityColorClass = 'text-yellow-700';
+                } else {
+                    suitabilityText = 'Kurang Sesuai';
+                    suitabilityColorClass = 'text-red-700';
+                }
+                suitabilityEl.textContent = suitabilityText;
+                suitabilityEl.className = `font-bold ${suitabilityColorClass}`;
+            };
+            
+            // Helper to get theme color, not strictly necessary but keeps styling consistent
+            const getThemeColor = (prefix) => {
+                const colors = { rd: 'blue', ob: 'emerald', sh: 'rose', dp: 'sky', cr: 'amber', lm: 'yellow' };
+                return colors[prefix] || 'indigo';
+            }
+
+
+            // Add event listeners to all time inputs
+            ['rd', 'ob', 'sh', 'cr', 'lm', 'dp'].forEach(prefix => {
+                const waktuInput = document.getElementById(`${prefix}-waktu`) || document.getElementById(`${prefix}-waktu-inv`);
+                if (waktuInput) {
+                    waktuInput.addEventListener('input', () => updateRiskProfile(prefix));
+                }
+            });
+
+            // --- Logika Kalkulator Investasi ---
+            const setupInvestmentCalculator = (prefix) => {
+                const hitungBtn = document.getElementById(`${prefix}-hitung-btn`);
+                if(hitungBtn) {
+                    hitungBtn.addEventListener('click', () => {
+                        const modal = parseNumberWithDots(document.getElementById(`${prefix}-modal`).value);
+                        const bulananInput = document.getElementById(`${prefix}-bulanan`);
+                        const bulanan = bulananInput ? parseNumberWithDots(bulananInput.value) : 0;
+                        const waktu = parseFloat(document.getElementById(`${prefix}-waktu`).value) || 0;
+                        const returnRate = parseFloat(document.getElementById(`${prefix}-return`).value) || 0;
+                        const hasilDiv = document.getElementById(`${prefix}-hasil`);
+
+                        if (modal <= 0 || waktu <= 0 || returnRate < 0) { // Return rate can be 0
+                            hasilDiv.innerHTML = `<p class="text-red-600 text-center font-medium">Mohon isi semua field dengan nilai yang valid.</p>`;
+                            hasilDiv.classList.remove('hidden');
+                            return;
+                        }
+
+                        let totalInvestasi;
+                        let totalAkhir;
+
+                        if (prefix === 'rd' && bulanan > 0) {
+                            totalInvestasi = modal + (bulanan * waktu * 12);
+                            let futureValueLumpSum = modal * Math.pow(1 + (returnRate / 100), waktu);
+                            let monthlyRate = returnRate / 100 / 12;
+                            let futureValueAnnuity = monthlyRate > 0 ? bulanan * ((Math.pow(1 + monthlyRate, waktu * 12) - 1) / monthlyRate) : bulanan * waktu * 12;
+                            totalAkhir = futureValueLumpSum + futureValueAnnuity;
+                        } else {
+                            totalInvestasi = modal;
+                            totalAkhir = modal * Math.pow(1 + (returnRate / 100), waktu);
+                        }
+                        
+                        const totalKeuntungan = totalAkhir - totalInvestasi;
+
+                        hasilDiv.innerHTML = `
+                            <h6 class="font-semibold text-lg mb-2 text-center">Hasil Simulasi</h6>
+                            <p class="text-center text-slate-600 mb-3">Estimasi nilai investasi Anda setelah ${waktu} tahun:</p>
+                            <p class="text-center text-3xl font-bold text-blue-600 mb-4">${formatCurrency(totalAkhir)}</p>
+                            <div class="text-sm border-t pt-3 space-y-1.5">
+                                <p class="flex justify-between"><span>Total Modal Diinvestasikan:</span> <strong>${formatCurrency(totalInvestasi)}</strong></p>
+                                <p class="flex justify-between"><span>Estimasi Total Keuntungan:</span> <strong>${formatCurrency(totalKeuntungan)}</strong></p>
+                            </div>
+                        `;
+                        hasilDiv.classList.remove('hidden');
+                    });
+                }
+            };
+            
+            const setupDepositoCalculator = () => {
+                const hitungBtn = document.getElementById('dp-hitung-btn-inv');
+                 if(hitungBtn) {
+                     hitungBtn.addEventListener('click', () => {
+                         const pokok = parseNumberWithDots(document.getElementById('dp-modal-inv').value);
+                         const bunga = parseFloat(document.getElementById('dp-bunga-inv').value) || 0;
+                         const waktuBulan = parseInt(document.getElementById('dp-waktu-inv').value) || 0;
+                         const hasilDiv = document.getElementById('dp-hasil-inv');
+                         
+                         if (pokok <= 0 || bunga < 0 || waktuBulan <= 0) {
+                              hasilDiv.innerHTML = `<p class="text-red-600 text-center font-medium">Mohon isi semua field dengan nilai yang valid.</p>`;
+                              hasilDiv.classList.remove('hidden'); return;
+                         }
+                         
+                         const totalBungaKotor = pokok * (bunga / 100) * (waktuBulan / 12);
+                         const pajak = totalBungaKotor * 0.20; // Pajak 20%
+                         const totalBungaBersih = totalBungaKotor - pajak;
+                         const totalAkhir = pokok + totalBungaBersih;
+
+                          hasilDiv.innerHTML = `
+                             <h6 class="font-semibold text-lg mb-2 text-center">Hasil Simulasi</h6>
+                             <p class="text-center text-slate-600 mb-3">Estimasi nilai deposito Anda setelah ${waktuBulan} bulan:</p>
+                             <p class="text-center text-3xl font-bold text-blue-600 mb-4">${formatCurrency(totalAkhir)}</p>
+                             <div class="text-sm border-t pt-3 space-y-1.5">
+                                 <p class="flex justify-between"><span>Jumlah Pokok:</span> <strong>${formatCurrency(pokok)}</strong></p>
+                                 <p class="flex justify-between"><span>Bunga Sebelum Pajak:</span> <strong>${formatCurrency(totalBungaKotor)}</strong></p>
+                                 <p class="flex justify-between"><span>Pajak (20%):</span> <strong>-${formatCurrency(pajak)}</strong></p>
+                                 <p class="flex justify-between font-semibold"><span>Bunga Bersih Diterima:</span> <strong>${formatCurrency(totalBungaBersih)}</strong></p>
+                             </div>
+                         `;
+                         hasilDiv.classList.remove('hidden');
+                     });
+                 }
+            };
+
+            const setupObligasiCalculator = () => {
+                const hitungBtn = document.getElementById('ob-hitung-btn');
+                if (hitungBtn) {
+                    hitungBtn.addEventListener('click', () => {
+                        const pokok = parseNumberWithDots(document.getElementById('ob-modal').value);
+                        const kupon = parseFloat(document.getElementById('ob-kupon').value) || 0;
+                        const waktu = parseInt(document.getElementById('ob-waktu').value) || 0;
+                        const hasilDiv = document.getElementById('ob-hasil');
+                        
+                        if (pokok <= 0 || kupon < 0 || waktu <= 0) {
+                              hasilDiv.innerHTML = `<p class="text-red-600 text-center font-medium">Mohon isi semua field dengan nilai yang valid.</p>`;
+                              hasilDiv.classList.remove('hidden'); return;
+                        }
+
+                        const totalKupon = pokok * (kupon / 100) * waktu;
+                        const totalAkhir = pokok + totalKupon;
+
+                        hasilDiv.innerHTML = `
+                            <h6 class="font-semibold text-lg mb-2 text-center">Hasil Simulasi</h6>
+                            <p class="text-center text-slate-600 mb-3">Total nilai investasi Anda setelah ${waktu} tahun:</p>
+                            <p class="text-center text-3xl font-bold text-emerald-600 mb-4">${formatCurrency(totalAkhir)}</p>
+                            <div class="text-sm border-t pt-3 space-y-1.5">
+                                <p class="flex justify-between"><span>Pokok Investasi:</span> <strong>${formatCurrency(pokok)}</strong></p>
+                                <p class="flex justify-between"><span>Total Kupon Diterima (sebelum pajak):</span> <strong>${formatCurrency(totalKupon)}</strong></p>
+                            </div>
+                        `;
+                        hasilDiv.classList.remove('hidden');
+                    });
+                }
+            };
+
+            setupInvestmentCalculator('rd');
+            setupInvestmentCalculator('sh');
+            setupInvestmentCalculator('cr');
+            setupInvestmentCalculator('lm');
+            setupDepositoCalculator();
+            setupObligasiCalculator();
+
 
             // --- Logika Kalkulator Pinjaman ---
             const hitungCicilan = (pokok, bungaTahunan, tenorBulan) => {
@@ -1339,8 +1773,8 @@
             const kprHitungBtn = document.getElementById('kpr-hitung-btn');
             if(kprHitungBtn) {
                 kprHitungBtn.addEventListener('click', () => {
-                    const harga = parseFloat(document.getElementById('kpr-harga').value) || 0;
-                    const dp = parseFloat(document.getElementById('kpr-dp').value) || 0;
+                    const harga = parseNumberWithDots(document.getElementById('kpr-harga').value);
+                    const dp = parseNumberWithDots(document.getElementById('kpr-dp').value);
                     const bungaTahunan = parseFloat(document.getElementById('kpr-bunga').value) || 0;
                     const tenorTahun = parseInt(document.getElementById('kpr-tenor').value) || 0;
                     const hasilDiv = document.getElementById('kpr-hasil');
@@ -1358,18 +1792,18 @@
             const setupLoanCalculator = (prefix) => {
                  const hitungBtn = document.getElementById(`${prefix}-hitung-btn`);
                  if(hitungBtn) {
-                     hitungBtn.addEventListener('click', () => {
-                         const pokok = parseFloat(document.getElementById(`${prefix}-pokok`).value) || 0;
-                         const bungaTahunan = parseFloat(document.getElementById(`${prefix}-bunga`).value) || 0;
-                         const tenorBulan = parseInt(document.getElementById(`${prefix}-tenor`).value) || 0;
-                         const hasilDiv = document.getElementById(`${prefix}-hasil`);
-                         if (pokok <= 0 || bungaTahunan < 0 || tenorBulan <= 0) {
-                             hasilDiv.innerHTML = `<p class="text-red-600 text-center font-medium">Mohon isi semua field dengan nilai yang valid.</p>`;
-                             hasilDiv.classList.remove('hidden'); return;
-                         }
-                         const cicilan = hitungCicilan(pokok, bungaTahunan, tenorBulan);
-                         tampilkanHasilCicilan(hasilDiv, cicilan, pokok, tenorBulan);
-                     });
+                      hitungBtn.addEventListener('click', () => {
+                          const pokok = parseNumberWithDots(document.getElementById(`${prefix}-pokok`).value);
+                          const bungaTahunan = parseFloat(document.getElementById(`${prefix}-bunga`).value) || 0;
+                          const tenorBulan = parseInt(document.getElementById(`${prefix}-tenor`).value) || 0;
+                          const hasilDiv = document.getElementById(`${prefix}-hasil`);
+                          if (pokok <= 0 || bungaTahunan < 0 || tenorBulan <= 0) {
+                              hasilDiv.innerHTML = `<p class="text-red-600 text-center font-medium">Mohon isi semua field dengan nilai yang valid.</p>`;
+                              hasilDiv.classList.remove('hidden'); return;
+                          }
+                          const cicilan = hitungCicilan(pokok, bungaTahunan, tenorBulan);
+                          tampilkanHasilCicilan(hasilDiv, cicilan, pokok, tenorBulan);
+                      });
                  }
             };
             setupLoanCalculator('kta');
@@ -1379,33 +1813,39 @@
             // --- LOGIKA HALAMAN PEMBIAYAAN ---
             const planningForm = document.getElementById('planning-form');
             if (planningForm) {
+                const initialPlanningState = document.getElementById('initial-planning-state');
                 const resultSection = document.getElementById('result-section');
                 const riskProfileEl = document.getElementById('risk-profile');
                 const monthlyInvestmentEl = document.getElementById('monthly-investment');
                 const recommendationsEl = document.getElementById('recommendations');
                 
                 const instruments = [
-                    { name: 'Deposito Bank', risk: 'Sangat Rendah', risk_level: 1, description: 'Simpanan berjangka dengan bunga tetap, cocok untuk keamanan dana jangka pendek.' },
-                    { name: 'Reksa Dana Pasar Uang', risk: 'Rendah', risk_level: 1, description: 'Berisi aset pasar uang seperti deposito dan obligasi jatuh tempo < 1 tahun. Risiko rendah & likuid.' },
-                    { name: 'Logam Mulia (Emas)', risk: 'Rendah', risk_level: 1, description: 'Aset safe-haven yang cenderung stabil nilainya saat ekonomi tidak menentu.' },
-                    { name: 'Obligasi Negara (SBN Ritel)', risk: 'Rendah - Menengah', risk_level: 2, description: 'Surat utang negara yang aman dan memberikan kupon (bunga) rutin. Cocok untuk pendapatan pasif.' },
-                    { name: 'Reksa Dana Pendapatan Tetap', risk: 'Menengah', risk_level: 2, description: 'Mayoritas berisi obligasi korporasi/negara. Potensi imbal hasil lebih tinggi dari reksa dana pasar uang.' },
-                    { name: 'Reksa Dana Campuran', risk: 'Menengah - Tinggi', risk_level: 3, description: 'Alokasi asetnya beragam antara saham, obligasi, dan pasar uang. Fleksibel dan seimbang.' },
-                    { name: 'Saham Blue Chip', risk: 'Tinggi', risk_level: 4, description: 'Saham perusahaan besar dengan fundamental kuat. Potensi pertumbuhan tinggi dalam jangka panjang.' },
-                    { name: 'Reksa Dana Saham', risk: 'Tinggi', risk_level: 4, description: 'Mayoritas berisi saham. Agresif dengan potensi imbal hasil paling tinggi di antara reksa dana lain.' },
-                    { name: 'Aset Kripto (Bitcoin, dll)', risk: 'Sangat Tinggi', risk_level: 5, description: 'Aset digital dengan volatilitas sangat tinggi. Potensi keuntungan besar diiringi risiko besar.' },
+                     { name: 'Deposito Bank', risk: 'Sangat Rendah', risk_level: 1, description: 'Simpanan berjangka dengan bunga tetap, cocok untuk keamanan dana jangka pendek.', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01" /></svg>` },
+                    { name: 'Reksa Dana Pasar Uang', risk: 'Rendah', risk_level: 1, description: 'Berisi aset pasar uang seperti deposito dan obligasi jatuh tempo < 1 tahun. Risiko rendah & likuid.', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>`},
+                    { name: 'Logam Mulia (Emas)', risk: 'Rendah', risk_level: 1, description: 'Aset safe-haven yang cenderung stabil nilainya saat ekonomi tidak menentu.', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12a2 2 0 100 4h14a2 2 0 100-4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg>` },
+                    { name: 'Obligasi Negara (SBN Ritel)', risk: 'Menengah', risk_level: 2, description: 'Surat utang negara yang aman dan memberikan kupon (bunga) rutin.', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>` },
+                    { name: 'Reksa Dana Pendapatan Tetap', risk: 'Menengah', risk_level: 2, description: 'Mayoritas berisi obligasi korporasi/negara. Imbal hasil lebih tinggi dari pasar uang.', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>` },
+                    { name: 'Reksa Dana Campuran', risk: 'Menengah-Tinggi', risk_level: 3, description: 'Alokasi asetnya beragam antara saham, obligasi, dan pasar uang. Fleksibel dan seimbang.', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>` },
+                    { name: 'Saham Blue Chip', risk: 'Tinggi', risk_level: 4, description: 'Saham perusahaan besar dengan fundamental kuat. Potensi pertumbuhan tinggi jangka panjang.', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>` },
+                    { name: 'Reksa Dana Saham', risk: 'Tinggi', risk_level: 4, description: 'Mayoritas berisi saham. Agresif dengan potensi imbal hasil paling tinggi di reksa dana.', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>` },
+                    { name: 'Aset Kripto', risk: 'Sangat Tinggi', risk_level: 5, description: 'Volatilitas sangat tinggi. Potensi keuntungan besar diiringi risiko kehilangan modal yang besar.', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01" /></svg>` },
                 ];
 
                 planningForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
                     const tujuan = document.getElementById('tujuan').value;
-                    const modal = parseFloat(document.getElementById('modal').value);
-                    const target = parseFloat(document.getElementById('target').value);
+                    const modal = parseNumberWithDots(document.getElementById('modal').value);
+                    const target = parseNumberWithDots(document.getElementById('target').value);
                     const waktu = parseFloat(document.getElementById('waktu').value);
 
-                    if (!tujuan || isNaN(modal) || isNaN(target) || isNaN(waktu) || waktu <= 0 || modal < 0 || target <= modal) {
-                        alert('Mohon isi semua data dengan benar. Target dana harus lebih besar dari modal awal.');
+                    if (!tujuan || isNaN(modal) || isNaN(target) || isNaN(waktu) || waktu <= 0 || modal < 0 || target <= 0) {
+                        alert('Mohon isi semua data dengan benar.');
+                        return;
+                    }
+
+                    if (target <= modal) {
+                        alert('Target dana harus lebih besar dari modal awal.');
                         return;
                     }
 
@@ -1433,7 +1873,7 @@
                     const investasiBulanan = sisaTarget > 0 ? sisaTarget / jumlahBulan : 0;
                     
                     riskProfileEl.textContent = riskProfile;
-                    monthlyInvestmentEl.textContent = `Rp ${investasiBulanan.toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+                    monthlyInvestmentEl.textContent = formatCurrency(investasiBulanan);
                     
                     recommendationsEl.innerHTML = '';
                     const filteredInstruments = instruments.filter(inst => inst.risk_level <= riskCategory + 1);
@@ -1441,30 +1881,37 @@
                     filteredInstruments.forEach(inst => {
                         const isRecommended = inst.risk_level <= riskCategory;
                         const card = `
-                            <div class="border rounded-xl p-5 ${isRecommended ? 'bg-white shadow-md' : 'bg-gray-100 opacity-70'} transform transition-transform hover:scale-105">
-                                <div class="flex items-start justify-between">
-                                    <h3 class="text-lg font-semibold text-gray-800">${inst.name}</h3>
-                                    <span class="text-xs font-medium px-3 py-1 rounded-full 
-                                        ${inst.risk_level <= 1 ? 'bg-green-100 text-green-800' : ''}
-                                        ${inst.risk_level === 2 ? 'bg-blue-100 text-blue-800' : ''}
-                                        ${inst.risk_level === 3 ? 'bg-yellow-100 text-yellow-800' : ''}
-                                        ${inst.risk_level === 4 ? 'bg-orange-100 text-orange-800' : ''}
-                                        ${inst.risk_level >= 5 ? 'bg-red-100 text-red-800' : ''}
-                                    ">${inst.risk}</span>
+                            <div class="flex items-start gap-4 p-4 rounded-lg ${isRecommended ? 'bg-slate-50' : 'bg-slate-50 opacity-60'}">
+                                <div class="flex-shrink-0 w-10 h-10 ${
+                                    inst.risk_level <= 1 ? 'bg-green-100 text-green-600' :
+                                    inst.risk_level === 2 ? 'bg-blue-100 text-blue-600' :
+                                    inst.risk_level === 3 ? 'bg-yellow-100 text-yellow-600' :
+                                    inst.risk_level === 4 ? 'bg-orange-100 text-orange-600' :
+                                    'bg-red-100 text-red-600'
+                                } rounded-lg flex items-center justify-center">${inst.icon}</div>
+                                <div>
+                                    <div class="flex items-center gap-3">
+                                        <h4 class="font-semibold text-slate-800">${inst.name}</h4>
+                                        <span class="text-xs font-medium px-2 py-0.5 rounded-full ${
+                                            inst.risk_level <= 1 ? 'bg-green-100 text-green-800' :
+                                            inst.risk_level === 2 ? 'bg-blue-100 text-blue-800' :
+                                            inst.risk_level === 3 ? 'bg-yellow-100 text-yellow-800' :
+                                            inst.risk_level === 4 ? 'bg-orange-100 text-orange-800' :
+                                            'bg-red-100 text-red-800'
+                                        }">${inst.risk}</span>
+                                    </div>
+                                    <p class="text-sm text-slate-500 mt-1">${inst.description}</p>
+                                    ${isRecommended ? '<div class="mt-2 text-xs font-bold text-indigo-600 flex items-center gap-1.5"><svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>Sesuai dengan profil Anda</div>' : '<div class="mt-2 text-xs font-semibold text-amber-600 flex items-center gap-1.5"><svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.21 3.03-1.742 3.03H4.42c-1.532 0-2.492-1.696-1.742-3.03l5.58-9.92zM10 13a1 1 0 100-2 1 1 0 000 2zm-1-8a1 1 0 011-1h.008a1 1 0 011 1v3.008a1 1 0 01-1 1H10a1 1 0 01-1-1V5z" clip-rule="evenodd" /></svg>Risiko lebih tinggi dari profil Anda</div>'}
                                 </div>
-                                <p class="mt-2 text-sm text-gray-600">${inst.description}</p>
-                                ${isRecommended ? '<div class="mt-4 text-xs font-semibold text-indigo-600">Sesuai dengan profil Anda</div>' : '<div class="mt-4 text-xs font-semibold text-gray-500">Risiko lebih tinggi dari profil Anda</div>'}
                             </div>
                         `;
                         recommendationsEl.innerHTML += card;
                     });
 
 
+                    initialPlanningState.classList.add('hidden');
                     resultSection.classList.remove('hidden');
-                    window.scrollTo({
-                        top: resultSection.offsetTop,
-                        behavior: 'smooth'
-                    });
+                    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             }
 
@@ -1543,8 +1990,8 @@
                 sendBtn.disabled = true;
 
 
-                const apiKey = ""; // API key will be injected by the environment
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                const apiKey = "AIzaSyCKfWiZqo__2YsPZYppMbXr8ZBHWK2T9Kk"; // API key will be injected by the environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
                 
                 const systemPrompt = "Anda adalah Financify AI Assistant, seorang ahli keuangan yang ramah dan membantu. Berikan jawaban yang jelas, singkat, dan mudah dimengerti seputar topik investasi, pinjaman, dan simpanan di Indonesia. Gunakan bahasa Indonesia yang baik dan benar.";
 
@@ -1619,6 +2066,4 @@
     </script>
 </body>
 </html>
-
-
 
