@@ -13,8 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-
-        
     .mobile-frame {
         position: relative;
         width: 260px; /* Lebar HP disesuaikan */
@@ -731,6 +729,158 @@
             #investasi-page .md\:w-3\/4 {
                 width: 65%;
             }
+        }
+
+        /* ========== PERBAIKAN RESPONSIVITAS KALKULATOR ========== */
+
+        /* Mobile-specific adjustments untuk kalkulator */
+        @media (max-width: 768px) {
+            /* Perbaikan input fields untuk kalkulator */
+            .calculator-input {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 12px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            /* Perbaikan grid layout untuk kalkulator */
+            #investasi-page .grid-cols-1.md\:grid-cols-2,
+            #investasi-page .grid-cols-1.md\:grid-cols-3,
+            #pinjaman-page .grid-cols-1.md\:grid-cols-2,
+            #pinjaman-page .grid-cols-1.md\:grid-cols-3 {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            /* Perbaikan container kalkulator */
+            #investasi-page .bg-white\/70,
+            #pinjaman-page .bg-white {
+                padding: 1rem;
+            }
+            
+            /* Perbaikan hasil kalkulator */
+            #rd-hasil, #ob-hasil, #sh-hasil, #dp-hasil-inv, #cr-hasil, #lm-hasil,
+            #kpr-hasil, #kta-hasil, #kur-hasil, #kmk-hasil {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            /* Perbaikan teks hasil yang panjang */
+            #rd-hasil .text-3xl,
+            #ob-hasil .text-3xl,
+            #sh-hasil .text-3xl,
+            #dp-hasil-inv .text-3xl,
+            #cr-hasil .text-3xl,
+            #lm-hasil .text-3xl,
+            #kpr-hasil .text-3xl,
+            #kta-hasil .text-3xl,
+            #kur-hasil .text-3xl,
+            #kmk-hasil .text-3xl {
+                font-size: 1.5rem;
+                word-break: break-word;
+            }
+            
+            /* Perbaikan tombol kalkulator */
+            #rd-hitung-btn, #ob-hitung-btn, #sh-hitung-btn, #dp-hitung-btn-inv,
+            #cr-hitung-btn, #lm-hitung-btn, #kpr-hitung-btn, #kta-hitung-btn,
+            #kur-hitung-btn, #kmk-hitung-btn {
+                padding: 12px 16px;
+                font-size: 1rem;
+            }
+            
+            /* Perbaikan section analisis risiko */
+            #rd-analysis-section, #ob-analysis-section, #sh-analysis-section,
+            #dp-analysis-section, #cr-analysis-section, #lm-analysis-section {
+                padding: 1rem;
+            }
+            
+            /* Perbaikan layout halaman perencanaan */
+            #perencanaan-page .grid.grid-cols-1.sm\:grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Perbaikan card hasil perencanaan */
+            #short-term-result .grid-cols-1.md\:grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Small mobile devices - further adjustments */
+        @media (max-width: 480px) {
+            /* Input fields lebih kecil */
+            .calculator-input {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            /* Tombol lebih kecil */
+            #rd-hitung-btn, #ob-hitung-btn, #sh-hitung-btn, #dp-hitung-btn-inv,
+            #cr-hitung-btn, #lm-hitung-btn, #kpr-hitung-btn, #kta-hitung-btn,
+            #kur-hitung-btn, #kmk-hitung-btn {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
+            
+            /* Hasil kalkulator lebih kompak */
+            #rd-hasil, #ob-hasil, #sh-hasil, #dp-hasil-inv, #cr-hasil, #lm-hasil,
+            #kpr-hasil, #kta-hasil, #kur-hasil, #kmk-hasil {
+                padding: 0.75rem;
+            }
+            
+            /* Font size lebih kecil untuk hasil */
+            #rd-hasil .text-3xl,
+            #ob-hasil .text-3xl,
+            #sh-hasil .text-3xl,
+            #dp-hasil-inv .text-3xl,
+            #cr-hasil .text-3xl,
+            #lm-hasil .text-3xl,
+            #kpr-hasil .text-3xl,
+            #kta-hasil .text-3xl,
+            #kur-hasil .text-3xl,
+            #kmk-hasil .text-3xl {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Tablet adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            /* Grid layout untuk tablet */
+            #investasi-page .grid-cols-1.md\:grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            #investasi-page .grid-cols-1.md\:grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            #pinjaman-page .grid-cols-1.md\:grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Perbaikan khusus untuk input number di iOS */
+        input[type="number"] {
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Perbaikan overflow untuk angka yang panjang */
+        .number-input-formatter {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Perbaikan container untuk hasil dengan angka panjang */
+        #rd-hasil, #ob-hasil, #sh-hasil, #dp-hasil-inv, #cr-hasil, #lm-hasil,
+        #kpr-hasil, #kta-hasil, #kur-hasil, #kmk-hasil {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
     </style>
@@ -2023,13 +2173,11 @@
         </p>
       </div>
     </div>
-  </div>
-  
-        
+</div>
                 </div>
             </div>
         </section>
-        
+           
         <!-- Halaman Detail Reksadana -->
         <section id="reksadana-detail-page" class="page-content hidden bg-slate-50">
             <div class="container mx-auto px-6 py-16">
@@ -2334,7 +2482,53 @@
 
             // --- Fungsi utilitas ---
             const formatCurrency = (value) => {
+                if (value >= 1000000000) {
+                    return (value / 1000000000).toFixed(2) + ' Miliar';
+                } else if (value >= 1000000) {
+                    return (value / 1000000).toFixed(2) + ' Juta';
+                } else if (value >= 1000) {
+                    return (value / 1000).toFixed(2) + ' Ribu';
+                }
                 return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(value);
+            };
+            
+            // Fungsi tambahan untuk memastikan format angka responsif
+            const optimizeNumberDisplay = (value, maxLength = 12) => {
+                if (!value) return '';
+                
+                const formatted = formatNumberWithDots(value);
+                
+                // Jika angka terlalu panjang, gunakan format singkat
+                if (formatted.length > maxLength) {
+                    if (value >= 1000000000000) {
+                        return (value / 1000000000000).toFixed(2) + ' T';
+                    } else if (value >= 1000000000) {
+                        return (value / 1000000000).toFixed(2) + ' M';
+                    } else if (value >= 1000000) {
+                        return (value / 1000000).toFixed(2) + ' Jt';
+                    }
+                }
+                
+                return formatted;
+            };
+
+            // Update fungsi formatCurrency untuk mobile
+            const formatCurrencyMobile = (value) => {
+                if (value >= 1000000000000) {
+                    return (value / 1000000000000).toFixed(2) + ' T';
+                } else if (value >= 1000000000) {
+                    return (value / 1000000000).toFixed(2) + ' M';
+                } else if (value >= 1000000) {
+                    return (value / 1000000).toFixed(2) + ' Jt';
+                } else if (value >= 1000) {
+                    return (value / 1000).toFixed(2) + ' Rb';
+                }
+                return new Intl.NumberFormat('id-ID', { 
+                    style: 'currency', 
+                    currency: 'IDR', 
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0 
+                }).format(value);
             };
             
             const formatNumberWithDots = (value) => {
@@ -2555,10 +2749,10 @@
                         hasilDiv.innerHTML = `
                             <h6 class="font-semibold text-lg mb-2 text-center">Hasil Simulasi</h6>
                             <p class="text-center text-slate-600 mb-3">Estimasi nilai investasi Anda setelah ${waktu} tahun:</p>
-                            <p class="text-center text-3xl font-bold text-blue-600 mb-4">${formatCurrency(totalAkhir)}</p>
+                            <p class="text-center text-3xl font-bold text-blue-600 mb-4">${formatCurrencyMobile(totalAkhir)}</p>
                             <div class="text-sm border-t pt-3 space-y-1.5">
-                                <p class="flex justify-between"><span>Total Modal Diinvestasikan:</span> <strong>${formatCurrency(totalInvestasi)}</strong></p>
-                                <p class="flex justify-between"><span>Estimasi Total Keuntungan:</span> <strong>${formatCurrency(totalKeuntungan)}</strong></p>
+                                <p class="flex justify-between"><span>Total Modal Diinvestasikan:</span> <strong>${formatCurrencyMobile(totalInvestasi)}</strong></p>
+                                <p class="flex justify-between"><span>Estimasi Total Keuntungan:</span> <strong>${formatCurrencyMobile(totalKeuntungan)}</strong></p>
                             </div>
                         `;
                         hasilDiv.classList.remove('hidden');
@@ -2596,12 +2790,12 @@
                           hasilDiv.innerHTML = `
                               <h6 class="font-semibold text-lg mb-2 text-center">Hasil Simulasi</h6>
                               <p class="text-center text-slate-600 mb-3">Estimasi nilai deposito Anda setelah ${waktuBulan} bulan:</p>
-                              <p class="text-center text-3xl font-bold text-blue-600 mb-4">${formatCurrency(totalAkhir)}</p>
+                              <p class="text-center text-3xl font-bold text-blue-600 mb-4">${formatCurrencyMobile(totalAkhir)}</p>
                               <div class="text-sm border-t pt-3 space-y-1.5">
-                                  <p class="flex justify-between"><span>Jumlah Pokok:</span> <strong>${formatCurrency(pokok)}</strong></p>
-                                  <p class="flex justify-between"><span>Bunga Sebelum Pajak:</span> <strong>${formatCurrency(totalBungaKotor)}</strong></p>
-                                  <p class="flex justify-between"><span>Pajak (20%):</span> <strong>-${formatCurrency(pajak)}</strong></p>
-                                  <p class="flex justify-between font-semibold"><span>Bunga Bersih Diterima:</span> <strong>${formatCurrency(totalBungaBersih)}</strong></p>
+                                  <p class="flex justify-between"><span>Jumlah Pokok:</span> <strong>${formatCurrencyMobile(pokok)}</strong></p>
+                                  <p class="flex justify-between"><span>Bunga Sebelum Pajak:</span> <strong>${formatCurrencyMobile(totalBungaKotor)}</strong></p>
+                                  <p class="flex justify-between"><span>Pajak (20%):</span> <strong>-${formatCurrencyMobile(pajak)}</strong></p>
+                                  <p class="flex justify-between font-semibold"><span>Bunga Bersih Diterima:</span> <strong>${formatCurrencyMobile(totalBungaBersih)}</strong></p>
                               </div>
                           `;
                           hasilDiv.classList.remove('hidden');
@@ -2636,10 +2830,10 @@
                         hasilDiv.innerHTML = `
                             <h6 class="font-semibold text-lg mb-2 text-center">Hasil Simulasi</h6>
                             <p class="text-center text-slate-600 mb-3">Total nilai investasi Anda setelah ${waktu} tahun:</p>
-                            <p class="text-center text-3xl font-bold text-emerald-600 mb-4">${formatCurrency(totalAkhir)}</p>
+                            <p class="text-center text-3xl font-bold text-emerald-600 mb-4">${formatCurrencyMobile(totalAkhir)}</p>
                             <div class="text-sm border-t pt-3 space-y-1.5">
-                                <p class="flex justify-between"><span>Pokok Investasi:</span> <strong>${formatCurrency(pokok)}</strong></p>
-                                <p class="flex justify-between"><span>Total Kupon Diterima (sebelum pajak):</span> <strong>${formatCurrency(totalKupon)}</strong></p>
+                                <p class="flex justify-between"><span>Pokok Investasi:</span> <strong>${formatCurrencyMobile(pokok)}</strong></p>
+                                <p class="flex justify-between"><span>Total Kupon Diterima (sebelum pajak):</span> <strong>${formatCurrencyMobile(totalKupon)}</strong></p>
                             </div>
                         `;
                         hasilDiv.classList.remove('hidden');
@@ -2668,7 +2862,7 @@
             const tampilkanHasilCicilan = (hasilDiv, cicilan, pokok, tenorBulan) => {
                 const totalBayar = cicilan * tenorBulan;
                 const totalBunga = totalBayar - pokok;
-                hasilDiv.innerHTML = `<h6 class="font-semibold text-lg mb-2 text-center">Hasil Simulasi</h6><p class="text-center text-slate-600 mb-3">Estimasi Cicilan Bulanan Anda adalah:</p><p class="text-center text-3xl font-bold text-blue-600 mb-4">${formatCurrency(cicilan)}</p><div class="text-sm border-t pt-3 space-y-1.5"><p class="flex justify-between"><span>Total Pokok Pinjaman:</span> <strong>${formatCurrency(pokok)}</strong></p><p class="flex justify-between"><span>Total Bunga Pinjaman:</span> <strong>${formatCurrency(totalBunga)}</strong></p><p class="flex justify-between font-semibold"><span>Total Pembayaran:</span> <strong>${formatCurrency(totalBayar)}</strong></p></div>`;
+                hasilDiv.innerHTML = `<h6 class="font-semibold text-lg mb-2 text-center">Hasil Simulasi</h6><p class="text-center text-slate-600 mb-3">Estimasi Cicilan Bulanan Anda adalah:</p><p class="text-center text-3xl font-bold text-blue-600 mb-4">${formatCurrencyMobile(cicilan)}</p><div class="text-sm border-t pt-3 space-y-1.5"><p class="flex justify-between"><span>Total Pokok Pinjaman:</span> <strong>${formatCurrencyMobile(pokok)}</strong></p><p class="flex justify-between"><span>Total Bunga Pinjaman:</span> <strong>${formatCurrencyMobile(totalBunga)}</strong></p><p class="flex justify-between font-semibold"><span>Total Pembayaran:</span> <strong>${formatCurrencyMobile(totalBayar)}</strong></p></div>`;
                 hasilDiv.classList.remove('hidden');
             };
             
@@ -2775,7 +2969,7 @@
                     const investasiBulanan = sisaTarget > 0 ? sisaTarget / jumlahBulan : 0;
                     
                     riskProfileEl.textContent = riskProfile;
-                    monthlyInvestmentEl.textContent = formatCurrency(investasiBulanan);
+                    monthlyInvestmentEl.textContent = formatCurrencyMobile(investasiBulanan);
                     
                     recommendationsEl.innerHTML = '';
                     const filteredInstruments = instruments.filter(inst => inst.risk_level <= riskCategory + 1);
@@ -3044,9 +3238,9 @@ if (shortTermForm) {
             const savings = income * 0.3;
             const wants = income * 0.2;
             
-            document.getElementById('needs-532').textContent = formatCurrency(needs);
-            document.getElementById('savings-532').textContent = formatCurrency(savings);
-            document.getElementById('wants-532').textContent = formatCurrency(wants);
+            document.getElementById('needs-532').textContent = formatCurrencyMobile(needs);
+            document.getElementById('savings-532').textContent = formatCurrencyMobile(savings);
+            document.getElementById('wants-532').textContent = formatCurrencyMobile(wants);
             document.getElementById('strategy-532').classList.remove('hidden');
             
         } else if (strategy === '622') {
@@ -3054,9 +3248,9 @@ if (shortTermForm) {
             const savings = income * 0.2;
             const wants = income * 0.2;
             
-            document.getElementById('needs-622').textContent = formatCurrency(needs);
-            document.getElementById('savings-622').textContent = formatCurrency(savings);
-            document.getElementById('wants-622').textContent = formatCurrency(wants);
+            document.getElementById('needs-622').textContent = formatCurrencyMobile(needs);
+            document.getElementById('savings-622').textContent = formatCurrencyMobile(savings);
+            document.getElementById('wants-622').textContent = formatCurrencyMobile(wants);
             document.getElementById('strategy-622').classList.remove('hidden');
             
         } else if (strategy === 'custom') {
@@ -3077,9 +3271,9 @@ if (shortTermForm) {
             document.getElementById('custom-wants-percent-text').textContent = document.getElementById('custom-wants').value;
             
             // Update amount displays
-            document.getElementById('needs-custom').textContent = formatCurrency(needs);
-            document.getElementById('savings-custom').textContent = formatCurrency(savings);
-            document.getElementById('wants-custom').textContent = formatCurrency(wants);
+            document.getElementById('needs-custom').textContent = formatCurrencyMobile(needs);
+            document.getElementById('savings-custom').textContent = formatCurrencyMobile(savings);
+            document.getElementById('wants-custom').textContent = formatCurrencyMobile(wants);
             
             document.getElementById('strategy-custom').classList.remove('hidden');
         }
