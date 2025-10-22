@@ -13,6 +13,225 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
+
+ /* ========== PERBAIKAN CARD STRATEGI ALOKASI KEUANGAN ========== */
+
+
+ .strategy-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.strategy-card-item {
+    transition: all 0.3s ease;
+}
+
+.strategy-card-item:hover {
+    transform: translateY(-5px);
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Container untuk penjelasan strategi */
+.strategy-explanation-container {
+    background: #f8fafc;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+}
+
+/* Grid untuk strategi - SATU CARD BESAR */
+.strategy-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* Individual strategy card - CARD BESAR */
+.strategy-card-item {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #f1f5f9;
+    transition: all 0.3s ease;
+}
+
+.strategy-card-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Header styling */
+.strategy-header {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.strategy-description {
+    font-size: 0.875rem;
+    color: #64748b;
+    text-align: left;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+/* Badge untuk persentase */
+.strategy-badges {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.strategy-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.strategy-badge.needs {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.strategy-badge.savings {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.strategy-badge.wants {
+    background: #f3e8ff;
+    color: #7e22ce;
+}
+
+.strategy-badge-percentage {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* Penjelasan detail */
+.strategy-detail {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.strategy-detail-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.strategy-detail-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.strategy-detail-list li {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    position: relative;
+}
+
+.strategy-detail-list li:before {
+    content: "•";
+    color: #94a3b8;
+    position: absolute;
+    left: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .strategy-explanation-container {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .strategy-card-item {
+        padding: 1rem;
+    }
+    
+    .strategy-badges {
+        gap: 0.5rem;
+    }
+    
+    .strategy-badge {
+        padding: 0.375rem 0.625rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Dark mode support */
+.dark .strategy-explanation-container {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+.dark .strategy-card-item {
+    background: #0f172a;
+    border-color: #1e293b;
+    color: #e2e8f0;
+}
+
+.dark .strategy-header {
+    color: #f1f5f9;
+}
+
+.dark .strategy-description {
+    color: #cbd5e1;
+}
+
+.dark .strategy-badge.needs {
+    background: #1e3a8a;
+    color: #93c5fd;
+}
+
+.dark .strategy-badge.savings {
+    background: #064e3b;
+    color: #6ee7b7;
+}
+
+.dark .strategy-badge.wants {
+    background: #581c87;
+    color: #d8b4fe;
+}
+
+.dark .strategy-detail {
+    border-color: #334155;
+}
+
+.dark .strategy-detail-title {
+    color: #f1f5f9;
+}
+
+.dark .strategy-detail-list li {
+    color: #cbd5e1;
+}
+
     .mobile-frame {
         position: relative;
         width: 260px; /* Lebar HP disesuaikan */
@@ -1835,195 +2054,333 @@
         </div>
         
         <!-- Fitur Rencana Jangka Pendek -->
-        <div class="mt-16">
-            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
-                <h2 class="text-2xl font-bold text-slate-800 mb-6">Rencana Jangka Pendek</h2>
-                <p class="text-slate-600 mb-6">Kelola keuangan jangka pendek Anda dengan strategi alokasi yang terstruktur.</p>
+        <!-- Fitur Rencana Jangka Pendek - YANG DIPERBAIKI -->
+<div class="mt-16">
+    <!-- Header yang Lebih Menarik -->
+    <div class="text-center mb-8">
+        <div class="inline-flex items-center justify-center p-3 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </div>
+        <h2 class="text-3xl font-bold text-slate-800">Kelola Keuangan Harian Anda</h2>
+        <p class="mt-2 text-slate-600 max-w-2xl mx-auto">Atur alokasi pendapatan bulanan dengan strategi yang terbukti efektif untuk kestabilan finansial</p>
+    </div>
+
+    <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-200 relative overflow-hidden">
+        <!-- Dekorasi Visual -->
+        <div class="absolute top-0 right-0 w-32 h-32 bg-purple-100 rounded-full -translate-y-16 translate-x-16 opacity-50"></div>
+        <div class="absolute bottom-0 left-0 w-24 h-24 bg-indigo-100 rounded-full translate-y-12 -translate-x-12 opacity-50"></div>
+        
+        <div class="relative z-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-800">Rencana Jangka Pendek</h3>
+            </div>
+            
+            <p class="text-slate-600 mb-8">Kelola keuangan jangka pendek Anda dengan strategi alokasi yang terstruktur untuk mencapai stabilitas finansial.</p>
+            
+            <!-- Penjelasan Metode dengan Visual yang Lebih Baik -->
+            <div class="bg-gradient-to-br from-slate-50 to-indigo-50 p-6 rounded-xl mb-8 border border-slate-200">
+                <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Pilih Strategi Alokasi Keuangan
+                </h3>
                 
-                <!-- Penjelasan Metode -->
-                <div class="bg-slate-50 p-6 rounded-xl mb-6">
-                    <h3 class="text-lg font-semibold text-slate-800 mb-4">Pilih Strategi Alokasi Keuangan</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white p-4 rounded-lg border border-slate-200">
-                            <h4 class="font-semibold text-blue-800 mb-2">Metode 5:3:2</h4>
-                            <p class="text-sm text-slate-600 mb-3">Membagi pendapatan menjadi 50% untuk kebutuhan, 30% untuk tabungan/investasi, dan 20% untuk keinginan.</p>
-                            <div class="flex items-center text-xs text-slate-500">
-                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded mr-2">50% Kebutuhan</span>
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded mr-2">30% Tabungan</span>
-                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded">20% Keinginan</span>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Strategi 5:3:2 -->
+                    <div class="strategy-card-item bg-white p-5 rounded-xl border-2 border-blue-200 hover:border-blue-400 transition-all duration-300 shadow-sm hover:shadow-md">
+                        <div class="flex items-start justify-between mb-4">
+                            <h4 class="strategy-header text-lg font-bold text-slate-800">Metode 5:3:2</h4>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Populer</span>
+                        </div>
+                        <p class="strategy-description text-sm text-slate-600 mb-4">
+                            Membagi pendapatan menjadi 50% untuk kebutuhan, 30% untuk tabungan/investasi, dan 20% untuk keinginan.
+                            Strategi ini ideal untuk mereka yang ingin menyeimbangkan antara kebutuhan hidup saat ini dan persiapan masa depan.
+                        </p>
+                        
+                        <div class="strategy-badges flex justify-between mb-4">
+                            <div class="strategy-badge needs bg-blue-50 p-3 rounded-lg text-center flex-1 mx-1">
+                                <span class="strategy-badge-percentage block text-lg font-bold text-blue-700">50%</span>
+                                <span class="text-xs text-blue-600">Kebutuhan</span>
+                            </div>
+                            <div class="strategy-badge savings bg-green-50 p-3 rounded-lg text-center flex-1 mx-1">
+                                <span class="strategy-badge-percentage block text-lg font-bold text-green-700">30%</span>
+                                <span class="text-xs text-green-600">Tabungan</span>
+                            </div>
+                            <div class="strategy-badge wants bg-purple-50 p-3 rounded-lg text-center flex-1 mx-1">
+                                <span class="strategy-badge-percentage block text-lg font-bold text-purple-700">20%</span>
+                                <span class="text-xs text-purple-600">Keinginan</span>
                             </div>
                         </div>
-                        <div class="bg-white p-4 rounded-lg border border-slate-200">
-                            <h4 class="font-semibold text-blue-800 mb-2">Metode 6:2:2</h4>
-                            <p class="text-sm text-slate-600 mb-3">Membagi pendapatan menjadi 60% untuk kebutuhan, 20% untuk tabungan/investasi, dan 20% untuk keinginan.</p>
-                            <div class="flex items-center text-xs text-slate-500">
-                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded mr-2">60% Kebutuhan</span>
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded mr-2">20% Tabungan</span>
-                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded">20% Keinginan</span>
+                        
+                        <div class="strategy-detail">
+                            <h5 class="strategy-detail-title text-sm font-semibold text-slate-700 mb-2">Kelebihan:</h5>
+                            <div class="strategy-detail-list text-xs text-slate-600 space-y-1">
+                                <div class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-green-500 mt-0.5 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Alokasi seimbang antara kebutuhan saat ini dan masa depan</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-green-500 mt-0.5 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Cocok untuk yang ingin mulai berinvestasi secara konsisten</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Strategi 6:2:2 -->
+                    <div class="strategy-card-item bg-white p-5 rounded-xl border-2 border-slate-200 hover:border-indigo-400 transition-all duration-300 shadow-sm hover:shadow-md">
+                        <div class="flex items-start justify-between mb-4">
+                            <h4 class="strategy-header text-lg font-bold text-slate-800">Metode 6:2:2</h4>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded">Hemat</span>
+                        </div>
+                        <p class="strategy-description text-sm text-slate-600 mb-4">
+                            Membagi pendapatan menjadi 60% untuk kebutuhan, 20% untuk tabungan/investasi, dan 20% untuk keinginan.
+                            Cocok untuk mereka yang memiliki biaya hidup lebih tinggi atau tanggungan keluarga.
+                        </p>
+                        
+                        <div class="strategy-badges flex justify-between mb-4">
+                            <div class="strategy-badge needs bg-blue-50 p-3 rounded-lg text-center flex-1 mx-1">
+                                <span class="strategy-badge-percentage block text-lg font-bold text-blue-700">60%</span>
+                                <span class="text-xs text-blue-600">Kebutuhan</span>
+                            </div>
+                            <div class="strategy-badge savings bg-green-50 p-3 rounded-lg text-center flex-1 mx-1">
+                                <span class="strategy-badge-percentage block text-lg font-bold text-green-700">20%</span>
+                                <span class="text-xs text-green-600">Tabungan</span>
+                            </div>
+                            <div class="strategy-badge wants bg-purple-50 p-3 rounded-lg text-center flex-1 mx-1">
+                                <span class="strategy-badge-percentage block text-lg font-bold text-purple-700">20%</span>
+                                <span class="text-xs text-purple-600">Keinginan</span>
+                            </div>
+                        </div>
+                        
+                        <div class="strategy-detail">
+                            <h5 class="strategy-detail-title text-sm font-semibold text-slate-700 mb-2">Kelebihan:</h5>
+                            <div class="strategy-detail-list text-xs text-slate-600 space-y-1">
+                                <div class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-green-500 mt-0.5 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Cocok untuk yang memiliki biaya hidup tinggi</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-green-500 mt-0.5 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Ideal untuk mereka yang memiliki tanggungan keluarga</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Form Input yang Lebih Menarik -->
+            <div class="bg-gradient-to-br from-white to-slate-50 p-6 rounded-xl border border-slate-200 mb-6">
+                <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    Mulai Hitung Alokasi Keuangan Anda
+                </h4>
                 
                 <form id="short-term-planning-form" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="short-term-income" class="block text-sm font-medium text-gray-700 mb-1">Pendapatan Bulanan (Rp)</label>
-                            <input type="text" id="short-term-income" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition number-input-formatter" placeholder="10.000.000" inputmode="numeric">
+                            <label for="short-term-income" class="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Pendapatan Bulanan (Rp)
+                            </label>
+                            <div class="relative">
+                                <input type="text" id="short-term-income" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition number-input-formatter bg-white" placeholder="10.000.000" inputmode="numeric">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <span class="text-gray-500">Rp</span>
+                                </div>
+                            </div>
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-3">Pilih Strategi Alokasi</label>
-                            <div class="space-y-3">
-                                <label class="flex items-center">
+                            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                                Pilih Strategi Alokasi
+                            </label>
+                            <div class="space-y-3 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <label class="flex items-center p-2 rounded-md hover:bg-white transition cursor-pointer">
                                     <input type="radio" name="allocation-strategy" value="532" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" checked>
-                                    <span class="ml-2 text-sm text-gray-700">Perbandingan 5:3:2</span>
+                                    <span class="ml-3 text-sm font-medium text-gray-700">Perbandingan 5:3:2 (Rekomendasi)</span>
                                 </label>
-                                <label class="flex items-center">
+                                <label class="flex items-center p-2 rounded-md hover:bg-white transition cursor-pointer">
                                     <input type="radio" name="allocation-strategy" value="622" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                    <span class="ml-2 text-sm text-gray-700">Perbandingan 6:2:2</span>
+                                    <span class="ml-3 text-sm font-medium text-gray-700">Perbandingan 6:2:2 (Hemat)</span>
                                 </label>
-                                <label class="flex items-center">
+                                <label class="flex items-center p-2 rounded-md hover:bg-white transition cursor-pointer">
                                     <input type="radio" name="allocation-strategy" value="custom" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                    <span class="ml-2 text-sm text-gray-700">Custom (Atur Persentase Sendiri)</span>
+                                    <span class="ml-3 text-sm font-medium text-gray-700">Custom (Atur Persentase Sendiri)</span>
                                 </label>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Custom Allocation Inputs -->
-                    <div id="custom-allocation-section" class="hidden bg-slate-50 p-4 rounded-lg border border-slate-200">
-                        <h4 class="font-semibold text-slate-800 mb-3">Atur Persentase Custom</h4>
+                    <div id="custom-allocation-section" class="hidden bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-lg border border-blue-200">
+                        <h4 class="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            Atur Persentase Custom
+                        </h4>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                                <label for="custom-needs" class="block text-xs font-medium text-gray-700 mb-1">Kebutuhan (%)</label>
-                                <input type="number" id="custom-needs" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" min="0" max="100" value="50">
+                            <div class="bg-white p-3 rounded-lg border border-blue-100">
+                                <label for="custom-needs" class="block text-xs font-medium text-blue-700 mb-1">Kebutuhan (%)</label>
+                                <input type="number" id="custom-needs" class="w-full px-3 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white" min="0" max="100" value="50">
                             </div>
-                            <div>
-                                <label for="custom-savings" class="block text-xs font-medium text-gray-700 mb-1">Tabungan (%)</label>
-                                <input type="number" id="custom-savings" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" min="0" max="100" value="30">
+                            <div class="bg-white p-3 rounded-lg border border-green-100">
+                                <label for="custom-savings" class="block text-xs font-medium text-green-700 mb-1">Tabungan (%)</label>
+                                <input type="number" id="custom-savings" class="w-full px-3 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white" min="0" max="100" value="30">
                             </div>
-                            <div>
-                                <label for="custom-wants" class="block text-xs font-medium text-gray-700 mb-1">Keinginan (%)</label>
-                                <input type="number" id="custom-wants" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" min="0" max="100" value="20">
+                            <div class="bg-white p-3 rounded-lg border border-purple-100">
+                                <label for="custom-wants" class="block text-xs font-medium text-purple-700 mb-1">Keinginan (%)</label>
+                                <input type="number" id="custom-wants" class="w-full px-3 py-2 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition bg-white" min="0" max="100" value="20">
                             </div>
                         </div>
-                        <div id="custom-validation" class="mt-2 text-xs text-red-600 hidden">
-                            Total persentase harus 100%. Total saat ini: <span id="current-total">100</span>%
+                        <div id="custom-validation" class="mt-3 p-2 bg-red-50 border border-red-200 rounded text-xs text-red-600 hidden flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Total persentase harus 100%. Total saat ini: <span id="current-total" class="font-bold">100</span>%
                         </div>
                     </div>
                     
                     <div class="pt-2">
-                        <button type="submit" class="w-full bg-purple-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-300 transition-transform transform hover:scale-105 shadow-lg shadow-purple-500/30">
+                        <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-3 px-8 rounded-lg hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-purple-300 transition-all duration-300 transform hover:scale-[1.02] shadow-lg shadow-purple-500/30 flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
                             Hitung Alokasi Keuangan
                         </button>
                     </div>
                 </form>
+            </div>
+            
+            <!-- Hasil Perhitungan -->
+            <div id="short-term-result" class="mt-8 hidden animate-fade-in">
+                <h3 class="text-xl font-bold text-slate-800 mb-4">Hasil Alokasi Keuangan</h3>
                 
-                <!-- Hasil Perhitungan -->
-                <div id="short-term-result" class="mt-8 hidden animate-fade-in">
-                    <h3 class="text-xl font-bold text-slate-800 mb-4">Hasil Alokasi Keuangan</h3>
-                    
-                    <!-- Untuk Strategi 5:3:2 -->
-                    <div id="strategy-532" class="hidden">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                            <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                                <h4 class="font-semibold text-blue-800 mb-2">Kebutuhan (50%)</h4>
-                                <p class="text-2xl font-bold text-blue-600" id="needs-532"></p>
-                                <p class="text-sm text-blue-700 mt-2">Untuk biaya hidup sehari-hari: makanan, transportasi, tagihan, dll.</p>
-                            </div>
-                            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
-                                <h4 class="font-semibold text-green-800 mb-2">Tabungan (30%)</h4>
-                                <p class="text-2xl font-bold text-green-600" id="savings-532"></p>
-                                <p class="text-sm text-green-700 mt-2">Untuk dana darurat, tujuan jangka pendek, dan investasi.</p>
-                            </div>
-                            <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
-                                <h4 class="font-semibold text-purple-800 mb-2">Keinginan (20%)</h4>
-                                <p class="text-2xl font-bold text-purple-600" id="wants-532"></p>
-                                <p class="text-sm text-purple-700 mt-2">Untuk hiburan, hobi, dan kepuasan pribadi.</p>
-                            </div>
+                <!-- Untuk Strategi 5:3:2 -->
+                <div id="strategy-532" class="hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="font-semibold text-blue-800 mb-2">Kebutuhan (50%)</h4>
+                            <p class="text-2xl font-bold text-blue-600" id="needs-532"></p>
+                            <p class="text-sm text-blue-700 mt-2">Untuk biaya hidup sehari-hari: makanan, transportasi, tagihan, dll.</p>
                         </div>
-                        
-                        <div class="bg-slate-50 p-4 rounded-lg">
-                            <h5 class="font-semibold text-slate-800 mb-3">Penjelasan Strategi 5:3:2</h5>
-                            <ul class="text-sm text-slate-600 space-y-2">
-                                <li><strong>50% Kebutuhan:</strong> Alokasi terbesar untuk kebutuhan pokok yang tidak bisa dihindari</li>
-                                <li><strong>30% Tabungan:</strong> Penting untuk membangun dana darurat dan investasi masa depan</li>
-                                <li><strong>20% Keinginan:</strong> Untuk menjaga keseimbangan hidup dan kebahagiaan</li>
-                            </ul>
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                            <h4 class="font-semibold text-green-800 mb-2">Tabungan (30%)</h4>
+                            <p class="text-2xl font-bold text-green-600" id="savings-532"></p>
+                            <p class="text-sm text-green-700 mt-2">Untuk dana darurat, tujuan jangka pendek, dan investasi.</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                            <h4 class="font-semibold text-purple-800 mb-2">Keinginan (20%)</h4>
+                            <p class="text-2xl font-bold text-purple-600" id="wants-532"></p>
+                            <p class="text-sm text-purple-700 mt-2">Untuk hiburan, hobi, dan kepuasan pribadi.</p>
                         </div>
                     </div>
                     
-                    <!-- Untuk Strategi 6:2:2 -->
-                    <div id="strategy-622" class="hidden">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                            <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                                <h4 class="font-semibold text-blue-800 mb-2">Kebutuhan (60%)</h4>
-                                <p class="text-2xl font-bold text-blue-600" id="needs-622"></p>
-                                <p class="text-sm text-blue-700 mt-2">Untuk biaya hidup pokok yang lebih besar.</p>
-                            </div>
-                            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
-                                <h4 class="font-semibold text-green-800 mb-2">Tabungan (20%)</h4>
-                                <p class="text-2xl font-bold text-green-600" id="savings-622"></p>
-                                <p class="text-sm text-green-700 mt-2">Untuk menabung dan berinvestasi.</p>
-                            </div>
-                            <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
-                                <h4 class="font-semibold text-purple-800 mb-2">Keinginan (20%)</h4>
-                                <p class="text-2xl font-bold text-purple-600" id="wants-622"></p>
-                                <p class="text-sm text-purple-700 mt-2">Untuk hiburan dan kepuasan pribadi.</p>
-                            </div>
+                    <div class="bg-slate-50 p-4 rounded-lg">
+                        <h5 class="font-semibold text-slate-800 mb-3">Penjelasan Strategi 5:3:2</h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li><strong>50% Kebutuhan:</strong> Alokasi terbesar untuk kebutuhan pokok yang tidak bisa dihindari</li>
+                            <li><strong>30% Tabungan:</strong> Penting untuk membangun dana darurat dan investasi masa depan</li>
+                            <li><strong>20% Keinginan:</strong> Untuk menjaga keseimbangan hidup dan kebahagiaan</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Untuk Strategi 6:2:2 -->
+                <div id="strategy-622" class="hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="font-semibold text-blue-800 mb-2">Kebutuhan (60%)</h4>
+                            <p class="text-2xl font-bold text-blue-600" id="needs-622"></p>
+                            <p class="text-sm text-blue-700 mt-2">Untuk biaya hidup pokok yang lebih besar.</p>
                         </div>
-                        
-                        <div class="bg-slate-50 p-4 rounded-lg">
-                            <h5 class="font-semibold text-slate-800 mb-3">Penjelasan Strategi 6:2:2</h5>
-                            <ul class="text-sm text-slate-600 space-y-2">
-                                <li><strong>60% Kebutuhan:</strong> Cocok jika biaya hidup lebih tinggi atau ada tanggungan keluarga</li>
-                                <li><strong>20% Tabungan:</strong> Tetap menyisihkan untuk masa depan meski jumlahnya lebih kecil</li>
-                                <li><strong>20% Keinginan:</strong> Proporsi yang sama untuk menjaga kualitas hidup</li>
-                            </ul>
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                            <h4 class="font-semibold text-green-800 mb-2">Tabungan (20%)</h4>
+                            <p class="text-2xl font-bold text-green-600" id="savings-622"></p>
+                            <p class="text-sm text-green-700 mt-2">Untuk menabung dan berinvestasi.</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                            <h4 class="font-semibold text-purple-800 mb-2">Keinginan (20%)</h4>
+                            <p class="text-2xl font-bold text-purple-600" id="wants-622"></p>
+                            <p class="text-sm text-purple-700 mt-2">Untuk hiburan dan kepuasan pribadi.</p>
                         </div>
                     </div>
                     
-                    <!-- Untuk Strategi Custom -->
-<!-- Untuk Strategi Custom -->
-<div id="strategy-custom" class="hidden">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-            <h4 class="font-semibold text-blue-800 mb-2">Kebutuhan (<span id="custom-needs-percent">0</span>%)</h4>
-            <p class="text-2xl font-bold text-blue-600" id="needs-custom">Rp 0</p>
-            <p class="text-sm text-blue-700 mt-2">Untuk biaya hidup sehari-hari: makanan, transportasi, tagihan, dll.</p>
-        </div>
-        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
-            <h4 class="font-semibold text-green-800 mb-2">Tabungan (<span id="custom-savings-percent">0</span>%)</h4>
-            <p class="text-2xl font-bold text-green-600" id="savings-custom">Rp 0</p>
-            <p class="text-sm text-green-700 mt-2">Untuk dana darurat, tujuan jangka pendek, dan investasi.</p>
-        </div>
-        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
-            <h4 class="font-semibold text-purple-800 mb-2">Keinginan (<span id="custom-wants-percent">0</span>%)</h4>
-            <p class="text-2xl font-bold text-purple-600" id="wants-custom">Rp 0</p>
-            <p class="text-sm text-purple-700 mt-2">Untuk hiburan, hobi, dan kepuasan pribadi.</p>
-        </div>
-    </div>
-    
-    <div class="bg-slate-50 p-4 rounded-lg">
-        <h5 class="font-semibold text-slate-800 mb-3">Penjelasan Strategi Custom Anda</h5>
-        <ul class="text-sm text-slate-600 space-y-2">
-            <li><strong><span id="custom-needs-percent-text">0</span>% Kebutuhan:</strong> Alokasi untuk kebutuhan pokok yang tidak bisa dihindari</li>
-            <li><strong><span id="custom-savings-percent-text">0</span>% Tabungan:</strong> Alokasi untuk membangun dana darurat dan investasi masa depan</li>
-            <li><strong><span id="custom-wants-percent-text">0</span>% Keinginan:</strong> Alokasi untuk menjaga keseimbangan hidup dan kebahagiaan</li>
-        </ul>
-    </div>
-</div>
-                    
-                    <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                        <p class="text-sm text-yellow-800 text-center">
-                            <strong>Tips:</strong> Sesuaikan persentase berdasarkan kondisi keuangan pribadi Anda. 
-                            Strategi ini adalah panduan umum yang bisa dimodifikasi.
-                        </p>
+                    <div class="bg-slate-50 p-4 rounded-lg">
+                        <h5 class="font-semibold text-slate-800 mb-3">Penjelasan Strategi 6:2:2</h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li><strong>60% Kebutuhan:</strong> Cocok jika biaya hidup lebih tinggi atau ada tanggungan keluarga</li>
+                            <li><strong>20% Tabungan:</strong> Tetap menyisihkan untuk masa depan meski jumlahnya lebih kecil</li>
+                            <li><strong>20% Keinginan:</strong> Proporsi yang sama untuk menjaga kualitas hidup</li>
+                        </ul>
                     </div>
+                </div>
+                
+                <!-- Untuk Strategi Custom -->
+                <div id="strategy-custom" class="hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="font-semibold text-blue-800 mb-2">Kebutuhan (<span id="custom-needs-percent">0</span>%)</h4>
+                            <p class="text-2xl font-bold text-blue-600" id="needs-custom">Rp 0</p>
+                            <p class="text-sm text-blue-700 mt-2">Untuk biaya hidup sehari-hari: makanan, transportasi, tagihan, dll.</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                            <h4 class="font-semibold text-green-800 mb-2">Tabungan (<span id="custom-savings-percent">0</span>%)</h4>
+                            <p class="text-2xl font-bold text-green-600" id="savings-custom">Rp 0</p>
+                            <p class="text-sm text-green-700 mt-2">Untuk dana darurat, tujuan jangka pendek, dan investasi.</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                            <h4 class="font-semibold text-purple-800 mb-2">Keinginan (<span id="custom-wants-percent">0</span>%)</h4>
+                            <p class="text-2xl font-bold text-purple-600" id="wants-custom">Rp 0</p>
+                            <p class="text-sm text-purple-700 mt-2">Untuk hiburan, hobi, dan kepuasan pribadi.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-50 p-4 rounded-lg">
+                        <h5 class="font-semibold text-slate-800 mb-3">Penjelasan Strategi Custom Anda</h5>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li><strong><span id="custom-needs-percent-text">0</span>% Kebutuhan:</strong> Alokasi untuk kebutuhan pokok yang tidak bisa dihindari</li>
+                            <li><strong><span id="custom-savings-percent-text">0</span>% Tabungan:</strong> Alokasi untuk membangun dana darurat dan investasi masa depan</li>
+                            <li><strong><span id="custom-wants-percent-text">0</span>% Keinginan:</strong> Alokasi untuk menjaga keseimbangan hidup dan kebahagiaan</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p class="text-sm text-yellow-800 text-center">
+                        <strong>Tips:</strong> Sesuaikan persentase berdasarkan kondisi keuangan pribadi Anda. 
+                        Strategi ini adalah panduan umum yang bisa dimodifikasi.
+                    </p>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 
