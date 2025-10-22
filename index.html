@@ -14,9 +14,38 @@
     
     <style>
 
- /* ========== PERBAIKAN CARD STRATEGI ALOKASI KEUANGAN ========== */
+/* ========== PERBAIKAN HEADER POTONG ========== */
+#short-term-result {
+    scroll-margin-top: 100px; /* Beri margin saat discroll */
+    position: relative;
+}
 
+/* Pastikan header tidak menutupi konten saat scroll */
+html {
+    scroll-padding-top: 80px;
+}
 
+/* Perbaikan untuk container hasil */
+.planning-results-container:not(.hidden) {
+    position: relative;
+}
+
+/* Perbaikan khusus untuk halaman perencanaan */
+#perencanaan-page {
+    scroll-behavior: smooth;
+}
+
+/* Pastikan konten tidak tertutup header */
+#perencanaan-page .container {
+    position: relative;
+    z-index: 1;
+}
+
+.planning-results-container:not(.hidden) {
+    padding-top: 80px;
+    margin-top: -60px;
+}
+ 
  .strategy-cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -2058,11 +2087,6 @@
 <div class="mt-16">
     <!-- Header yang Lebih Menarik -->
     <div class="text-center mb-8">
-        <div class="inline-flex items-center justify-center p-3 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-        </div>
         <h2 class="text-3xl font-bold text-slate-800">Kelola Keuangan Harian Anda</h2>
         <p class="mt-2 text-slate-600 max-w-2xl mx-auto">Atur alokasi pendapatan bulanan dengan strategi yang terbukti efektif untuk kestabilan finansial</p>
     </div>
@@ -2187,100 +2211,114 @@
             </div>
             
             <!-- Form Input yang Lebih Menarik -->
-            <div class="bg-gradient-to-br from-white to-slate-50 p-6 rounded-xl border border-slate-200 mb-6">
-                <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            <!-- Form Input yang Lebih Menarik -->
+<div class="bg-gradient-to-br from-white to-slate-50 p-6 rounded-xl border border-slate-200 mb-6">
+    <h4 class="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+        Mulai Hitung Alokasi Keuangan Anda
+    </h4>
+    
+    <form id="short-term-planning-form" class="space-y-6">
+        <!-- TAMBAHAN: Field Tujuan Rencana -->
+        <div>
+            <label for="short-term-goal" class="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+                Tujuan Rencana Keuangan
+            </label>
+            <input type="text" id="short-term-goal" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition bg-white" placeholder="Contoh: Dana Liburan, Beli Laptop, Tabungan Darurat" value="">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="short-term-income" class="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Mulai Hitung Alokasi Keuangan Anda
-                </h4>
-                
-                <form id="short-term-planning-form" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="short-term-income" class="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Pendapatan Bulanan (Rp)
-                            </label>
-                            <div class="relative">
-                                <input type="text" id="short-term-income" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition number-input-formatter bg-white" placeholder="10.000.000" inputmode="numeric">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <span class="text-gray-500">Rp</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                </svg>
-                                Pilih Strategi Alokasi
-                            </label>
-                            <div class="space-y-3 bg-slate-50 p-4 rounded-lg border border-slate-200">
-                                <label class="flex items-center p-2 rounded-md hover:bg-white transition cursor-pointer">
-                                    <input type="radio" name="allocation-strategy" value="532" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" checked>
-                                    <span class="ml-3 text-sm font-medium text-gray-700">Perbandingan 5:3:2 (Rekomendasi)</span>
-                                </label>
-                                <label class="flex items-center p-2 rounded-md hover:bg-white transition cursor-pointer">
-                                    <input type="radio" name="allocation-strategy" value="622" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                    <span class="ml-3 text-sm font-medium text-gray-700">Perbandingan 6:2:2 (Hemat)</span>
-                                </label>
-                                <label class="flex items-center p-2 rounded-md hover:bg-white transition cursor-pointer">
-                                    <input type="radio" name="allocation-strategy" value="custom" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                    <span class="ml-3 text-sm font-medium text-gray-700">Custom (Atur Persentase Sendiri)</span>
-                                </label>
-                            </div>
-                        </div>
+                    Pendapatan Bulanan (Rp)
+                </label>
+                <div class="relative">
+                    <input type="text" id="short-term-income" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition number-input-formatter bg-white" placeholder="10.000.000" inputmode="numeric">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="text-gray-500">Rp</span>
                     </div>
-                    
-                    <!-- Custom Allocation Inputs -->
-                    <div id="custom-allocation-section" class="hidden bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-lg border border-blue-200">
-                        <h4 class="font-semibold text-slate-800 mb-3 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            Atur Persentase Custom
-                        </h4>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="bg-white p-3 rounded-lg border border-blue-100">
-                                <label for="custom-needs" class="block text-xs font-medium text-blue-700 mb-1">Kebutuhan (%)</label>
-                                <input type="number" id="custom-needs" class="w-full px-3 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white" min="0" max="100" value="50">
-                            </div>
-                            <div class="bg-white p-3 rounded-lg border border-green-100">
-                                <label for="custom-savings" class="block text-xs font-medium text-green-700 mb-1">Tabungan (%)</label>
-                                <input type="number" id="custom-savings" class="w-full px-3 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white" min="0" max="100" value="30">
-                            </div>
-                            <div class="bg-white p-3 rounded-lg border border-purple-100">
-                                <label for="custom-wants" class="block text-xs font-medium text-purple-700 mb-1">Keinginan (%)</label>
-                                <input type="number" id="custom-wants" class="w-full px-3 py-2 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition bg-white" min="0" max="100" value="20">
-                            </div>
-                        </div>
-                        <div id="custom-validation" class="mt-3 p-2 bg-red-50 border border-red-200 rounded text-xs text-red-600 hidden flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            Total persentase harus 100%. Total saat ini: <span id="current-total" class="font-bold">100</span>%
-                        </div>
-                    </div>
-                    
-                    <div class="pt-2">
-                        <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-3 px-8 rounded-lg hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-purple-300 transition-all duration-300 transform hover:scale-[1.02] shadow-lg shadow-purple-500/30 flex items-center justify-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                            </svg>
-                            Hitung Alokasi Keuangan
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
             
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    Pilih Strategi Alokasi
+                </label>
+                <div class="space-y-3 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <label class="flex items-center p-2 rounded-md hover:bg-white transition cursor-pointer">
+                        <input type="radio" name="allocation-strategy" value="532" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" checked>
+                        <span class="ml-3 text-sm font-medium text-gray-700">Perbandingan 5:3:2 (Rekomendasi)</span>
+                    </label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-white transition cursor-pointer">
+                        <input type="radio" name="allocation-strategy" value="622" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                        <span class="ml-3 text-sm font-medium text-gray-700">Perbandingan 6:2:2 (Hemat)</span>
+                    </label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-white transition cursor-pointer">
+                        <input type="radio" name="allocation-strategy" value="custom" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                        <span class="ml-3 text-sm font-medium text-gray-700">Custom (Atur Persentase Sendiri)</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Custom Allocation Inputs -->
+        <div id="custom-allocation-section" class="hidden bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-lg border border-blue-200">
+            <h4 class="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Atur Persentase Custom
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-3 rounded-lg border border-blue-100">
+                    <label for="custom-needs" class="block text-xs font-medium text-blue-700 mb-1">Kebutuhan (%)</label>
+                    <input type="number" id="custom-needs" class="w-full px-3 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white" min="0" max="100" value="50">
+                </div>
+                <div class="bg-white p-3 rounded-lg border border-green-100">
+                    <label for="custom-savings" class="block text-xs font-medium text-green-700 mb-1">Tabungan (%)</label>
+                    <input type="number" id="custom-savings" class="w-full px-3 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white" min="0" max="100" value="30">
+                </div>
+                <div class="bg-white p-3 rounded-lg border border-purple-100">
+                    <label for="custom-wants" class="block text-xs font-medium text-purple-700 mb-1">Keinginan (%)</label>
+                    <input type="number" id="custom-wants" class="w-full px-3 py-2 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition bg-white" min="0" max="100" value="20">
+                </div>
+            </div>
+            <div id="custom-validation" class="mt-3 p-2 bg-red-50 border border-red-200 rounded text-xs text-red-600 hidden flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Total persentase harus 100%. Total saat ini: <span id="current-total" class="font-bold">100</span>%
+            </div>
+        </div>
+        
+        <div class="pt-2">
+            <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-3 px-8 rounded-lg hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-purple-300 transition-all duration-300 transform hover:scale-[1.02] shadow-lg shadow-purple-500/30 flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                Hitung Alokasi Keuangan
+            </button>
+        </div>
+    </form>
+</div>
+            
             <!-- Hasil Perhitungan -->
-            <div id="short-term-result" class="mt-8 hidden animate-fade-in">
-                <h3 class="text-xl font-bold text-slate-800 mb-4">Hasil Alokasi Keuangan</h3>
+            <!-- Hasil Perhitungan -->
+<div id="short-term-result" class="mt-8 hidden animate-fade-in">
+
+    <h3 class="text-xl font-bold text-slate-800 mb-4">Hasil Alokasi Keuangan</h3>
                 
                 <!-- Untuk Strategi 5:3:2 -->
                 <div id="strategy-532" class="hidden">
@@ -3535,6 +3573,44 @@ if (shortTermForm) {
         });
     });
 
+
+    shortTermForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const goal = document.getElementById('short-term-goal').value;
+    const income = parseNumberWithDots(document.getElementById('short-term-income').value);
+    const strategy = document.querySelector('input[name="allocation-strategy"]:checked').value;
+    const resultDiv = document.getElementById('short-term-result');
+    
+    
+    
+    if (isNaN(income) || income <= 0) {
+        alert('Mohon masukkan jumlah pendapatan yang valid.');
+        return;
+    }
+    
+    // Validate custom allocation if selected
+    if (strategy === 'custom') {
+        if (!validateCustomAllocation()) {
+            alert('Total persentase untuk strategi custom harus 100%.');
+            return;
+        }
+    }
+    
+    // Tampilkan tujuan di hasil
+    const goalDisplay = goal || 'Rencana Alokasi Keuangan Bulanan';
+    
+    // Update judul hasil dengan tujuan
+    resultDiv.querySelector('h3').textContent = `Hasil Alokasi Keuangan - ${goalDisplay}`;
+    
+    // Hide all strategies first
+    document.getElementById('strategy-532').classList.add('hidden');
+    document.getElementById('strategy-622').classList.add('hidden');
+    document.getElementById('strategy-custom').classList.add('hidden');
+    
+    // ... kode perhitungan selanjutnya tetap sama ...
+});
+
     // Validate custom allocation
     function validateCustomAllocation() {
         const needs = parseInt(document.getElementById('custom-needs').value) || 0;
@@ -3636,7 +3712,18 @@ if (shortTermForm) {
         }
         
         resultDiv.classList.remove('hidden');
-        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+// PERBAIKAN: Scroll dengan offset untuk header - VERSI DIPERBAIKI
+setTimeout(() => {
+    const headerHeight = document.getElementById('main-header')?.offsetHeight || 80;
+    const elementPosition = resultDiv.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = Math.max(elementPosition - headerHeight - 40, 0); // Tambah margin lebih besar
+    
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+    });
+}, 150); // Tambah delay sedikit lebih lama
     });
 }
 
